@@ -176,11 +176,13 @@ export function AppForm({ app, userId }: AppFormProps) {
           <Input
             id="price"
             type="number"
-            min={0}
-            value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            value={0}
+            disabled
+            className="bg-muted"
           />
-          <p className="text-xs text-muted-foreground">0 = 無料</p>
+          <p className="text-xs text-amber-600">
+            現在は無料アプリのみ対応。有料販売機能は今後実装予定です。
+          </p>
         </div>
       </div>
 
