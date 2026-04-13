@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { ProfileForm } from "@/components/profile-form";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -26,26 +27,12 @@ export default async function DashboardPage() {
         <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
           <h1 className="font-serif text-2xl font-medium">マイページ</h1>
 
-          <div className="mt-8 rounded-2xl bg-card p-8">
-            <h2 className="font-serif text-lg font-medium">プロフィール</h2>
-            <div className="mt-4 space-y-2 text-sm">
-              <p>
-                <span className="text-muted-foreground">氏名：</span>
-                {profile?.display_name || "未設定"}
-              </p>
-              <p>
-                <span className="text-muted-foreground">メール：</span>
-                {user.email}
-              </p>
-              <p>
-                <span className="text-muted-foreground">専門科：</span>
-                {profile?.specialty || "未設定"}
-              </p>
-              <p>
-                <span className="text-muted-foreground">所属：</span>
-                {profile?.hospital || "未設定"}
-              </p>
-            </div>
+          <div className="mt-8">
+            <ProfileForm
+              userId={user.id}
+              email={user.email || ""}
+              profile={profile}
+            />
           </div>
 
           <div className="mt-8 rounded-2xl bg-card p-8">
