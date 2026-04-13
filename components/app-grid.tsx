@@ -1,20 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AppCard } from "@/components/app-card";
 import { CategoryFilter } from "@/components/category-filter";
 import { SEED_APPS } from "@/lib/seed-apps";
+import { createClient } from "@/lib/supabase/client";
+import type { AppData } from "@/components/app-card";
 
 export function AppGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [apps, setApps] = useState<AppData[]>(SEED_APPS);
+
+  useEffect(() => {
+    async function fetchApps() {
+      const supabase = createClient();
+      const { data } = await supabase
+        .from("apps")
+        .select("*, profiles:developer_id(display_name, specialty)")
+        .eq("is_published", true)
+        .order("created_at", { ascending: false });
+
+      if (data && data.length > 0) {
+        const dbApps: AppData[] = data.map((a: Record<string, unknown>) => {
+          const profile = a.profiles as Record<string, string> | null;
+          return {
+            id: a.id as string,
+            slug: a.slug as string,
+            name: a.name as string,
+            category: a.category as string,
+            price: a.price as number,
+            tagline: a.tagline as string,
+            description: a.description as string,
+            app_url: a.app_url as string,
+            demo_url: a.demo_url as string | null,
+            thumbnail_url: a.thumbnail_url as string | null,
+            developer_name: profile?.display_name ?? "開発者",
+            developer_specialty: profile?.specialty ?? "",
+          };
+        });
+        setApps(dbApps);
+      }
+    }
+    fetchApps();
+  }, []);
 
   const filteredApps = selectedCategory
-    ? SEED_APPS.filter(
+    ? apps.filter(
         (app) =>
           app.category === selectedCategory ||
           app.category.includes(selectedCategory)
       )
-    : SEED_APPS;
+    : apps;
 
   return (
     <>

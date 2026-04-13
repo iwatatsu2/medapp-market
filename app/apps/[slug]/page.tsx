@@ -1,13 +1,32 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { AppWindow, ArrowLeft, ExternalLink } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
 
-export function generateStaticParams() {
-  return SEED_APPS.map((app) => ({ slug: app.slug }));
+async function getApp(slug: string) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("apps")
+    .select("*, profiles:developer_id(display_name, specialty)")
+    .eq("slug", slug)
+    .eq("is_published", true)
+    .single();
+
+  if (data) {
+    const profile = data.profiles as Record<string, string> | null;
+    return {
+      ...data,
+      developer_name: profile?.display_name ?? "開発者",
+      developer_specialty: profile?.specialty ?? "",
+    };
+  }
+
+  return SEED_APPS.find((a) => a.slug === slug) ?? null;
 }
 
 export default async function AppDetailPage({
@@ -16,10 +35,12 @@ export default async function AppDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const app = SEED_APPS.find((a) => a.slug === slug);
+  const app = await getApp(slug);
   if (!app) notFound();
 
   const isFree = app.price === 0;
+  const thumbnailUrl = "thumbnail_url" in app ? app.thumbnail_url : null;
+  const screenshots = "screenshots" in app ? (app.screenshots as string[]) : [];
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -34,15 +55,23 @@ export default async function AppDetailPage({
             アプリ一覧に戻る
           </Link>
 
-          {/* メインカード */}
           <div className="overflow-hidden rounded-lg border border-border bg-white">
-            {/* サムネイル */}
-            <div className="flex aspect-[2/1] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
-              <AppWindow className="size-20 text-primary/20" />
+            <div className="relative aspect-[2/1] bg-gradient-to-br from-primary/5 to-primary/10">
+              {thumbnailUrl ? (
+                <Image
+                  src={thumbnailUrl}
+                  alt={app.name}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex h-full items-center justify-center">
+                  <AppWindow className="size-20 text-primary/20" />
+                </div>
+              )}
             </div>
 
             <div className="p-6 sm:p-8">
-              {/* タイトル行 */}
               <div className="flex flex-wrap items-center gap-3">
                 <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
                   {app.name}
@@ -56,14 +85,12 @@ export default async function AppDetailPage({
                 {app.tagline}
               </p>
 
-              {/* メタ情報 */}
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span>カテゴリ：{app.category}</span>
                 <span>開発者：{app.developer_name}</span>
                 <span>専門：{app.developer_specialty}</span>
               </div>
 
-              {/* CTA */}
               <div className="mt-6 flex flex-wrap gap-3">
                 {app.demo_url ? (
                   <Button size="lg" className="gap-2 rounded-full px-8" asChild>
@@ -83,7 +110,26 @@ export default async function AppDetailPage({
                 )}
               </div>
 
-              {/* 説明 */}
+              {screenshots.length > 0 && (
+                <div className="mt-8 border-t border-border pt-6">
+                  <h2 className="text-lg font-bold text-foreground">
+                    スクリーンショット
+                  </h2>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    {screenshots.map((url, i) => (
+                      <Image
+                        key={i}
+                        src={url}
+                        alt={`${app.name} スクリーンショット ${i + 1}`}
+                        width={400}
+                        height={250}
+                        className="rounded-lg border object-cover"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="mt-8 border-t border-border pt-6">
                 <h2 className="text-lg font-bold text-foreground">説明</h2>
                 <p className="mt-3 whitespace-pre-wrap text-sm leading-loose text-muted-foreground">

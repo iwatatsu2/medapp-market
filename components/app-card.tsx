@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { AppWindow } from "lucide-react";
 
 export interface AppData {
@@ -11,6 +12,7 @@ export interface AppData {
   description: string;
   app_url: string;
   demo_url: string | null;
+  thumbnail_url?: string | null;
   developer_name: string;
   developer_specialty: string;
 }
@@ -26,11 +28,22 @@ export function AppCard({ app }: AppCardProps) {
     <Link href={`/apps/${app.slug}`} className="group block">
       <article className="overflow-hidden rounded-lg border border-border bg-white transition-shadow hover:shadow-md">
         {/* サムネイル */}
-        <div className="flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
-          <AppWindow className="size-12 text-primary/30" />
+        <div className="relative aspect-[16/10] bg-gradient-to-br from-primary/5 to-primary/10">
+          {app.thumbnail_url ? (
+            <Image
+              src={app.thumbnail_url}
+              alt={app.name}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="flex h-full items-center justify-center">
+              <AppWindow className="size-12 text-primary/30" />
+            </div>
+          )}
         </div>
 
-        {/* コンテンツ — テキスト途切れなし */}
+        {/* コンテンツ */}
         <div className="p-4">
           <div className="flex items-center gap-2">
             <span className="rounded bg-primary/10 px-2 py-0.5 text-xs text-primary">
