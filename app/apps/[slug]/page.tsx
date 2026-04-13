@@ -12,17 +12,16 @@ async function getApp(slug: string) {
   const supabase = await createClient();
   const { data } = await supabase
     .from("apps")
-    .select("*, profiles:developer_id(display_name, specialty)")
+    .select("*")
     .eq("slug", slug)
     .eq("is_published", true)
     .single();
 
   if (data) {
-    const profile = data.profiles as Record<string, string> | null;
     return {
       ...data,
-      developer_name: profile?.display_name ?? "開発者",
-      developer_specialty: profile?.specialty ?? "",
+      developer_name: "開発者",
+      developer_specialty: "",
     };
   }
 

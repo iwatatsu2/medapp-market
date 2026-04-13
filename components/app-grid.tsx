@@ -16,29 +16,29 @@ export function AppGrid() {
       const supabase = createClient();
       const { data } = await supabase
         .from("apps")
-        .select("*, profiles:developer_id(display_name, specialty)")
+        .select("*")
         .eq("is_published", true)
         .order("created_at", { ascending: false });
 
       if (data && data.length > 0) {
-        const dbApps: AppData[] = data.map((a: Record<string, unknown>) => {
-          const profile = a.profiles as Record<string, string> | null;
-          return {
-            id: a.id as string,
-            slug: a.slug as string,
-            name: a.name as string,
-            category: a.category as string,
-            price: a.price as number,
-            tagline: a.tagline as string,
-            description: a.description as string,
-            app_url: a.app_url as string,
-            demo_url: a.demo_url as string | null,
-            thumbnail_url: a.thumbnail_url as string | null,
-            developer_name: profile?.display_name ?? "開発者",
-            developer_specialty: profile?.specialty ?? "",
-          };
-        });
-        setApps(dbApps);
+        const dbApps: AppData[] = data.map((a: Record<string, unknown>) => ({
+          id: a.id as string,
+          slug: a.slug as string,
+          name: a.name as string,
+          category: a.category as string,
+          price: a.price as number,
+          tagline: a.tagline as string,
+          description: a.description as string,
+          app_url: a.app_url as string,
+          demo_url: a.demo_url as string | null,
+          thumbnail_url: a.thumbnail_url as string | null,
+          developer_name: "開発者",
+          developer_specialty: "",
+        }));
+        // DB apps + seed apps (dedupe by slug)
+        const dbSlugs = new Set(dbApps.map((a) => a.slug));
+        const seedOnly = SEED_APPS.filter((a) => !dbSlugs.has(a.slug));
+        setApps([...dbApps, ...seedOnly]);
       }
     }
     fetchApps();
