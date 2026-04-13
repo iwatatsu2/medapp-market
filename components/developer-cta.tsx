@@ -4,22 +4,20 @@ import Link from "next/link";
 
 export function DeveloperCTA() {
   return (
-    <section id="developer" className="bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="developer" className="bg-primary/5">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl lg:text-4xl">
-            <span className="text-balance">
-              あなたのアプリも公開しませんか?
-            </span>
+          <h2 className="text-xl font-bold text-foreground sm:text-2xl">
+            あなたのアプリも公開しませんか？
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-pretty leading-relaxed text-muted-foreground">
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             医師が作ったWebアプリを登録して、全国の医師に届けましょう。
+            <br className="hidden sm:block" />
             アプリストアの審査不要。Webアプリなら今すぐ公開できます。
           </p>
-          <div className="mt-10">
+          <div className="mt-8">
             <Button
               size="lg"
-              variant="outline"
               className="group gap-2 rounded-full px-8"
               asChild
             >

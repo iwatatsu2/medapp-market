@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +8,21 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
-const categories = {
+const popularTags = [
+  "研修医",
+  "総合診療",
+  "救急外来",
+  "糖尿病",
+  "感染症",
+  "循環器内科",
+  "プライマリケア",
+  "初期研修医向け",
+  "脳神経内科",
+];
+
+const allCategories = {
   内科系: [
     "内科",
     "消化器内科",
@@ -74,62 +86,77 @@ export function CategoryFilter({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="border-y border-border/50">
-      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
-        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-          <div className="flex items-center justify-between">
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                onClick={() => onCategoryChange(null)}
-                className={cn(
-                  "rounded-full px-4 py-1.5 text-sm transition-colors",
-                  selectedCategory === null
-                    ? "bg-foreground text-background"
-                    : "bg-muted text-muted-foreground hover:text-foreground"
-                )}
-              >
-                すべて
-              </button>
-              {selectedCategory && (
-                <button className="rounded-full bg-foreground px-4 py-1.5 text-sm text-background">
-                  {selectedCategory}
-                </button>
+    <section className="border-b border-border bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ハッシュタグ横スクロール */}
+        <div className="flex items-center gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <button
+            onClick={() => onCategoryChange(null)}
+            className={cn(
+              "shrink-0 rounded-full border px-4 py-1.5 text-sm transition-colors",
+              selectedCategory === null
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-white text-muted-foreground hover:border-foreground/30 hover:text-foreground"
+            )}
+          >
+            すべて
+          </button>
+          {popularTags.map((tag) => (
+            <button
+              key={tag}
+              onClick={() => onCategoryChange(tag)}
+              className={cn(
+                "shrink-0 rounded-full border px-4 py-1.5 text-sm transition-colors",
+                selectedCategory === tag
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-white text-muted-foreground hover:border-foreground/30 hover:text-foreground"
               )}
-            </div>
+            >
+              #{tag}
+            </button>
+          ))}
+
+          <Collapsible open={isOpen} onOpenChange={setIsOpen}>
             <CollapsibleTrigger asChild>
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-1 text-muted-foreground"
+                className="shrink-0 gap-1 text-sm text-muted-foreground"
               >
-                {isOpen ? "閉じる" : "カテゴリを選ぶ"}
+                診療科
                 <ChevronDown
                   className={cn(
-                    "size-4 transition-transform",
+                    "size-3.5 transition-transform",
                     isOpen && "rotate-180"
                   )}
                 />
               </Button>
             </CollapsibleTrigger>
-          </div>
+          </Collapsible>
+        </div>
 
-          <CollapsibleContent className="mt-6">
-            <div className="grid gap-8 md:grid-cols-3">
-              {Object.entries(categories).map(([group, items]) => (
+        {/* 全カテゴリ展開 */}
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <CollapsibleContent>
+            <div className="grid gap-6 border-t border-border pb-6 pt-4 md:grid-cols-3">
+              {Object.entries(allCategories).map(([group, items]) => (
                 <div key={group}>
-                  <h3 className="mb-4 text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                  <h3 className="mb-3 text-xs font-medium text-muted-foreground">
                     {group}
                   </h3>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {items.map((category) => (
                       <button
                         key={category}
-                        onClick={() => onCategoryChange(category)}
+                        onClick={() => {
+                          onCategoryChange(category);
+                          setIsOpen(false);
+                        }}
                         className={cn(
                           "rounded-full px-3 py-1 text-xs transition-colors",
                           selectedCategory === category
-                            ? "bg-foreground text-background"
-                            : "bg-muted text-muted-foreground hover:text-foreground"
+                            ? "bg-primary text-primary-foreground"
+                            : "bg-secondary text-muted-foreground hover:text-foreground"
                         )}
                       >
                         {category}

@@ -13,29 +13,25 @@ import {
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link
-          href="/"
-          className="font-serif text-xl font-medium tracking-tight text-foreground"
-        >
-          MedApp Market
-        </Link>
+    <header className="sticky top-0 z-50 border-b border-border bg-white">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="text-lg font-bold tracking-tight text-foreground">
+            MedApp Market
+          </Link>
+          <span className="hidden text-xs text-muted-foreground sm:block">
+            医師のためのWebアプリマーケット
+          </span>
+        </div>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          <Link
-            href="/#apps"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            アプリ一覧
-          </Link>
-          <Link
-            href="/dashboard"
-            className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            マイページ
-          </Link>
-          <Button size="sm" className="rounded-full px-6" asChild>
+        <nav className="hidden items-center gap-1 md:flex">
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/#apps">アプリ一覧</Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
+            <Link href="/dashboard">マイページ</Link>
+          </Button>
+          <Button size="sm" className="ml-2 rounded-full bg-primary px-5 text-primary-foreground hover:bg-primary/90" asChild>
             <Link href="/auth/login">ログイン</Link>
           </Button>
         </nav>
@@ -49,18 +45,18 @@ export function Header() {
           </SheetTrigger>
           <SheetContent side="right" className="w-72">
             <SheetHeader>
-              <SheetTitle className="font-serif">メニュー</SheetTitle>
+              <SheetTitle>メニュー</SheetTitle>
             </SheetHeader>
-            <nav className="mt-8 flex flex-col gap-6">
+            <nav className="mt-8 flex flex-col gap-4">
               <Link
                 href="/#apps"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 アプリ一覧
               </Link>
               <Link
                 href="/dashboard"
-                className="text-muted-foreground transition-colors hover:text-foreground"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
                 マイページ
               </Link>

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { AppWindow, ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { AppWindow } from "lucide-react";
 
 export interface AppData {
   id: string;
@@ -25,38 +24,42 @@ export function AppCard({ app }: AppCardProps) {
 
   return (
     <Link href={`/apps/${app.slug}`} className="group block">
-      <article className="overflow-hidden rounded-2xl bg-card transition-all hover:shadow-lg">
-        <div className="flex aspect-video items-center justify-center bg-muted">
-          <AppWindow className="size-10 text-muted-foreground/50" />
+      <article className="overflow-hidden rounded-lg border border-border bg-white transition-shadow hover:shadow-md">
+        {/* サムネイル */}
+        <div className="flex aspect-[16/10] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
+          <AppWindow className="size-12 text-primary/30" />
         </div>
 
-        <div className="p-5">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="font-serif text-lg font-medium text-foreground">
-              {app.name}
-            </h3>
-            <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-          </div>
-
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-            {app.tagline}
-          </p>
-
-          <div className="mt-4 flex items-center justify-between">
-            <Badge
-              variant="secondary"
-              className="rounded-full text-xs font-normal"
-            >
-              {app.category}
-            </Badge>
-            <span className="text-sm font-medium text-foreground">
+        {/* コンテンツ — テキスト途切れなし */}
+        <div className="p-4">
+          <div className="flex items-center gap-2">
+            <span className="rounded bg-primary/10 px-2 py-0.5 text-xs text-primary">
               {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {app.category}
             </span>
           </div>
 
-          <p className="mt-3 text-xs text-muted-foreground">
-            {app.developer_name}
+          <h3 className="mt-2 text-base font-medium leading-snug text-foreground">
+            {app.name}
+          </h3>
+
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+            {app.tagline}
           </p>
+
+          <div className="mt-3 flex items-center gap-2 border-t border-border pt-3">
+            <div className="flex size-6 items-center justify-center rounded-full bg-muted text-xs font-medium text-muted-foreground">
+              {app.developer_name.charAt(0)}
+            </div>
+            <span className="text-xs text-muted-foreground">
+              {app.developer_name}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {app.developer_specialty}
+            </span>
+          </div>
         </div>
       </article>
     </Link>

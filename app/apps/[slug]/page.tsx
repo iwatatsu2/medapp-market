@@ -1,10 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { AppWindow, ArrowLeft } from "lucide-react";
+import { AppWindow, ArrowLeft, ExternalLink } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { SEED_APPS } from "@/lib/seed-apps";
 
 export function generateStaticParams() {
@@ -25,98 +24,71 @@ export default async function AppDetailPage({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <main className="flex-1 bg-background">
+        <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
           <Link
             href="/#apps"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="mb-6 inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="size-4" />
             アプリ一覧に戻る
           </Link>
 
-          <div className="grid gap-12 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <div className="flex aspect-video items-center justify-center rounded-2xl bg-card">
-                <AppWindow className="size-20 text-muted-foreground/30" />
-              </div>
-
-              <div className="mt-10">
-                <div className="flex flex-wrap items-center gap-3">
-                  <h1 className="font-serif text-3xl font-medium text-foreground sm:text-4xl">
-                    {app.name}
-                  </h1>
-                  <Badge variant="secondary" className="rounded-full">
-                    {app.category}
-                  </Badge>
-                </div>
-                <p className="mt-3 text-lg text-muted-foreground">
-                  {app.tagline}
-                </p>
-
-                <div className="mt-10">
-                  <h2 className="font-serif text-xl font-medium text-foreground">
-                    説明
-                  </h2>
-                  <p className="mt-4 whitespace-pre-wrap leading-relaxed text-muted-foreground">
-                    {app.description}
-                  </p>
-                </div>
-              </div>
+          {/* メインカード */}
+          <div className="overflow-hidden rounded-lg border border-border bg-white">
+            {/* サムネイル */}
+            <div className="flex aspect-[2/1] items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10">
+              <AppWindow className="size-20 text-primary/20" />
             </div>
 
-            <div className="lg:col-span-1">
-              <div className="sticky top-24">
-                <div className="rounded-2xl bg-card p-6">
-                  <div className="mb-6 text-center">
-                    <span className="font-serif text-4xl font-medium text-foreground">
-                      {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
-                    </span>
-                  </div>
+            <div className="p-6 sm:p-8">
+              {/* タイトル行 */}
+              <div className="flex flex-wrap items-center gap-3">
+                <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+                  {app.name}
+                </h1>
+                <span className="rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
+                  {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
+                </span>
+              </div>
 
-                  {app.demo_url ? (
-                    <Button className="w-full rounded-full" size="lg" asChild>
-                      <a
-                        href={app.demo_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {isFree ? "アプリを開く" : "デモを試す"}
-                      </a>
-                    </Button>
-                  ) : (
-                    <Button className="w-full rounded-full" size="lg">
-                      {isFree ? "アプリを開く" : "購入する"}
-                    </Button>
-                  )}
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground">
+                {app.tagline}
+              </p>
 
-                  <div className="mt-8 space-y-4 border-t border-border/50 pt-6">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">カテゴリ</span>
-                      <span className="font-medium text-foreground">
-                        {app.category}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">開発者</span>
-                      <span className="font-medium text-foreground">
-                        {app.developer_name}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">専門</span>
-                      <span className="font-medium text-foreground">
-                        {app.developer_specialty}
-                      </span>
-                    </div>
-                    <div className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">種類</span>
-                      <span className="font-medium text-foreground">
-                        Webアプリ
-                      </span>
-                    </div>
-                  </div>
-                </div>
+              {/* メタ情報 */}
+              <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
+                <span>カテゴリ：{app.category}</span>
+                <span>開発者：{app.developer_name}</span>
+                <span>専門：{app.developer_specialty}</span>
+              </div>
+
+              {/* CTA */}
+              <div className="mt-6 flex flex-wrap gap-3">
+                {app.demo_url ? (
+                  <Button size="lg" className="gap-2 rounded-full px-8" asChild>
+                    <a
+                      href={app.demo_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {isFree ? "アプリを開く" : "デモを試す"}
+                      <ExternalLink className="size-4" />
+                    </a>
+                  </Button>
+                ) : (
+                  <Button size="lg" className="rounded-full px-8">
+                    {isFree ? "アプリを開く" : "購入する"}
+                  </Button>
+                )}
+              </div>
+
+              {/* 説明 */}
+              <div className="mt-8 border-t border-border pt-6">
+                <h2 className="text-lg font-bold text-foreground">説明</h2>
+                <p className="mt-3 whitespace-pre-wrap text-sm leading-loose text-muted-foreground">
+                  {app.description}
+                </p>
               </div>
             </div>
           </div>
