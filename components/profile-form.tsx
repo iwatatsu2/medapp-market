@@ -98,7 +98,7 @@ export function ProfileForm({
           <Input
             value={form.display_name}
             onChange={(e) => update("display_name", e.target.value)}
-            placeholder="例：岩本 達也"
+            placeholder="例：山田 太郎"
             className="mt-1"
           />
         </div>
@@ -111,7 +111,7 @@ export function ProfileForm({
           <Input
             value={form.specialty}
             onChange={(e) => update("specialty", e.target.value)}
-            placeholder="例：糖尿病内分泌代謝内科"
+            placeholder="例：内科"
             className="mt-1"
           />
         </div>
