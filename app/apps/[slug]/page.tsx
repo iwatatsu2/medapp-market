@@ -109,6 +109,7 @@ export default async function AppDetailPage({
               <div className="mt-6 flex flex-wrap gap-3">
                 <PurchaseButton
                   appId={"id" in app ? app.id : ""}
+                  slug={slug}
                   price={app.price}
                   appUrl={app.demo_url || app.app_url}
                   purchased={purchased}

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electrolyte Compass サムネイル</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .container {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #1a120a 0%, #29200f 50%, #1a120a 100%);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .left {
+    width: 780px;
+    padding: 40px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 20px;
+    width: fit-content;
+    margin-bottom: 14px;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 58px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .title .elyte {
+    background: linear-gradient(135deg, #fb923c, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .free-badge {
+    display: inline-block;
+    background: #22c55e;
+    color: white;
+    font-size: 32px;
+    font-weight: 900;
+    padding: 10px 28px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+  }
+
+  .subtitle {
+    font-size: 26px;
+    color: #fed7aa;
+    margin-top: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .sections {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 28px;
+  }
+
+  .section-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e2e8f0;
+    font-size: 16px;
+    padding: 3px 0;
+    font-weight: 500;
+  }
+
+  .section-item::before {
+    content: "•";
+    color: #fb923c;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .author {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-name {
+    color: #fb923c;
+    font-size: 22px;
+    font-weight: 900;
+  }
+
+  .author-role {
+    color: #9ca3af;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+
+  .right {
+    position: absolute;
+    right: -40px;
+    bottom: 0;
+    width: 520px;
+    height: 720px;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .right img {
+    height: 660px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.5));
+  }
+
+  .bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 1;
+  }
+
+  .bg-glow-1 {
+    background: #f97316;
+    width: 500px; height: 500px;
+    top: -150px; right: 150px;
+    opacity: 0.12;
+  }
+
+  .bg-glow-2 {
+    background: #ea580c;
+    width: 500px; height: 500px;
+    bottom: -200px; left: 100px;
+    opacity: 0.12;
+  }
+
+  .bg-glow-3 {
+    background: #f97316;
+    width: 400px; height: 400px;
+    bottom: 0; right: 100px;
+    opacity: 0.08;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="left">
+    <div class="badge">電解質異常 研修医・救急向け</div>
+    <div class="title-row">
+      <h1 class="title"><span class="elyte">Electrolyte</span> Compass</h1>
+    </div>
+    <div style="margin-top: 8px;">
+      <span class="free-badge">無料</span>
+    </div>
+    <p class="subtitle">電解質異常の<br>鑑別・計算ツール</p>
+
+    <div class="sections">
+      <div class="section-item">酸塩基平衡（AG計算）</div>
+      <div class="section-item">高K血症（TTKG・FEK）</div>
+      <div class="section-item">補正HCO3・Winter式</div>
+      <div class="section-item">補正Ca・PTH鑑別</div>
+      <div class="section-item">UAG（尿AG）</div>
+      <div class="section-item">Mg異常</div>
+      <div class="section-item">低Na血症（浸透圧）</div>
+      <div class="section-item">P異常</div>
+      <div class="section-item">低Na 自由水計算</div>
+      <div class="section-item">AKI鑑別（FENa）</div>
+      <div class="section-item">低Na 鑑別フロー</div>
+      <div class="section-item">浸透圧ギャップ</div>
+      <div class="section-item">高Na（自由水欠乏量）</div>
+      <div class="section-item">輸液プランナー</div>
+      <div class="section-item">低K血症（TTKG・FEK）</div>
+      <div class="section-item">電解質パニック値一覧</div>
+    </div>
+
+    <div class="author">
+      <div>
+        <div class="author-name">Dr. いわたつ</div>
+        <div class="author-role">糖尿病・内分泌専門医</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right">
+    <img src="dr-iwatatsu.png" alt="Dr. いわたつ">
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><link rel="stylesheet" href="slide-template.css">
+<style>
+  .slide { padding: 60px 50px 32px; }
+  .badge { display:inline-block; background:linear-gradient(135deg,#14b8a6,#0d9488); color:white; font-size:15px; font-weight:700; padding:6px 18px; border-radius:20px; margin-bottom:10px; }
+  .title-row { display:flex; align-items:center; gap:14px; }
+  .title { font-size:64px; font-weight:900; color:white; line-height:1.1; }
+  .title .dm { background:linear-gradient(135deg,#14b8a6,#2dd4bf); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .subtitle { font-size:22px; color:#99f6e4; margin-top:8px; font-weight:700; line-height:1.4; }
+  .sections { margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:3px 20px; }
+  .section-item { display:flex; align-items:center; gap:6px; color:#64748b; font-size:14px; padding:2px 0; font-weight:500; }
+  .section-item.active { color:#e2e8f0; }
+  .section-num { width:20px; height:20px; background:rgba(20,184,166,0.2); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:10px; color:#64748b; font-weight:700; flex-shrink:0; }
+  .section-item.active .section-num { background:linear-gradient(135deg,#14b8a6,#0d9488); color:white; }
+  .highlight-box { background:rgba(20,184,166,0.12); border:2px solid #14b8a6; border-radius:8px; padding:2px 4px; margin:-2px -4px; }
+  .author-area { margin-top:14px; display:flex; align-items:center; gap:10px; }
+  .author-name { color:#14b8a6; font-size:20px; font-weight:900; }
+  .author-role { color:#64748b; font-size:13px; margin-top:2px; }
+  .right-area { position:absolute; right:-40px; bottom:0; width:520px; height:720px; z-index:2; display:flex; align-items:flex-end; justify-content:center; }
+  .right-area img { height:620px; object-fit:contain; filter:drop-shadow(0 10px 40px rgba(0,0,0,0.5)); }
+  .vol-badge { position:absolute; top:28px; right:60px; background:linear-gradient(135deg,#14b8a6,#0d9488); color:white; font-size:16px; font-weight:900; padding:8px 20px; border-radius:10px; z-index:5; }
+</style></head><body>
+<div class="slide slide-dark">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="vol-badge">vol.2 ケトメーター判定</div>
+  <div class="content" style="position:relative;z-index:3">
+    <div class="badge">糖尿病病棟管理 研修医向け</div>
+    <div class="title-row">
+      <h1 class="title"><span class="dm">DM</span> Compass</h1>
+    </div>
+    <p class="subtitle">病棟業務でもう迷わない<br>糖尿病マネジメント支援ツール</p>
+
+    <div class="sections">
+      <div class="section-item"><div class="section-num">1</div>高血糖緊急症</div>
+      <div class="section-item"><div class="section-num">8</div>インスリン完全ガイド</div>
+      <div class="section-item active"><div class="section-num">2</div><span class="highlight-box" style="color:#2dd4bf;font-weight:900">ケトメーター判定 ← 今回</span></div>
+      <div class="section-item"><div class="section-num">9</div>スライディングスケール</div>
+      <div class="section-item"><div class="section-num">3</div>糖分入り点滴・IVH</div>
+      <div class="section-item"><div class="section-num">10</div>周術期血糖管理</div>
+      <div class="section-item"><div class="section-num">4</div>糖尿病タイプ診断</div>
+      <div class="section-item"><div class="section-num">11</div>食事・カロリー計算</div>
+      <div class="section-item"><div class="section-num">5</div>2型治療アルゴリズム</div>
+      <div class="section-item"><div class="section-num">12</div>低血糖対応</div>
+      <div class="section-item"><div class="section-num">6</div>HbA1c目標値</div>
+      <div class="section-item"><div class="section-num">13</div>合併症リファレンス</div>
+      <div class="section-item"><div class="section-num">7</div>内服／注射一覧</div>
+      <div class="section-item"><div class="section-num">14</div>制作者</div>
+    </div>
+
+    <div class="author-area">
+      <div>
+        <div class="author-name">Dr. いわたつ</div>
+        <div class="author-role">糖尿病・内分泌専門医</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-area">
+    <img src="../../dr-iwatatsu.png" alt="Dr. いわたつ">
+  </div>
+</div>
+</body></html>

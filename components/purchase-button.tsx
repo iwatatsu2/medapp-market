@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 
 interface PurchaseButtonProps {
   appId: string;
+  slug: string;
   price: number;
   appUrl: string;
   purchased: boolean;
@@ -14,6 +15,7 @@ interface PurchaseButtonProps {
 
 export function PurchaseButton({
   appId,
+  slug,
   price,
   appUrl,
   purchased,
@@ -22,9 +24,11 @@ export function PurchaseButton({
   const [loading, setLoading] = useState(false);
 
   if (price === 0 || purchased) {
+    // 有料アプリは認証付きビューアー経由、無料は直リンク
+    const href = price === 0 ? appUrl : `/apps/${slug}/view`;
     return (
       <Button size="lg" className="gap-2 rounded-full px-8" asChild>
-        <a href={appUrl} target="_blank" rel="noopener noreferrer">
+        <a href={href} target={price === 0 ? "_blank" : undefined} rel={price === 0 ? "noopener noreferrer" : undefined}>
           アプリを開く
           <ExternalLink className="size-4" />
         </a>

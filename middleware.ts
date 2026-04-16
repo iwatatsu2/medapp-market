@@ -29,10 +29,15 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Protect /dashboard routes
-  if (request.nextUrl.pathname.startsWith("/dashboard") && !user) {
+  // Protect /dashboard and /apps/*/view routes
+  const needsAuth =
+    request.nextUrl.pathname.startsWith("/dashboard") ||
+    request.nextUrl.pathname.match(/^\/apps\/[^/]+\/view$/);
+
+  if (needsAuth && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
+    url.searchParams.set("redirect", request.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 
@@ -40,5 +45,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: ["/dashboard/:path*", "/apps/:slug/view"],
 };
