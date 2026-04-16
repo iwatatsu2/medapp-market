@@ -232,7 +232,7 @@ export function AppForm({ app, userId }: AppFormProps) {
               src={thumbnailUrl}
               alt="サムネイル"
               width={320}
-              height={200}
+              height={180}
               className="rounded-lg border object-cover"
             />
             <button
@@ -279,7 +279,7 @@ export function AppForm({ app, userId }: AppFormProps) {
                 src={url}
                 alt={`スクリーンショット ${i + 1}`}
                 width={160}
-                height={100}
+                height={90}
                 className="rounded-lg border object-cover"
               />
               <button
@@ -297,7 +297,7 @@ export function AppForm({ app, userId }: AppFormProps) {
             <button
               type="button"
               onClick={() => screenshotsRef.current?.click()}
-              className="flex h-[100px] w-[160px] items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 hover:border-primary/50"
+              className="flex h-[90px] w-[160px] items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 hover:border-primary/50"
             >
               <ImagePlus className="size-6 text-muted-foreground/50" />
             </button>

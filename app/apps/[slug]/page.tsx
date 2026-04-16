@@ -71,7 +71,7 @@ export default async function AppDetailPage({
           </Link>
 
           <div className="overflow-hidden rounded-lg border border-border bg-white">
-            <div className="relative aspect-[2/1] bg-gradient-to-br from-primary/5 to-primary/10">
+            <div className="relative aspect-[16/9] bg-gradient-to-br from-primary/5 to-primary/10">
               {thumbnailUrl ? (
                 <Image
                   src={thumbnailUrl}
@@ -129,7 +129,7 @@ export default async function AppDetailPage({
                         src={url}
                         alt={`${app.name} スクリーンショット ${i + 1}`}
                         width={400}
-                        height={250}
+                        height={225}
                         className="rounded-lg border object-cover"
                       />
                     ))}
