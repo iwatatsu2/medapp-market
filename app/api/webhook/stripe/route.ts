@@ -23,6 +23,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
   }
 
+  if (event.type === "account.updated") {
+    const account = event.data.object;
+    if (account.charges_enabled && account.payouts_enabled) {
+      await supabaseAdmin
+        .from("market_profiles")
+        .update({ stripe_onboarding_complete: true })
+        .eq("stripe_account_id", account.id);
+    }
+  }
+
   if (event.type === "checkout.session.completed") {
     const session = event.data.object;
     const { appId, userId } = session.metadata || {};

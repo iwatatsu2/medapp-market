@@ -23,6 +23,8 @@ export type Profile = {
   specialty: string | null;
   hospital: string | null;
   is_developer: boolean;
+  stripe_account_id: string | null;
+  stripe_onboarding_complete: boolean;
   created_at: string;
 };
 

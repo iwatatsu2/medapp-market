@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, AppWindow } from "lucide-react";
+import { Plus, Pencil, AppWindow, Settings } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -33,12 +33,20 @@ export default async function DeveloperDashboardPage() {
             <h1 className="font-serif text-2xl font-medium">
               開発者ダッシュボード
             </h1>
-            <Button asChild className="gap-2">
-              <Link href="/dashboard/developer/new">
-                <Plus className="size-4" />
-                新規出品
-              </Link>
-            </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" asChild className="gap-2">
+                <Link href="/dashboard/developer/settings">
+                  <Settings className="size-4" />
+                  売上設定
+                </Link>
+              </Button>
+              <Button asChild className="gap-2">
+                <Link href="/dashboard/developer/new">
+                  <Plus className="size-4" />
+                  新規出品
+                </Link>
+              </Button>
+            </div>
           </div>
 
           <div className="mt-8 rounded-2xl bg-card p-8">

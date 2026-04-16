@@ -47,9 +47,16 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Get developer's Stripe Connect account
+    const { data: developerProfile } = await supabase
+      .from("market_profiles")
+      .select("stripe_account_id, stripe_onboarding_complete")
+      .eq("id", app.developer_id)
+      .single();
+
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams: Parameters<typeof stripe.checkout.sessions.create>[0] = {
       payment_method_types: ["card"],
       line_items: [
         {
@@ -71,7 +78,23 @@ export async function POST(req: NextRequest) {
         appId: app.id,
         userId: user.id,
       },
-    });
+    };
+
+    // If developer has connected Stripe, split revenue (80% developer, 20% platform)
+    if (
+      developerProfile?.stripe_account_id &&
+      developerProfile.stripe_onboarding_complete
+    ) {
+      const platformFee = Math.round(app.price * 0.2);
+      sessionParams.payment_intent_data = {
+        application_fee_amount: platformFee,
+        transfer_data: {
+          destination: developerProfile.stripe_account_id,
+        },
+      };
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
