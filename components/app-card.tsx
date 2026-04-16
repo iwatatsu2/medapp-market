@@ -34,7 +34,7 @@ export function AppCard({ app }: AppCardProps) {
               src={app.thumbnail_url}
               alt={app.name}
               fill
-              className="object-cover"
+              className="object-contain"
             />
           ) : (
             <div className="flex h-full items-center justify-center">

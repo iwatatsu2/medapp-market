@@ -77,7 +77,7 @@ export default async function AppDetailPage({
                   src={thumbnailUrl}
                   alt={app.name}
                   fill
-                  className="object-cover"
+                  className="object-contain"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">
