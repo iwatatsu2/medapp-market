@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { ProfileForm } from "@/components/profile-form";
+import { PurchasedApps } from "@/components/purchased-apps";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -35,12 +36,7 @@ export default async function DashboardPage() {
             />
           </div>
 
-          <div className="mt-8 rounded-2xl bg-card p-8">
-            <h2 className="font-serif text-lg font-medium">購入済みアプリ</h2>
-            <p className="mt-4 text-sm text-muted-foreground">
-              まだ購入したアプリはありません。
-            </p>
-          </div>
+          <PurchasedApps userId={user.id} />
 
           <div className="mt-8 flex items-center justify-between">
             <Link

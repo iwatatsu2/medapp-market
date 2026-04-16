@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { AppWindow, ArrowLeft, ExternalLink } from "lucide-react";
+import { AppWindow, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { Button } from "@/components/ui/button";
+import { PurchaseButton } from "@/components/purchase-button";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
 
@@ -36,6 +36,22 @@ export default async function AppDetailPage({
   const { slug } = await params;
   const app = await getApp(slug);
   if (!app) notFound();
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let purchased = false;
+  if (user && app.price > 0 && "id" in app) {
+    const { data } = await supabase
+      .from("purchases")
+      .select("id")
+      .eq("user_id", user.id)
+      .eq("app_id", app.id)
+      .single();
+    purchased = !!data;
+  }
 
   const isFree = app.price === 0;
   const thumbnailUrl = "thumbnail_url" in app ? app.thumbnail_url : null;
@@ -91,22 +107,13 @@ export default async function AppDetailPage({
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                {app.demo_url ? (
-                  <Button size="lg" className="gap-2 rounded-full px-8" asChild>
-                    <a
-                      href={app.demo_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {isFree ? "アプリを開く" : "デモを試す"}
-                      <ExternalLink className="size-4" />
-                    </a>
-                  </Button>
-                ) : (
-                  <Button size="lg" className="rounded-full px-8">
-                    {isFree ? "アプリを開く" : "購入する"}
-                  </Button>
-                )}
+                <PurchaseButton
+                  appId={"id" in app ? app.id : ""}
+                  price={app.price}
+                  appUrl={app.demo_url || app.app_url}
+                  purchased={purchased}
+                  loggedIn={!!user}
+                />
               </div>
 
               {screenshots.length > 0 && (
