@@ -51,8 +51,14 @@ export function PurchaseButton({
         body: JSON.stringify({ appId }),
       });
       const data = await res.json();
+      if (res.status === 401) {
+        window.location.href = `/auth/login?redirect=/apps`;
+        return;
+      }
       if (data.url) {
         window.location.href = data.url;
+      } else {
+        alert(data.error || "購入処理に失敗しました");
       }
     } catch {
       alert("購入処理に失敗しました");
