@@ -2,6 +2,7 @@ import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { AppGrid } from "@/components/app-grid";
 import { DeveloperCTA } from "@/components/developer-cta";
+import { AboutSection } from "@/components/about-section";
 import { Footer } from "@/components/footer";
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
       <main className="flex-1">
         <Hero />
         <AppGrid />
+        <AboutSection />
         <DeveloperCTA />
       </main>
       <Footer />
