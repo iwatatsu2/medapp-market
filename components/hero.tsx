@@ -7,7 +7,7 @@ export function Hero() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl lg:text-4xl">
-            医師が作った、医師のための
+            医療の現場から生まれた
             <br />
             Webアプリマーケット
           </h1>

@@ -11,7 +11,7 @@ export function DeveloperCTA() {
             あなたのアプリも公開しませんか？
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            医師が作ったWebアプリを登録して、全国の医師に届けましょう。
+            医療の現場から生まれたWebアプリを登録して、全国の医療者に届けましょう。
             <br className="hidden sm:block" />
             アプリストアの審査不要。Webアプリなら今すぐ公開できます。
           </p>

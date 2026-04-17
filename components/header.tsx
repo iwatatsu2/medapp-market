@@ -41,7 +41,7 @@ export function Header() {
             MedApp Market
           </Link>
           <span className="hidden text-xs text-muted-foreground sm:block">
-            医師のためのWebアプリマーケット
+            医療の現場から生まれたWebアプリマーケット
           </span>
         </div>
 

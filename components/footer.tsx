@@ -10,7 +10,7 @@ export function Footer() {
               MedApp Market
             </Link>
             <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-              医師が作った、医師のための
+              医療の現場から生まれた
               <br />
               Webアプリマーケット
             </p>

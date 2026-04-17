@@ -3,9 +3,9 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "MedApp Market - 医師のためのWebアプリマーケット",
+  title: "MedApp Market - 医療の現場から生まれたWebアプリマーケット",
   description:
-    "医師が作った、医師のためのWebアプリマーケット。臨床現場で本当に使えるツールを見つけよう。",
+    "医療の現場から生まれたWebアプリマーケット。臨床現場で本当に使えるツールを見つけよう。",
 };
 
 export default function RootLayout({
