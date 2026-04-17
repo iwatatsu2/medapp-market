@@ -49,13 +49,23 @@ export default function TermsPage() {
             </section>
 
             <section>
-              <h2 className="text-base font-bold text-foreground">第6条（規約の変更）</h2>
+              <h2 className="text-base font-bold text-foreground">第6条（手数料および決済）</h2>
+              <ol className="mt-2 list-inside list-decimal space-y-1">
+                <li>本サービスでアプリを販売する開発者は、販売価格の20%をプラットフォーム手数料として本サービスに支払うものとします。</li>
+                <li>決済処理はStripe, Inc.の決済サービス（Stripe Connect）を通じて行われます。</li>
+                <li>開発者の売上金（販売価格の80%）は、Stripe Connectを通じて開発者が登録したStripeアカウントに支払われます。支払スケジュールはStripeの規定に準じます。</li>
+                <li>本サービスは、手数料率を変更する場合、事前に開発者に通知するものとします。</li>
+              </ol>
+            </section>
+
+            <section>
+              <h2 className="text-base font-bold text-foreground">第7条（規約の変更）</h2>
               <p className="mt-2">
                 本サービスは、必要に応じて本規約を変更できるものとします。変更後の規約は本ページに掲載した時点で効力を生じます。
               </p>
             </section>
 
-            <p className="text-xs text-muted-foreground">2026年4月13日 制定</p>
+            <p className="text-xs text-muted-foreground">2026年4月13日 制定 / 2026年4月17日 改定</p>
           </div>
         </div>
       </main>

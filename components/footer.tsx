@@ -52,6 +52,9 @@ export function Footer() {
               <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground">
                 プライバシーポリシー
               </Link>
+              <Link href="/tokushoho" className="text-xs text-muted-foreground hover:text-foreground">
+                特定商取引法に基づく表記
+              </Link>
               <Link href="/contact" className="text-xs text-muted-foreground hover:text-foreground">
                 お問い合わせ
               </Link>
