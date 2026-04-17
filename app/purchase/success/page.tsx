@@ -1,10 +1,40 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { CheckCircle } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/server";
 
-export default function PurchaseSuccessPage() {
+export default async function PurchaseSuccessPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ session_id?: string }>;
+}) {
+  const { session_id } = await searchParams;
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // 未ログインまたはsession_idなし → トップへ
+  if (!user || !session_id) {
+    redirect("/");
+  }
+
+  // session_idで購入記録を確認
+  const { data: purchase } = await supabase
+    .from("purchases")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("stripe_session_id", session_id)
+    .single();
+
+  if (!purchase) {
+    redirect("/");
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />

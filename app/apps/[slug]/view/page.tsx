@@ -55,7 +55,8 @@ export default async function AppViewerPage({
     <iframe
       src={appUrl}
       className="fixed inset-0 h-full w-full border-0"
-      allow="clipboard-write"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+      referrerPolicy="no-referrer"
       title={app.name}
     />
   );

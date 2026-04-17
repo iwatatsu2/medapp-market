@@ -94,7 +94,11 @@ export async function POST(req: NextRequest) {
       };
     }
 
-    const session = await stripe.checkout.sessions.create(sessionParams);
+    // Idempotency key to prevent double purchases from rapid clicks
+    const idempotencyKey = `checkout_${user.id}_${appId}`;
+    const session = await stripe.checkout.sessions.create(sessionParams, {
+      idempotencyKey,
+    });
 
     return NextResponse.json({ url: session.url });
   } catch (error) {
