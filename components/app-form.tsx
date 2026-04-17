@@ -31,7 +31,9 @@ export function AppForm({ app, userId }: AppFormProps) {
   const [tagline, setTagline] = useState(app?.tagline ?? "");
   const [description, setDescription] = useState(app?.description ?? "");
   const [price, setPrice] = useState(app?.price ?? 0);
-  const [category, setCategory] = useState(app?.category ?? "other");
+  const [category, setCategory] = useState<string[]>(
+    app?.category ? (Array.isArray(app.category) ? app.category : [app.category]) : ["other"]
+  );
   const [appUrl, setAppUrl] = useState(app?.app_url ?? "");
   const [demoUrl, setDemoUrl] = useState(app?.demo_url ?? "");
   const [thumbnailUrl, setThumbnailUrl] = useState(app?.thumbnail_url ?? "");
@@ -157,19 +159,38 @@ export function AppForm({ app, userId }: AppFormProps) {
       {/* カテゴリ・価格 */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="category">カテゴリ *</Label>
-          <select
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-          >
-            {categories.map((c) => (
-              <option key={c.value} value={c.value}>
-                {c.label}
-              </option>
-            ))}
-          </select>
+          <Label>カテゴリ *（複数選択可）</Label>
+          <div className="max-h-48 overflow-y-auto rounded-md border border-input bg-background p-3">
+            <div className="flex flex-wrap gap-2">
+              {categories.map((c) => (
+                <label
+                  key={c.value}
+                  className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${
+                    category.includes(c.value)
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border bg-white text-muted-foreground hover:border-primary/50"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    className="hidden"
+                    checked={category.includes(c.value)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setCategory((prev) => [...prev, c.value]);
+                      } else {
+                        setCategory((prev) => prev.filter((v) => v !== c.value));
+                      }
+                    }}
+                  />
+                  {c.label}
+                </label>
+              ))}
+            </div>
+          </div>
+          {category.length === 0 && (
+            <p className="text-xs text-red-500">1つ以上選択してください</p>
+          )}
         </div>
         <div className="space-y-2">
           <Label htmlFor="price">価格（円）</Label>

@@ -5,6 +5,7 @@ import { AppCard } from "@/components/app-card";
 import { CategoryFilter } from "@/components/category-filter";
 import { SEED_APPS } from "@/lib/seed-apps";
 import { createClient } from "@/lib/supabase/client";
+import { getCategoryLabel } from "@/lib/category-utils";
 import type { AppData } from "@/components/app-card";
 
 export function AppGrid() {
@@ -25,7 +26,7 @@ export function AppGrid() {
           id: a.id as string,
           slug: a.slug as string,
           name: a.name as string,
-          category: a.category as string,
+          category: a.category as string | string[],
           price: a.price as number,
           tagline: a.tagline as string,
           description: a.description as string,
@@ -45,11 +46,10 @@ export function AppGrid() {
   }, []);
 
   const filteredApps = selectedCategory
-    ? apps.filter(
-        (app) =>
-          app.category === selectedCategory ||
-          app.category.includes(selectedCategory)
-      )
+    ? apps.filter((app) => {
+        const cats = Array.isArray(app.category) ? app.category : [app.category];
+        return cats.includes(selectedCategory);
+      })
     : apps;
 
   return (
@@ -63,7 +63,7 @@ export function AppGrid() {
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
           <div className="mb-6 flex items-baseline gap-3">
             <h2 className="text-lg font-bold text-foreground">
-              {selectedCategory ? selectedCategory : "新着のアプリ"}
+              {selectedCategory ? getCategoryLabel(selectedCategory) : "新着のアプリ"}
             </h2>
             {selectedCategory && (
               <button

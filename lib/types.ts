@@ -6,7 +6,7 @@ export type App = {
   tagline: string;
   description: string;
   price: number;
-  category: string;
+  category: string[];
   app_url: string;
   demo_url: string | null;
   thumbnail_url: string | null;

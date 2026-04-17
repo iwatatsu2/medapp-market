@@ -1,12 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { AppWindow } from "lucide-react";
+import { getCategoryLabel } from "@/lib/category-utils";
 
 export interface AppData {
   id: string;
   slug: string;
   name: string;
-  category: string;
+  category: string | string[];
   price: number;
   tagline: string;
   description: string;
@@ -50,9 +51,11 @@ export function AppCard({ app }: AppCardProps) {
             <span className="rounded bg-primary/10 px-2 py-0.5 text-xs text-primary">
               {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
             </span>
-            <span className="text-xs text-muted-foreground">
-              {app.category}
-            </span>
+            {(Array.isArray(app.category) ? app.category : [app.category]).map((cat) => (
+              <span key={cat} className="text-xs text-muted-foreground">
+                {getCategoryLabel(cat)}
+              </span>
+            ))}
           </div>
 
           <h3 className="mt-2 text-base font-medium leading-snug text-foreground">

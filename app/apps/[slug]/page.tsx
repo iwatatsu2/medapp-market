@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { PurchaseButton } from "@/components/purchase-button";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
+import { getCategoryLabel } from "@/lib/category-utils";
 
 async function getApp(slug: string) {
   const supabase = await createClient();
@@ -101,7 +102,7 @@ export default async function AppDetailPage({
               </p>
 
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
-                <span>カテゴリ：{app.category}</span>
+                <span>カテゴリ：{(Array.isArray(app.category) ? app.category : [app.category]).map((c: string) => getCategoryLabel(c)).join(" / ")}</span>
                 <span>開発者：{app.developer_name}</span>
                 <span>専門：{app.developer_specialty}</span>
               </div>
