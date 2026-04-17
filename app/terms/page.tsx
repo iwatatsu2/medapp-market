@@ -53,7 +53,7 @@ export default function TermsPage() {
               <ol className="mt-2 list-inside list-decimal space-y-1">
                 <li>本サービスでアプリを販売する開発者は、販売価格の20%をプラットフォーム手数料として本サービスに支払うものとします。</li>
                 <li>決済処理はStripe, Inc.の決済サービス（Stripe Connect）を通じて行われます。</li>
-                <li>開発者の売上金（販売価格の80%）は、Stripe Connectを通じて開発者が登録したStripeアカウントに支払われます。支払スケジュールはStripeの規定に準じます。</li>
+                <li>開発者の売上金（販売価格の80%からStripe決済手数料を差し引いた金額）は、Stripe Connectを通じて開発者が登録したStripeアカウントに支払われます。支払スケジュールはStripeの規定に準じます。</li>
                 <li>本サービスは、手数料率を変更する場合、事前に開発者に通知するものとします。</li>
               </ol>
             </section>
