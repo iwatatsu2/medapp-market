@@ -13,6 +13,7 @@ export interface AppData {
   app_url: string;
   demo_url: string | null;
   thumbnail_url?: string | null;
+  screenshots?: string[];
   developer_name: string;
   developer_specialty: string;
 }

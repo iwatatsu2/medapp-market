@@ -12,6 +12,7 @@ export const SEED_APPS: AppData[] = [
     category: "糖尿病内分泌代謝内科",
     app_url: "https://iwatatsu2.github.io/dm-compass/",
     demo_url: "https://iwatatsu2.github.io/dm-compass/",
+    screenshots: ["/screenshots/dm-compass-1.png"],
     developer_name: "岩本 達也",
     developer_specialty: "糖尿病内分泌代謝内科",
   },

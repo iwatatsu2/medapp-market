@@ -55,7 +55,7 @@ export default async function AppDetailPage({
 
   const isFree = app.price === 0;
   const thumbnailUrl = "thumbnail_url" in app ? app.thumbnail_url : null;
-  const screenshots = "screenshots" in app ? (app.screenshots as string[]) : [];
+  const screenshots = ("screenshots" in app ? (app.screenshots as string[]) : []);
 
   return (
     <div className="flex min-h-screen flex-col">
