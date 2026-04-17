@@ -31,19 +31,50 @@ export function AboutSection() {
                 糖尿病・内分泌領域を中心に、研修医や病棟担当医がすぐに使える実践的なツールを提供しています。
               </p>
 
-              <div className="mt-4 flex flex-wrap justify-center gap-3 text-xs text-muted-foreground sm:justify-start">
+              <div className="mt-4 flex flex-wrap justify-center gap-2 text-xs text-muted-foreground sm:justify-start">
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-3 py-1">
                   <GraduationCap className="size-3.5" />
                   和歌山県立医科大学卒
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-3 py-1">
+                  <GraduationCap className="size-3.5" />
+                  医学博士
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-3 py-1">
                   <Stethoscope className="size-3.5" />
                   内科認定医
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-3 py-1">
+                  <Stethoscope className="size-3.5" />
+                  糖尿病専門医・指導医
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-3 py-1">
+                  <Stethoscope className="size-3.5" />
+                  内分泌専門医
+                </span>
+              </div>
+
+              <div className="mt-3 flex flex-wrap justify-center gap-2 text-xs text-muted-foreground sm:justify-start">
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1">
+                  <Award className="size-3.5" />
+                  オルガネラ・ゾーン若手の会 優秀発表賞
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1">
+                  <Award className="size-3.5" />
+                  看護師が選ぶベストレジデント賞
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1">
+                  <Award className="size-3.5" />
+                  研修医が選ぶベストチューター賞
+                </span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-3 py-1">
                   <Award className="size-3.5" />
                   Medical Tribune 掲載
                 </span>
+              </div>
+
+              <div className="mt-3 text-xs text-muted-foreground">
+                <span className="font-medium">所属学会：</span>日本内科学会 / 日本糖尿病学会 / 日本内分泌学会 / 日本糖尿病合併症学会 / 日本体質医学会
               </div>
 
               <div className="mt-4 flex justify-center gap-4 sm:justify-start">
