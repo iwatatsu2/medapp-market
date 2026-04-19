@@ -3,7 +3,7 @@ import { Globe, Award, GraduationCap, Stethoscope } from "lucide-react";
 
 export function AboutSection() {
   return (
-    <section className="border-t border-border bg-muted/30 py-16">
+    <section className="border-t border-border bg-slate-50 py-16">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <h2 className="mb-8 text-center text-2xl font-bold text-foreground">
           運営者について

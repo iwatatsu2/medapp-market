@@ -29,9 +29,9 @@ export function AppCard({ app }: AppCardProps) {
 
   return (
     <Link href={`/apps/${app.slug}`} className="group block">
-      <article className="overflow-hidden rounded-lg border border-border bg-white transition-shadow hover:shadow-md">
+      <article className="overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-shadow hover:shadow-lg">
         {/* サムネイル */}
-        <div className="relative aspect-[16/9] bg-gradient-to-br from-primary/5 to-primary/10">
+        <div className="relative aspect-[16/9] bg-gradient-to-br from-slate-100 to-indigo-50">
           {app.thumbnail_url ? (
             <Image
               src={app.thumbnail_url}
