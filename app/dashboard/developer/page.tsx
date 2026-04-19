@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { DeleteAppButton } from "@/components/delete-app-button";
 import type { App } from "@/lib/types";
 
 export default async function DeveloperDashboardPage() {
@@ -85,11 +86,14 @@ export default async function DeveloperDashboardPage() {
                           : `¥${app.price.toLocaleString()}`}
                       </p>
                     </div>
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href={`/dashboard/developer/edit/${app.id}`}>
-                        <Pencil className="size-3.5" />
-                      </Link>
-                    </Button>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm" asChild>
+                        <Link href={`/dashboard/developer/edit/${app.id}`}>
+                          <Pencil className="size-3.5" />
+                        </Link>
+                      </Button>
+                      <DeleteAppButton appId={app.id} appName={app.name} />
+                    </div>
                   </div>
                 ))}
               </div>
