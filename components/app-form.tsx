@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ImagePlus, X, Loader2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { uploadAppImage } from "@/lib/upload";
-import { CATEGORIES } from "@/lib/types";
+import { CATEGORIES, ROLES } from "@/lib/types";
 import type { App } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,6 +40,9 @@ export function AppForm({ app, userId }: AppFormProps) {
   const [thumbnailUrl, setThumbnailUrl] = useState(app?.thumbnail_url ?? "");
   const [screenshots, setScreenshots] = useState<string[]>(
     app?.screenshots ?? []
+  );
+  const [targetRoles, setTargetRoles] = useState<string[]>(
+    (app as Record<string, unknown>)?.target_roles as string[] ?? []
   );
   const [isPublished, setIsPublished] = useState(app?.is_published ?? false);
 
@@ -88,6 +91,7 @@ export function AppForm({ app, userId }: AppFormProps) {
         demo_url: demoUrl || null,
         thumbnail_url: thumbnailUrl || null,
         screenshots,
+        target_roles: targetRoles,
         is_published: isPublished,
       };
 
@@ -232,6 +236,37 @@ export function AppForm({ app, userId }: AppFormProps) {
             onChange={(e) => setDemoUrl(e.target.value)}
             placeholder="https://..."
           />
+        </div>
+      </div>
+
+      {/* 対象職種 */}
+      <div className="space-y-2">
+        <Label>対象職種（複数選択可）</Label>
+        <div className="flex flex-wrap gap-2">
+          {Object.entries(ROLES).map(([key, role]) => (
+            <label
+              key={key}
+              className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${
+                targetRoles.includes(key)
+                  ? "border-primary bg-primary/10 text-primary"
+                  : "border-border bg-white text-muted-foreground hover:border-primary/50"
+              }`}
+            >
+              <input
+                type="checkbox"
+                className="hidden"
+                checked={targetRoles.includes(key)}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setTargetRoles((prev) => [...prev, key]);
+                  } else {
+                    setTargetRoles((prev) => prev.filter((v) => v !== key));
+                  }
+                }}
+              />
+              {role.icon} {role.label}
+            </label>
+          ))}
         </div>
       </div>
 
