@@ -37,6 +37,40 @@ export type Purchase = {
   purchased_at: string;
 };
 
+// 職種別ページ定義
+export const ROLES = {
+  doctors: {
+    label: "医師",
+    title: "医師のための\n臨床支援アプリ",
+    description: "病棟・外来で即使える計算ツール・ガイドライン参照アプリ。現役専門医が開発。",
+    icon: "🩺",
+    color: "from-blue-500 to-blue-600",
+  },
+  nurses: {
+    label: "看護師",
+    title: "看護師のための\n業務支援アプリ",
+    description: "投薬計算・アセスメント・患者指導に役立つツールを厳選。",
+    icon: "💊",
+    color: "from-pink-500 to-pink-600",
+  },
+  pharmacists: {
+    label: "薬剤師",
+    title: "薬剤師のための\n調剤・服薬指導アプリ",
+    description: "薬物相互作用・用量計算・服薬指導に使えるツール。",
+    icon: "⚗️",
+    color: "from-purple-500 to-purple-600",
+  },
+  general: {
+    label: "一般の方",
+    title: "健康管理に役立つ\nセルフケアアプリ",
+    description: "糖尿病・生活習慣病の自己管理をサポートするツール。",
+    icon: "🏠",
+    color: "from-green-500 to-green-600",
+  },
+} as const;
+
+export type RoleKey = keyof typeof ROLES;
+
 // Antaa Slide準拠の診療科カテゴリ
 export const CATEGORIES = [
   { value: "all", label: "すべて" },

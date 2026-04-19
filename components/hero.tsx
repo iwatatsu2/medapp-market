@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { ROLES } from "@/lib/types";
 
 export function Hero() {
   return (
@@ -29,6 +30,22 @@ export function Hero() {
               <Link href="/auth/register">開発者として登録</Link>
             </Button>
           </div>
+        </div>
+
+        {/* 職種別リンク */}
+        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+          {Object.entries(ROLES).map(([key, role]) => (
+            <Link
+              key={key}
+              href={`/for/${key}`}
+              className="group flex flex-col items-center gap-2 rounded-lg border border-border bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <span className="text-3xl">{role.icon}</span>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary">
+                {role.label}向け
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>

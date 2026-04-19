@@ -1,8 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import {
   Sheet,
   SheetContent,
@@ -10,6 +16,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ROLES } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -49,6 +56,22 @@ export function Header() {
           <Button variant="ghost" size="sm" asChild>
             <Link href="/#apps">アプリ一覧</Link>
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                職種で探す <ChevronDown className="ml-1 size-3.5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="center">
+              {Object.entries(ROLES).map(([key, role]) => (
+                <DropdownMenuItem key={key} asChild>
+                  <Link href={`/for/${key}`}>
+                    {role.icon} {role.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button variant="ghost" size="sm" asChild>
             <Link href="/dashboard">マイページ</Link>
           </Button>
@@ -81,6 +104,18 @@ export function Header() {
               >
                 アプリ一覧
               </Link>
+              <div className="space-y-1">
+                <span className="text-xs font-medium text-foreground">職種で探す</span>
+                {Object.entries(ROLES).map(([key, role]) => (
+                  <Link
+                    key={key}
+                    href={`/for/${key}`}
+                    className="block pl-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    {role.icon} {role.label}
+                  </Link>
+                ))}
+              </div>
               <Link
                 href="/dashboard"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
