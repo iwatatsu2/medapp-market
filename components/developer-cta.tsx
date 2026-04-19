@@ -19,7 +19,7 @@ export function DeveloperCTA() {
           <div className="mt-8">
             <Button
               size="lg"
-              className="group gap-2 rounded-full bg-white px-8 text-slate-900 hover:bg-slate-100"
+              className="group gap-2 rounded-full bg-white! px-8 text-slate-900! hover:bg-slate-100!"
               asChild
             >
               <Link href="/auth/register">

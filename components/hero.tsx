@@ -22,14 +22,14 @@ export function Hero() {
             ブラウザだけで動くWebアプリを見つけよう。
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button size="lg" asChild className="rounded-full bg-white px-8 text-slate-900 hover:bg-slate-100">
+            <Button size="lg" asChild className="rounded-full bg-white! px-8 text-slate-900! hover:bg-slate-100!">
               <a href="#apps">アプリを探す</a>
             </Button>
             <Button
               variant="outline"
               size="lg"
               asChild
-              className="rounded-full border-white/30 px-8 text-white hover:bg-white/10"
+              className="rounded-full border-white/30! bg-transparent! px-8 text-white! hover:bg-white/10! hover:text-white!"
             >
               <Link href="/auth/register">開発者として登録</Link>
             </Button>
