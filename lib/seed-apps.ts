@@ -30,7 +30,7 @@ export const SEED_APPS: AppData[] = [
     demo_url: "https://psych-agitation.vercel.app",
     screenshots: [],
     target_roles: ["doctors", "nurses"],
-    developer_name: "岩本 達也",
-    developer_specialty: "糖尿病内分泌代謝内科",
+    developer_name: "Medical App Lab",
+    developer_specialty: "精神科・総合診療",
   },
 ];
