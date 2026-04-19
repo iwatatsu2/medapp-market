@@ -44,28 +44,28 @@ export const ROLES = {
     title: "医師のための\n臨床支援アプリ",
     description: "病棟・外来で即使える計算ツール・ガイドライン参照アプリ。現役専門医が開発。",
     icon: "🩺",
-    color: "from-blue-500 to-blue-600",
+    color: "from-slate-600 to-slate-700",
   },
   nurses: {
     label: "看護師",
     title: "看護師のための\n業務支援アプリ",
     description: "投薬計算・アセスメント・患者指導に役立つツールを厳選。",
     icon: "💊",
-    color: "from-pink-500 to-pink-600",
+    color: "from-slate-500 to-indigo-600",
   },
   pharmacists: {
     label: "薬剤師",
     title: "薬剤師のための\n調剤・服薬指導アプリ",
     description: "薬物相互作用・用量計算・服薬指導に使えるツール。",
     icon: "⚗️",
-    color: "from-purple-500 to-purple-600",
+    color: "from-indigo-700 to-slate-700",
   },
   general: {
     label: "一般の方",
     title: "健康管理に役立つ\nセルフケアアプリ",
     description: "糖尿病・生活習慣病の自己管理をサポートするツール。",
     icon: "🏠",
-    color: "from-green-500 to-green-600",
+    color: "from-zinc-600 to-slate-600",
   },
 } as const;
 
