@@ -91,7 +91,6 @@ export function AppForm({ app, userId }: AppFormProps) {
         demo_url: demoUrl || null,
         thumbnail_url: thumbnailUrl || null,
         screenshots,
-        target_roles: targetRoles,
         is_published: isPublished,
       };
 
