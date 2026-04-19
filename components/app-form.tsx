@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+
 
 interface AppFormProps {
   app?: App;
@@ -91,6 +91,7 @@ export function AppForm({ app, userId }: AppFormProps) {
         demo_url: demoUrl || null,
         thumbnail_url: thumbnailUrl || null,
         screenshots,
+        target_roles: targetRoles,
         is_published: isPublished,
       };
 
@@ -362,13 +363,40 @@ export function AppForm({ app, userId }: AppFormProps) {
       </div>
 
       {/* 公開設定 */}
-      <div className="flex items-center gap-3">
-        <Switch
-          checked={isPublished}
-          onCheckedChange={setIsPublished}
-          id="published"
-        />
-        <Label htmlFor="published">公開する</Label>
+      <div className="space-y-2">
+        <Label>公開設定 *</Label>
+        <div className="flex gap-3">
+          <button
+            type="button"
+            onClick={() => setIsPublished(false)}
+            className={`flex-1 rounded-xl border-2 p-4 text-center transition-all ${
+              !isPublished
+                ? "border-amber-500 bg-amber-50 shadow-md"
+                : "border-muted bg-white hover:border-muted-foreground/30"
+            }`}
+          >
+            <div className="text-2xl mb-1">🔒</div>
+            <p className={`font-bold text-sm ${!isPublished ? "text-amber-700" : "text-muted-foreground"}`}>
+              非公開
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">マーケットに表示しない</p>
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsPublished(true)}
+            className={`flex-1 rounded-xl border-2 p-4 text-center transition-all ${
+              isPublished
+                ? "border-green-500 bg-green-50 shadow-md"
+                : "border-muted bg-white hover:border-muted-foreground/30"
+            }`}
+          >
+            <div className="text-2xl mb-1">🌐</div>
+            <p className={`font-bold text-sm ${isPublished ? "text-green-700" : "text-muted-foreground"}`}>
+              公開する
+            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">マーケットに表示する</p>
+          </button>
+        </div>
       </div>
 
       {/* 開発者同意 */}
