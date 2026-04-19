@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><link rel="stylesheet" href="slide-template.css">
+<style>
+  .slide { padding: 0; }
+  .left-panel { position:absolute; left:0; top:0; width:720px; height:720px; padding:60px 50px 40px; display:flex; flex-direction:column; justify-content:center; z-index:3; }
+  .series-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(20,184,166,0.15); border:1.5px solid #14b8a6; color:#2dd4bf; font-size:14px; font-weight:700; padding:6px 16px; border-radius:20px; margin-bottom:16px; width:fit-content; }
+  .series-badge .dot { width:8px; height:8px; background:#14b8a6; border-radius:50%; }
+  .main-title { font-size:52px; font-weight:900; color:white; line-height:1.2; margin-bottom:12px; }
+  .main-title .keyword { color:#2dd4bf; }
+  .sub-title { font-size:24px; color:#94a3b8; font-weight:700; line-height:1.5; margin-bottom:24px; }
+  .target-badge { display:inline-block; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; font-size:15px; font-weight:700; padding:8px 20px; border-radius:8px; margin-bottom:28px; }
+  .feature-list { list-style:none; display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+  .feature-list li { background:rgba(20,184,166,0.1); border:1px solid rgba(20,184,166,0.3); color:#99f6e4; font-size:14px; font-weight:600; padding:6px 14px; border-radius:6px; }
+  .author-area { display:flex; align-items:center; gap:12px; }
+  .author-avatar { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#14b8a6,#0d9488); display:flex; align-items:center; justify-content:center; color:white; font-size:20px; font-weight:900; }
+  .author-name { color:#14b8a6; font-size:18px; font-weight:900; }
+  .author-role { color:#64748b; font-size:13px; margin-top:2px; }
+  .right-panel { position:absolute; right:0; top:0; width:560px; height:720px; background:linear-gradient(135deg,rgba(20,184,166,0.08),rgba(13,148,136,0.15)); display:flex; align-items:flex-end; justify-content:center; z-index:2; }
+  .right-panel img { height:640px; object-fit:contain; filter:drop-shadow(0 10px 40px rgba(0,0,0,0.5)); }
+  .vol-label { position:absolute; top:24px; right:24px; background:linear-gradient(135deg,#14b8a6,#0d9488); color:white; font-size:15px; font-weight:900; padding:8px 18px; border-radius:8px; z-index:5; }
+  .divider-line { position:absolute; left:700px; top:60px; bottom:60px; width:2px; background:linear-gradient(to bottom,transparent,#14b8a6,transparent); z-index:4; }
+</style></head><body>
+<div class="slide slide-dark">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="vol-label">Vol.2</div>
+  <div class="divider-line"></div>
+
+  <div class="left-panel">
+    <div class="series-badge"><span class="dot"></span>DM Compass シリーズ</div>
+    <h1 class="main-title">
+      <span class="keyword">ケトメーター判定</span><br>
+      ケトン体測定の<br>判定基準
+    </h1>
+    <p class="sub-title">血中β-HBの正しい読み方から<br>DKA診断・治療モニタリングまで</p>
+    <div class="target-badge">対象：初期研修医・病棟担当医</div>
+    <ul class="feature-list">
+      <li>β-HB判定基準</li>
+      <li>血液 vs 尿ケトン</li>
+      <li>euDKA鑑別</li>
+      <li>DKA離脱基準</li>
+    </ul>
+    <div class="author-area">
+      <div class="author-avatar">岩</div>
+      <div>
+        <div class="author-name">Dr. いわたつ</div>
+        <div class="author-role">糖尿病・内分泌専門医 ／ 医学博士</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-panel">
+    <img src="../../dr-iwatatsu.png" alt="Dr. いわたつ">
+  </div>
+</div>
+</body></html>
