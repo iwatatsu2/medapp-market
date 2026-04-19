@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased">
         {children}
+        <CookieConsent />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

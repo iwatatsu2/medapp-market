@@ -24,6 +24,7 @@ export function AppForm({ app, userId }: AppFormProps) {
   const thumbnailRef = useRef<HTMLInputElement>(null);
   const screenshotsRef = useRef<HTMLInputElement>(null);
 
+  const [agreed, setAgreed] = useState(!!app);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -336,9 +337,25 @@ export function AppForm({ app, userId }: AppFormProps) {
         <Label htmlFor="published">公開する</Label>
       </div>
 
+      {/* 開発者同意 */}
+      {!app && (
+        <label className="flex items-start gap-2 text-sm text-muted-foreground">
+          <input
+            type="checkbox"
+            checked={agreed}
+            onChange={(e) => setAgreed(e.target.checked)}
+            className="mt-0.5"
+          />
+          <span>
+            <a href="/terms" target="_blank" className="underline underline-offset-2">利用規約</a>
+            に同意し、掲載アプリの内容の正確性について責任を持つことを確認します。プラットフォーム手数料（売上の20%）に同意します。
+          </span>
+        </label>
+      )}
+
       {/* 送信 */}
       <div className="flex gap-3 pt-4">
-        <Button type="submit" disabled={saving} className="gap-2">
+        <Button type="submit" disabled={saving || !agreed} className="gap-2">
           {saving && <Loader2 className="size-4 animate-spin" />}
           {app ? "更新する" : "出品する"}
         </Button>

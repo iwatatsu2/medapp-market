@@ -63,7 +63,10 @@ export function Footer() {
         </div>
 
         <div className="mt-8 border-t border-border pt-6">
-          <p className="text-center text-xs text-muted-foreground">
+          <p className="text-center text-xs leading-relaxed text-muted-foreground">
+            当サイトに掲載されたアプリは医療行為の代替ではありません。医療上の判断は必ず医療専門家にご相談ください。
+          </p>
+          <p className="mt-2 text-center text-xs text-muted-foreground">
             &copy; 2026 MedApp Market. All rights reserved.
           </p>
         </div>

@@ -117,6 +117,14 @@ export default async function AppDetailPage({
                   loggedIn={!!user}
                 />
               </div>
+              {app.price > 0 && !purchased && (
+                <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                  購入することで<Link href="/terms" className="underline underline-offset-2">利用規約</Link>に同意したものとみなします。デジタルコンテンツという性質上、購入後の返品・返金は原則としてお受けできません。
+                </p>
+              )}
+              <p className="mt-2 text-xs text-muted-foreground">
+                本プラットフォームは掲載アプリの医学的正確性を保証しません。医療上の判断は必ず医療専門家にご相談ください。
+              </p>
 
               {screenshots.length > 0 && (
                 <div className="mt-8 border-t border-border pt-6">

@@ -19,6 +19,7 @@ export default function RegisterPage() {
     specialty: "",
     hospital: "",
   });
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -119,11 +120,25 @@ export default function RegisterPage() {
                 className="mt-1"
               />
             </div>
+            <label className="flex items-start gap-2 text-sm text-muted-foreground">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+                className="mt-0.5"
+              />
+              <span>
+                <Link href="/terms" className="underline underline-offset-4" target="_blank">利用規約</Link>
+                および
+                <Link href="/privacy" className="underline underline-offset-4" target="_blank">プライバシーポリシー</Link>
+                に同意します
+              </span>
+            </label>
             <Button
               type="submit"
               className="w-full rounded-full"
               size="lg"
-              disabled={loading}
+              disabled={loading || !agreed}
             >
               {loading ? "登録中..." : "登録する"}
             </Button>
