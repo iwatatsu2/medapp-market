@@ -48,12 +48,12 @@ export function AppCard({ app }: AppCardProps) {
 
         {/* コンテンツ */}
         <div className="p-4">
-          <div className="flex items-center gap-2">
-            <span className="rounded bg-primary/10 px-2 py-0.5 text-xs text-primary">
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="rounded bg-primary/10 px-2 py-0.5 text-xs text-primary whitespace-nowrap">
               {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
             </span>
             {(Array.isArray(app.category) ? app.category : [app.category]).map((cat) => (
-              <span key={cat} className="text-xs text-muted-foreground">
+              <span key={cat} className="text-xs text-muted-foreground whitespace-nowrap">
                 {getCategoryLabel(cat)}
               </span>
             ))}
