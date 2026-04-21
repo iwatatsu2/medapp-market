@@ -28,14 +28,10 @@ export async function PurchasedApps({ userId }: { userId: string }) {
                 </p>
               </div>
               <Button size="sm" variant="outline" className="gap-1" asChild>
-                <a
-                  href={p.apps?.app_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href={`/apps/${p.apps?.slug}/view`}>
                   開く
                   <ExternalLink className="size-3" />
-                </a>
+                </Link>
               </Button>
             </div>
           ))}
