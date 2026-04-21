@@ -1,5 +1,6 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
+import { CoverFlow } from "@/components/cover-flow";
 import { AppGrid } from "@/components/app-grid";
 import { DeveloperCTA } from "@/components/developer-cta";
 import { AboutSection } from "@/components/about-section";
@@ -11,6 +12,7 @@ export default function HomePage() {
       <Header />
       <main className="flex-1">
         <Hero />
+        <CoverFlow />
         <AppGrid />
         <AboutSection />
         <DeveloperCTA />

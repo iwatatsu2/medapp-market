@@ -35,6 +35,7 @@ export function AppGrid() {
           thumbnail_url: a.thumbnail_url as string | null,
           developer_name: "開発者",
           developer_specialty: "",
+          access_count: (a.access_count as number) ?? 0,
         }));
         // DB apps + seed apps (dedupe by slug)
         const dbSlugs = new Set(dbApps.map((a) => a.slug));

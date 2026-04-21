@@ -18,6 +18,7 @@ export interface AppData {
   target_roles?: string[];
   developer_name: string;
   developer_specialty: string;
+  access_count?: number;
 }
 
 interface AppCardProps {
@@ -77,6 +78,12 @@ export function AppCard({ app }: AppCardProps) {
             <span className="text-xs text-muted-foreground">
               {app.developer_specialty}
             </span>
+            {app.access_count != null && (
+              <span className="ml-auto flex items-center gap-1 text-xs text-muted-foreground">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500" />
+                {app.access_count.toLocaleString()}
+              </span>
+            )}
           </div>
         </div>
       </article>
