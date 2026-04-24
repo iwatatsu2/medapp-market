@@ -17,7 +17,7 @@ export const SEED_APPS: AppData[] = [
     target_roles: ["doctors", "nurses"],
     developer_name: "岩本 達也",
     developer_specialty: "糖尿病内分泌代謝内科",
-    access_count: 1243,
+    access_count: 0,
   },
   {
     id: "2",
@@ -35,7 +35,7 @@ export const SEED_APPS: AppData[] = [
     target_roles: ["general"],
     developer_name: "岩本 達也",
     developer_specialty: "糖尿病内分泌代謝内科",
-    access_count: 876,
+    access_count: 0,
   },
   {
     id: "3",
@@ -53,7 +53,7 @@ export const SEED_APPS: AppData[] = [
     target_roles: ["general"],
     developer_name: "岩本 達也",
     developer_specialty: "糖尿病内分泌代謝内科",
-    access_count: 654,
+    access_count: 0,
   },
   {
     id: "4",
@@ -71,7 +71,7 @@ export const SEED_APPS: AppData[] = [
     target_roles: ["doctors"],
     developer_name: "岩本 達也",
     developer_specialty: "糖尿病内分泌代謝内科",
-    access_count: 412,
+    access_count: 0,
   },
   {
     id: "5",
@@ -89,6 +89,6 @@ export const SEED_APPS: AppData[] = [
     target_roles: ["doctors"],
     developer_name: "岩本 達也",
     developer_specialty: "糖尿病内分泌代謝内科",
-    access_count: 328,
+    access_count: 0,
   },
 ];

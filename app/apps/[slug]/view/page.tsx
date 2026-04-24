@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
+import { TrackView } from "@/components/track-view";
 
 async function getApp(slug: string) {
   const supabase = await createClient();
@@ -52,12 +53,15 @@ export default async function AppViewerPage({
   }
 
   return (
-    <iframe
-      src={appUrl}
-      className="fixed inset-0 h-full w-full border-0"
-      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-      referrerPolicy="no-referrer"
-      title={app.name}
-    />
+    <>
+      <TrackView slug={slug} />
+      <iframe
+        src={appUrl}
+        className="fixed inset-0 h-full w-full border-0"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+        referrerPolicy="no-referrer"
+        title={app.name}
+      />
+    </>
   );
 }

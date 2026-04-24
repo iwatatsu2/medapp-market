@@ -15,14 +15,29 @@ export function AppGrid() {
   useEffect(() => {
     async function fetchApps() {
       const supabase = createClient();
-      const { data } = await supabase
-        .from("apps")
-        .select("*")
-        .eq("is_published", true)
-        .order("created_at", { ascending: false });
 
-      if (data && data.length > 0) {
-        const dbApps: AppData[] = data.map((a: Record<string, unknown>) => ({
+      // DBアプリとアクセス数を並行取得
+      const [appsRes, viewsRes] = await Promise.all([
+        supabase
+          .from("apps")
+          .select("*")
+          .eq("is_published", true)
+          .order("created_at", { ascending: false }),
+        supabase.from("app_views").select("slug, view_count"),
+      ]);
+
+      // アクセス数マップ
+      const viewMap = new Map<string, number>();
+      if (viewsRes.data) {
+        for (const v of viewsRes.data) {
+          viewMap.set(v.slug, v.view_count);
+        }
+      }
+
+      let merged: AppData[];
+
+      if (appsRes.data && appsRes.data.length > 0) {
+        const dbApps: AppData[] = appsRes.data.map((a: Record<string, unknown>) => ({
           id: a.id as string,
           slug: a.slug as string,
           name: a.name as string,
@@ -35,13 +50,22 @@ export function AppGrid() {
           thumbnail_url: a.thumbnail_url as string | null,
           developer_name: "開発者",
           developer_specialty: "",
-          access_count: (a.access_count as number) ?? 0,
+          access_count: viewMap.get(a.slug as string) ?? 0,
         }));
-        // DB apps + seed apps (dedupe by slug)
         const dbSlugs = new Set(dbApps.map((a) => a.slug));
-        const seedOnly = SEED_APPS.filter((a) => !dbSlugs.has(a.slug));
-        setApps([...dbApps, ...seedOnly]);
+        const seedOnly = SEED_APPS.map((a) => ({
+          ...a,
+          access_count: viewMap.get(a.slug) ?? 0,
+        })).filter((a) => !dbSlugs.has(a.slug));
+        merged = [...dbApps, ...seedOnly];
+      } else {
+        merged = SEED_APPS.map((a) => ({
+          ...a,
+          access_count: viewMap.get(a.slug) ?? 0,
+        }));
       }
+
+      setApps(merged);
     }
     fetchApps();
   }, []);
