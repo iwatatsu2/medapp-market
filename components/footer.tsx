@@ -58,6 +58,9 @@ export function Footer() {
               <Link href="/contact" className="text-xs text-slate-400 hover:text-white">
                 お問い合わせ
               </Link>
+              <Link href="/#install" className="text-xs text-slate-400 hover:text-white">
+                アプリをインストール
+              </Link>
             </nav>
           </div>
         </div>

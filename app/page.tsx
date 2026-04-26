@@ -5,6 +5,7 @@ import { AppGrid } from "@/components/app-grid";
 import { DeveloperCTA } from "@/components/developer-cta";
 import { AboutSection } from "@/components/about-section";
 import { Footer } from "@/components/footer";
+import { InstallGuide } from "@/components/install-guide";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
         <AppGrid />
         <AboutSection />
         <DeveloperCTA />
+        <InstallGuide />
       </main>
       <Footer />
     </div>
