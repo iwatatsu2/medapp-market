@@ -143,10 +143,10 @@ export function CoverFlow() {
 
                 {/* App info */}
                 <div className="mt-3 text-center">
-                  <p className="text-white font-bold text-lg">{app.name}</p>
-                  <p className="text-white/50 text-xs mt-0.5">{app.tagline}</p>
-                  <p className="text-white/70 text-sm mt-2 flex items-center justify-center gap-1.5">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-400" />
+                  <p className="text-white font-bold text-2xl">{app.name}</p>
+                  <p className="text-white text-base mt-1">{app.tagline}</p>
+                  <p className="text-white text-lg mt-2 flex items-center justify-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
                     {app.accessCount.toLocaleString()} アクセス
                   </p>
                 </div>
