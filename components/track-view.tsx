@@ -8,7 +8,13 @@ export function TrackView({ slug }: { slug: string }) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ slug }),
-    }).catch(() => {});
+    })
+      .then((res) => {
+        if (!res.ok) {
+          res.json().then((d) => console.error("[TrackView] error:", d));
+        }
+      })
+      .catch((e) => console.error("[TrackView] fetch failed:", e));
   }, [slug]);
 
   return null;

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>InsuCalc 紹介</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden; font-family: 'Noto Sans JP', sans-serif; transform-origin: top left; transform: scale(0.6); }
+  .container { width: 1080px; height: 1080px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%); position: relative; overflow: hidden; display: flex; padding: 50px 50px 40px; }
+  .bg-glow { position: absolute; border-radius: 50%; filter: blur(140px); z-index: 0; }
+  .bg-glow-1 { background: #3b82f6; width: 500px; height: 500px; top: -100px; right: 100px; opacity: 0.12; }
+  .bg-glow-2 { background: #2563eb; width: 400px; height: 400px; bottom: -100px; left: 50px; opacity: 0.10; }
+  .left { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; padding-right: 40px; }
+  .right { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
+  .top-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .badge { background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; font-size: 17px; font-weight: 700; padding: 8px 20px; border-radius: 20px; }
+  .free-badge { background: #22c55e; color: white; font-size: 17px; font-weight: 900; padding: 8px 20px; border-radius: 20px; letter-spacing: 2px; }
+  .app-title { font-size: 56px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 6px; }
+  .app-title .accent { background: linear-gradient(135deg, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .tagline { font-size: 24px; color: #93c5fd; font-weight: 700; margin-bottom: 24px; }
+  .features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .feature { background: rgba(255,255,255,0.06); border: 1px solid rgba(59,130,246,0.2); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+  .feature-icon { font-size: 26px; flex-shrink: 0; }
+  .feature-text { font-size: 18px; color: #e2e8f0; font-weight: 700; }
+  .feature-sub { font-size: 13px; color: #94a3b8; }
+  .target { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: auto; }
+  .target-chip { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 8px 16px; color: #93c5fd; font-size: 16px; font-weight: 700; }
+  .bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+  .market-badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .market-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 18px; }
+  .market-name { color: white; font-size: 16px; font-weight: 700; }
+  .market-url { color: #3b82f6; font-size: 13px; }
+  .author-name { color: #3b82f6; font-size: 18px; font-weight: 900; text-align: right; }
+  .author-role { color: #94a3b8; font-size: 13px; text-align: right; }
+  .phone { width: 340px; height: 700px; background: #000; border-radius: 44px; border: 6px solid #333; position: relative; overflow: hidden; box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 40px rgba(59,130,246,0.15); }
+  .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 140px; height: 30px; background: #000; border-radius: 0 0 20px 20px; z-index: 3; }
+  .phone-screen { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%); display: flex; flex-direction: column; }
+  .mock-header { padding: 40px 24px 16px; text-align: center; }
+  .mock-header h2 { color: #60a5fa; font-size: 22px; font-weight: 900; }
+  .mock-header p { color: #94a3b8; font-size: 12px; margin-top: 4px; }
+  .mock-body { padding: 12px 24px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .mock-input-group label { color: #93c5fd; font-size: 13px; font-weight: 700; display: block; margin-bottom: 4px; }
+  .mock-input { background: rgba(255,255,255,0.08); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; padding: 12px 14px; color: #e2e8f0; font-size: 16px; width: 100%; }
+  .mock-result { background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 14px; padding: 18px; text-align: center; margin-top: 8px; }
+  .mock-result-label { color: #93c5fd; font-size: 13px; }
+  .mock-result-value { color: #60a5fa; font-size: 36px; font-weight: 900; margin-top: 4px; }
+  .mock-result-unit { color: #94a3b8; font-size: 14px; }
+  .phone-label { text-align: center; margin-top: 16px; color: #94a3b8; font-size: 14px; }
+  .phone-label span { color: #3b82f6; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="left">
+    <div class="top-row">
+      <span class="badge">1型糖尿病向け</span>
+      <span class="free-badge">無料</span>
+    </div>
+    <h1 class="app-title"><span class="accent">Insu</span>Calc</h1>
+    <p class="tagline">ボーラスインスリン計算アプリ</p>
+    <div class="features">
+      <div class="feature"><div class="feature-icon">🍚</div><div><div class="feature-text">カーボカウント計算</div><div class="feature-sub">食事の炭水化物量から算出</div></div></div>
+      <div class="feature"><div class="feature-icon">💉</div><div><div class="feature-text">食事ボーラス</div><div class="feature-sub">カーボ比で自動計算</div></div></div>
+      <div class="feature"><div class="feature-icon">🎯</div><div><div class="feature-text">補正ボーラス</div><div class="feature-sub">目標血糖値との差から算出</div></div></div>
+      <div class="feature"><div class="feature-icon">📱</div><div><div class="feature-text">スマホ最適化</div><div class="feature-sub">片手で素早く操作</div></div></div>
+    </div>
+    <div class="target">
+      <div class="target-chip">🩸 1型糖尿病患者</div>
+      <div class="target-chip">👨‍⚕️ 医療者</div>
+    </div>
+    <div class="bottom">
+      <div class="market-badge">
+        <div class="market-icon">M</div>
+        <div><div class="market-name">MedApp Market</div><div class="market-url">medapp-market.vercel.app</div></div>
+      </div>
+      <div><div class="author-name">Dr. いわたつ</div><div class="author-role">糖尿病・内分泌専門医</div></div>
+    </div>
+  </div>
+  <div class="right">
+    <div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="mock-header">
+            <h2>InsuCalc</h2>
+            <p>ボーラスインスリン計算</p>
+          </div>
+          <div class="mock-body">
+            <div class="mock-input-group">
+              <label>現在の血糖値 (mg/dL)</label>
+              <div class="mock-input">220</div>
+            </div>
+            <div class="mock-input-group">
+              <label>食事の炭水化物量 (g)</label>
+              <div class="mock-input">60</div>
+            </div>
+            <div class="mock-input-group">
+              <label>カーボ比 (1単位あたりg)</label>
+              <div class="mock-input">10</div>
+            </div>
+            <div class="mock-result">
+              <div class="mock-result-label">必要インスリン量</div>
+              <div class="mock-result-value">8.4</div>
+              <div class="mock-result-unit">単位（食事6.0 + 補正2.4）</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="phone-label"><span>アプリイメージ</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

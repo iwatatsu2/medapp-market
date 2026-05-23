@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><link rel="stylesheet" href="slide-template.css">
+<style>
+  .slide { padding:0; }
+  .left-panel { position:absolute; left:0; top:0; width:380px; height:720px; background:linear-gradient(135deg,rgba(20,184,166,0.08),rgba(13,148,136,0.15)); display:flex; align-items:flex-end; justify-content:center; z-index:2; }
+  .dr-wrap { position:relative; height:560px; }
+  .dr-wrap .dr-outline { position:absolute; bottom:0; left:50%; transform:translateX(-50%) scale(1.03); height:560px; object-fit:contain; filter:brightness(0) invert(1); }
+  .dr-wrap .dr-main { position:relative; height:560px; object-fit:contain; }
+  .right-panel { position:absolute; right:0; top:0; width:900px; height:720px; padding:44px 50px; display:flex; flex-direction:column; justify-content:center; z-index:3; }
+  .divider-line { position:absolute; left:380px; top:60px; bottom:60px; width:2px; background:linear-gradient(to bottom,transparent,#14b8a6,transparent); z-index:4; }
+
+  .slide-title { font-size:28px; font-weight:900; color:white; margin-bottom:4px; }
+  .slide-title .accent { color:#2dd4bf; }
+  .slide-subtitle { font-size:14px; color:#64748b; margin-bottom:18px; }
+
+  .profile-name { font-size:32px; font-weight:900; color:white; margin-bottom:2px; }
+  .profile-name-en { font-size:14px; color:#64748b; margin-bottom:10px; }
+  .profile-tag { display:inline-block; background:rgba(20,184,166,0.15); border:1px solid rgba(20,184,166,0.4); color:#2dd4bf; font-size:13px; font-weight:700; padding:4px 12px; border-radius:20px; margin-right:6px; margin-bottom:6px; }
+
+  .profile-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+  .profile-section-title { font-size:14px; color:#14b8a6; font-weight:700; margin-bottom:6px; border-bottom:1px solid rgba(20,184,166,0.3); padding-bottom:3px; }
+  .profile-list { list-style:none; padding:0; margin:0; }
+  .profile-list li { font-size:16px; color:#e2e8f0; padding:3px 0; }
+  .profile-list li::before { content:'▸ '; color:#14b8a6; font-weight:700; }
+  .award-list { list-style:none; padding:0; margin:0; }
+  .award-list li { font-size:15px; color:#fbbf24; padding:3px 0; }
+  .award-list li::before { content:'🏆 '; }
+
+  .message-box { margin-top:14px; background:rgba(20,184,166,0.06); border:1px solid rgba(20,184,166,0.2); border-radius:10px; padding:12px 16px; }
+  .message-title { font-size:14px; color:#14b8a6; font-weight:700; margin-bottom:4px; }
+  .message-text { font-size:15px; color:#e2e8f0; line-height:1.6; }
+
+  .links-area { margin-top:14px; display:flex; gap:10px; flex-wrap:wrap; }
+  .link-chip { display:inline-flex; align-items:center; gap:6px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:6px 12px; }
+  .link-chip-icon { font-size:14px; }
+  .link-chip-label { font-size:12px; color:#94a3b8; }
+  .link-chip-url { font-size:12px; color:#5eead4; font-weight:600; }
+</style></head><body>
+<div class="slide slide-dark">
+  <div class="bg-glow bg-glow-1"></div><div class="bg-glow bg-glow-2"></div>
+  <div class="slide-header" style="position:absolute;top:16px;left:24px;right:24px;z-index:10"><div class="slide-num">13</div><div class="slide-logo">DM Compass</div></div>
+
+  <div class="left-panel">
+    <div class="dr-wrap">
+      <img class="dr-outline" src="dr-iwatatsu.png">
+      <img class="dr-main" src="dr-iwatatsu.png">
+    </div>
+  </div>
+  <div class="divider-line"></div>
+
+  <div class="right-panel">
+    <div class="slide-title">自己紹介 ／ <span class="accent">About Me</span></div>
+    <div class="slide-subtitle">糖尿病病棟の5つの計算、全部暗算してませんか？</div>
+
+    <div class="profile-name">Dr. いわたつ</div>
+    <div class="profile-name-en">岩本 達也</div>
+    <div>
+      <span class="profile-tag">糖尿病専門医・指導医</span>
+      <span class="profile-tag">内分泌専門医・指導医</span>
+    </div>
+
+    <div class="profile-grid">
+      <div>
+        <div class="profile-section-title">概要</div>
+        <ul class="profile-list">
+          <li>糖尿病・内分泌内科 医師</li>
+          <li>臨床の「困った」をアプリで解決</li>
+          <li>すべて無料・登録不要で公開中</li>
+        </ul>
+      </div>
+      <div>
+        <div class="profile-section-title">受賞歴</div>
+        <ul class="award-list">
+          <li>ベストレジデント賞</li>
+          <li>ベストチューター賞</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="message-box">
+      <div class="message-title">先生方へ</div>
+      <div class="message-text">忙しい病棟業務の中で「あの計算どうだっけ？」を減らしたい。<br>DM Compassが少しでもお役に立てれば幸いです。ご意見・ご要望お待ちしています。</div>
+    </div>
+
+    <div class="links-area">
+      <div class="link-chip">
+        <span class="link-chip-icon">🏥</span>
+        <div><div class="link-chip-label">MedApp Market</div><div class="link-chip-url">medapp-market.vercel.app</div></div>
+      </div>
+      <div class="link-chip">
+        <span class="link-chip-icon">📱</span>
+        <div><div class="link-chip-label">DM Compass</div><div class="link-chip-url">iwatatsu2.github.io/dm-compass</div></div>
+      </div>
+      <div class="link-chip">
+        <span class="link-chip-icon">𝕏</span>
+        <div><div class="link-chip-label">X (Twitter)</div><div class="link-chip-url">@dr_iwatatsu</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer" style="position:absolute;bottom:12px;left:24px;right:24px;z-index:10"><span>© Dr. いわたつ</span><span>DM Compass シリーズ vol.4</span></div>
+</div>
+</body></html>

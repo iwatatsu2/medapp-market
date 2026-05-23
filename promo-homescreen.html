@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedApp Market - ホーム画面追加 宣伝</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', sans-serif;
+    transform-origin: top left;
+    transform: scale(0.6);
+  }
+
+  .container {
+    width: 1080px;
+    height: 1080px;
+    background: linear-gradient(135deg, #0a1a1a 0%, #132e2e 50%, #0a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 60px 40px;
+  }
+
+  /* 背景装飾 */
+  .bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 0;
+  }
+  .bg-glow-1 { background: #14b8a6; width: 500px; height: 500px; top: -100px; right: 100px; opacity: 0.12; }
+  .bg-glow-2 { background: #0d9488; width: 400px; height: 400px; bottom: -100px; left: 50px; opacity: 0.12; }
+  .bg-glow-3 { background: #14b8a6; width: 300px; height: 300px; top: 400px; right: -50px; opacity: 0.08; }
+
+  .content { position: relative; z-index: 2; width: 100%; display: flex; flex-direction: column; align-items: center; }
+
+  /* ヘッダー */
+  .top-badge {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    font-size: 22px;
+    font-weight: 900;
+    padding: 10px 30px;
+    border-radius: 30px;
+    margin-bottom: 24px;
+    letter-spacing: 2px;
+  }
+
+  .main-title {
+    font-size: 56px;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .main-title .accent {
+    background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .sub-text {
+    font-size: 24px;
+    color: #94a3b8;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  /* ステップ */
+  .steps {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+    border-radius: 20px;
+    padding: 22px 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .step-num {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: white;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    flex: 1;
+  }
+
+  .step-label {
+    font-size: 28px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.3;
+  }
+
+  .step-desc {
+    font-size: 18px;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+
+  .step-emoji {
+    font-size: 40px;
+    flex-shrink: 0;
+  }
+
+  /* ポイント */
+  .points {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .point {
+    flex: 1;
+    background: rgba(20, 184, 166, 0.1);
+    border: 1px solid rgba(20, 184, 166, 0.25);
+    border-radius: 16px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+
+  .point-icon { font-size: 32px; margin-bottom: 6px; }
+  .point-text { font-size: 18px; color: #99f6e4; font-weight: 700; line-height: 1.4; }
+
+  /* フッター */
+  .footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .app-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    font-weight: 900;
+  }
+
+  .footer-name {
+    font-size: 26px;
+    font-weight: 900;
+    color: white;
+  }
+
+  .footer-url {
+    font-size: 16px;
+    color: #14b8a6;
+  }
+
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .author-name {
+    font-size: 20px;
+    color: #14b8a6;
+    font-weight: 900;
+    text-align: right;
+  }
+
+  .author-role {
+    font-size: 14px;
+    color: #94a3b8;
+    text-align: right;
+  }
+
+  .author-img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #14b8a6;
+    flex-shrink: 0;
+  }
+
+  .author-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+
+  <div class="content">
+    <div class="top-badge">アプリストア不要！</div>
+
+    <h1 class="main-title">
+      <span class="accent">MedApp Market</span>は<br>
+      ホーム画面に追加できます
+    </h1>
+    <p class="sub-text">ブラウザからアクセス → 3秒でアプリ化</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-label">SafariでMedApp Marketを開く</div>
+          <div class="step-desc">medapp-market.vercel.app にアクセス</div>
+        </div>
+        <div class="step-emoji">🌐</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-label">共有ボタン（↑）をタップ</div>
+          <div class="step-desc">画面下の四角＋矢印のアイコン</div>
+        </div>
+        <div class="step-emoji">📤</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-label">「ホーム画面に追加」を選択</div>
+          <div class="step-desc">アプリと同じようにアイコンが追加！</div>
+        </div>
+        <div class="step-emoji">📱</div>
+      </div>
+    </div>
+
+    <div class="points">
+      <div class="point">
+        <div class="point-icon">⚡</div>
+        <div class="point-text">ダウンロード<br>不要</div>
+      </div>
+      <div class="point">
+        <div class="point-icon">💰</div>
+        <div class="point-text">完全<br>無料</div>
+      </div>
+      <div class="point">
+        <div class="point-icon">🔄</div>
+        <div class="point-text">常に<br>最新版</div>
+      </div>
+      <div class="point">
+        <div class="point-icon">📶</div>
+        <div class="point-text">容量<br>ゼロ</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        <div class="app-icon">M</div>
+        <div>
+          <div class="footer-name">MedApp Market</div>
+          <div class="footer-url">medapp-market.vercel.app</div>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div>
+          <div class="author-name">Dr. いわたつ</div>
+          <div class="author-role">糖尿病・内分泌専門医</div>
+        </div>
+        <div class="author-img">
+          <img src="public/dr-iwatatsu.png" alt="Dr. いわたつ">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

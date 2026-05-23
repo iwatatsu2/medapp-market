@@ -26,6 +26,10 @@ export function AppGrid() {
         supabase.from("app_views").select("slug, view_count"),
       ]);
 
+      if (viewsRes.error) {
+        console.error("[AppGrid] app_views fetch error:", viewsRes.error);
+      }
+
       // アクセス数マップ
       const viewMap = new Map<string, number>();
       if (viewsRes.data) {

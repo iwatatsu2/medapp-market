@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><link rel="stylesheet" href="slide-template.css">
+<style>
+  .calc-num { display:inline-block; background:linear-gradient(135deg,#f59e0b,#d97706); color:white; font-size:18px; font-weight:900; width:34px; height:34px; line-height:34px; text-align:center; border-radius:50%; margin-right:10px; }
+  .ss-table td { font-size:18px; padding:8px 14px; }
+  .ss-table th { font-size:17px; padding:8px 14px; }
+</style></head><body>
+<div class="slide slide-dark">
+  <div class="bg-glow bg-glow-1"></div><div class="bg-glow bg-glow-2"></div>
+  <div class="content">
+    <div class="slide-header"><div class="slide-num">07</div><div class="slide-logo">DM Compass</div></div>
+    <h2 class="section-title" style="font-size:34px"><span class="calc-num">5</span><span class="accent">スライディングスケール</span>作成</h2>
+    <p style="font-size:20px;color:#94a3b8;margin-bottom:16px">体重と重症度から血糖値別補正インスリン表を自動生成</p>
+
+    <div class="grid-2" style="gap:20px">
+      <div>
+        <div class="card" style="padding:20px">
+          <div class="card-title" style="font-size:22px;margin-bottom:8px">生成例：60kg・中等度</div>
+          <div class="table-wrap ss-table" style="margin-top:8px">
+            <table>
+              <tr><th>血糖値</th><th>インスリン</th></tr>
+              <tr><td>150〜199</td><td style="color:#2dd4bf">2単位</td></tr>
+              <tr><td>200〜249</td><td style="color:#fbbf24">4単位</td></tr>
+              <tr><td>250〜299</td><td style="color:#fbbf24">6単位</td></tr>
+              <tr><td>300〜349</td><td style="color:#f87171">8単位</td></tr>
+              <tr><td>350〜</td><td style="color:#f87171">10単位 + 医師報告</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card" style="padding:20px">
+          <div class="card-title" style="font-size:22px;margin-bottom:8px">📱 DM Compassなら</div>
+          <ul class="bullet-list" style="font-size:22px;line-height:2">
+            <li>条件を入力するだけ</li>
+            <li>血糖値別の表が<span class="accent">自動生成</span></li>
+            <li>そのまま指示簿に転記可能</li>
+          </ul>
+        </div>
+        <div class="point-box" style="margin-top:14px;font-size:18px">
+          <div class="point-box-title" style="font-size:18px">💡 臨床Tips</div>
+          SSはあくまで補正用。基礎インスリンを忘れずに。SSだけの管理は血糖変動が大きくなる。
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer"><span>© Dr. いわたつ</span><span>DM Compass シリーズ vol.4</span></div>
+  </div>
+</div>
+</body></html>

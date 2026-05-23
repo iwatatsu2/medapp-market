@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .container {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #0a1028 0%, #1a2a50 50%, #0a1028 100%);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 50px 60px 70px;
+    gap: 24px;
+    z-index: 2;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(37,99,235,0.2);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: #93c5fd;
+    width: fit-content;
+    letter-spacing: 2px;
+  }
+
+  .app-name {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: white;
+  }
+  .app-name span {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .catchcopy {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+  }
+
+  .features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .feature {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .right {
+    width: 440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glow {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .phone {
+    width: 260px;
+    height: 520px;
+    background: #f8fafc;
+    border-radius: 36px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 8px #334155;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: rotate(3deg);
+  }
+
+  .phone-header {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    padding: 14px 14px 10px;
+    text-align: center;
+    color: white;
+  }
+  .phone-title {
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .phone-sub {
+    font-size: 8px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 2px;
+  }
+
+  .phone-body {
+    flex: 1;
+    padding: 10px;
+    background: #f1f5f9;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .card-label {
+    font-size: 7px;
+    color: #64748b;
+    margin-bottom: 4px;
+    font-weight: 700;
+  }
+
+  .today-badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: #2563eb;
+    font-size: 7px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+  }
+
+  .glucose-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+  }
+
+  .g-item { text-align: center; }
+  .g-label { font-size: 6px; color: #64748b; }
+  .g-val { font-size: 12px; font-weight: 900; }
+  .g-val.ok { color: #16a34a; }
+  .g-val.hi { color: #dc2626; }
+  .g-val.na { color: #cbd5e1; }
+
+  .chart-svg {
+    width: 100%;
+    height: 65px;
+  }
+
+  .advice-card {
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 8px 10px;
+  }
+
+  .advice-title {
+    font-size: 8px;
+    font-weight: 700;
+    color: #2563eb;
+    margin-bottom: 2px;
+  }
+
+  .advice-text {
+    font-size: 7px;
+    color: #475569;
+    line-height: 1.4;
+  }
+
+  .phone-nav {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    padding: 5px 0 8px;
+  }
+
+  .nav-item {
+    text-align: center;
+    font-size: 6px;
+    color: #94a3b8;
+  }
+  .nav-item.active { color: #2563eb; }
+  .nav-icon {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  .bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 1;
+  }
+  .bg-glow-1 {
+    background: #2563eb;
+    width: 500px; height: 500px;
+    top: -150px; right: 150px;
+    opacity: 0.1;
+  }
+  .bg-glow-2 {
+    background: #1d4ed8;
+    width: 400px; height: 400px;
+    bottom: -100px; left: 200px;
+    opacity: 0.1;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="left">
+    <div class="badge">📊 GLUCOSE SELF-MANAGEMENT</div>
+    <div class="app-name"><span>Glucose</span> Diary</div>
+    <div class="catchcopy">毎日の血糖記録を、かしこく管理。<br>インスリン調整もAIがサポート。</div>
+    <div class="features">
+      <div class="feature">血糖値7ポイント記録</div>
+      <div class="feature">週間トレンド分析</div>
+      <div class="feature">インスリン調整アドバイス</div>
+      <div class="feature">受診レポート自動生成</div>
+      <div class="feature">GLP-1/GIP製剤対応</div>
+      <div class="feature">PWA対応</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="glow"></div>
+    <div class="phone">
+      <div class="phone-header">
+        <div class="phone-title">📊 Glucose Diary</div>
+        <div class="phone-sub">血糖自己管理アプリ</div>
+      </div>
+      <div class="phone-body">
+        <div class="card">
+          <div class="card-label">🩸 今日の血糖値</div>
+          <div class="today-badge">5 / 7 入力済み</div>
+          <div class="glucose-grid">
+            <div class="g-item"><div class="g-label">朝食前</div><div class="g-val ok">98</div></div>
+            <div class="g-item"><div class="g-label">朝食後</div><div class="g-val hi">185</div></div>
+            <div class="g-item"><div class="g-label">昼食前</div><div class="g-val ok">112</div></div>
+            <div class="g-item"><div class="g-label">昼食後</div><div class="g-val ok">145</div></div>
+            <div class="g-item"><div class="g-label">夕食前</div><div class="g-val ok">108</div></div>
+            <div class="g-item"><div class="g-label">夕食後</div><div class="g-val na">--</div></div>
+            <div class="g-item"><div class="g-label">眠前</div><div class="g-val na">--</div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">📈 週間トレンド</div>
+          <svg class="chart-svg" viewBox="0 0 220 60" preserveAspectRatio="none">
+            <line x1="0" y1="18" x2="220" y2="18" stroke="#fee2e2" stroke-width="0.5" stroke-dasharray="3"/>
+            <line x1="0" y1="40" x2="220" y2="40" stroke="#dcfce7" stroke-width="0.5" stroke-dasharray="3"/>
+            <polyline fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              points="10,32 42,18 74,36 106,28 138,12 170,34 202,26"/>
+            <polyline fill="none" stroke="#93c5fd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4"
+              points="10,46 42,38 74,50 106,44 138,36 170,48 202,42"/>
+            <circle cx="10" cy="32" r="2.5" fill="#3b82f6"/>
+            <circle cx="42" cy="18" r="2.5" fill="#3b82f6"/>
+            <circle cx="74" cy="36" r="2.5" fill="#3b82f6"/>
+            <circle cx="106" cy="28" r="2.5" fill="#3b82f6"/>
+            <circle cx="138" cy="12" r="2.5" fill="#dc2626"/>
+            <circle cx="170" cy="34" r="2.5" fill="#3b82f6"/>
+            <circle cx="202" cy="26" r="2.5" fill="#3b82f6"/>
+          </svg>
+        </div>
+
+        <div class="advice-card">
+          <div class="advice-title">💉 インスリン調整アドバイス</div>
+          <div class="advice-text">朝食後の高血糖が3日連続。超速効型を1〜2単位増量を検討してください。</div>
+        </div>
+      </div>
+
+      <div class="phone-nav">
+        <div class="nav-item active"><span class="nav-icon">📊</span>ホーム</div>
+        <div class="nav-item"><span class="nav-icon">📝</span>記録</div>
+        <div class="nav-item"><span class="nav-icon">📈</span>トレンド</div>
+        <div class="nav-item"><span class="nav-icon">💉</span>インスリン</div>
+        <div class="nav-item"><span class="nav-icon">📋</span>レポート</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

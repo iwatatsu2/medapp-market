@@ -24,7 +24,7 @@ export function AboutSection() {
                 Dr. いわたつ
               </h3>
               <p className="mt-1 text-sm text-muted-foreground">
-                医学博士 / 糖尿病専門医・指導医 / 内分泌専門医
+                医学博士 / 糖尿病専門医・指導医 / 内分泌専門医・指導医
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 臨床現場で「こんなツールがあったら便利なのに」と感じた経験から、医療者向けWebアプリの開発を始めました。
@@ -50,7 +50,7 @@ export function AboutSection() {
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-primary/5 px-3 py-1">
                   <Stethoscope className="size-3.5" />
-                  内分泌専門医
+                  内分泌専門医・指導医
                 </span>
               </div>
 

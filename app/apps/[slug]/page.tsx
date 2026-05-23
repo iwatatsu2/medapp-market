@@ -5,6 +5,7 @@ import { AppWindow, ArrowLeft } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PurchaseButton } from "@/components/purchase-button";
+import { TrackView } from "@/components/track-view";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
 import { getCategoryLabel } from "@/lib/category-utils";
@@ -60,6 +61,7 @@ export default async function AppDetailPage({
 
   return (
     <div className="flex min-h-screen flex-col">
+      <TrackView slug={slug} />
       <Header />
       <main className="flex-1 bg-background">
         <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">

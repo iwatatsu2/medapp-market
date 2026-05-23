@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Glucose Diary 紹介</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1080px; overflow: hidden; font-family: 'Noto Sans JP', sans-serif; transform-origin: top left; transform: scale(0.6); }
+  .container { width: 1080px; height: 1080px; background: linear-gradient(135deg, #0a1a0a 0%, #132e13 50%, #0a1a0a 100%); position: relative; overflow: hidden; display: flex; padding: 50px 50px 40px; }
+  .bg-glow { position: absolute; border-radius: 50%; filter: blur(140px); z-index: 0; }
+  .bg-glow-1 { background: #22c55e; width: 500px; height: 500px; top: -100px; right: 100px; opacity: 0.12; }
+  .bg-glow-2 { background: #16a34a; width: 400px; height: 400px; bottom: -100px; left: 50px; opacity: 0.10; }
+  .left { position: relative; z-index: 2; flex: 1; display: flex; flex-direction: column; padding-right: 40px; }
+  .right { position: relative; z-index: 2; display: flex; align-items: center; justify-content: center; }
+  .top-row { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .badge { background: linear-gradient(135deg, #22c55e, #16a34a); color: white; font-size: 17px; font-weight: 700; padding: 8px 20px; border-radius: 20px; }
+  .free-badge { background: #22c55e; color: white; font-size: 17px; font-weight: 900; padding: 8px 20px; border-radius: 20px; letter-spacing: 2px; }
+  .app-title { font-size: 52px; font-weight: 900; color: white; line-height: 1.2; margin-bottom: 6px; }
+  .app-title .accent { background: linear-gradient(135deg, #22c55e, #4ade80); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .tagline { font-size: 22px; color: #bbf7d0; font-weight: 700; margin-bottom: 24px; }
+  .features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .feature { background: rgba(255,255,255,0.06); border: 1px solid rgba(34,197,94,0.2); border-radius: 14px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
+  .feature-icon { font-size: 26px; flex-shrink: 0; }
+  .feature-text { font-size: 18px; color: #e2e8f0; font-weight: 700; }
+  .feature-sub { font-size: 13px; color: #94a3b8; }
+  .target { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: auto; }
+  .target-chip { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); border-radius: 10px; padding: 8px 16px; color: #bbf7d0; font-size: 16px; font-weight: 700; }
+  .bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; }
+  .market-badge { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+  .market-icon { width: 36px; height: 36px; background: linear-gradient(135deg, #14b8a6, #0d9488); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 18px; }
+  .market-name { color: white; font-size: 16px; font-weight: 700; }
+  .market-url { color: #22c55e; font-size: 13px; }
+  .author-name { color: #22c55e; font-size: 18px; font-weight: 900; text-align: right; }
+  .author-role { color: #94a3b8; font-size: 13px; text-align: right; }
+  .phone { width: 340px; height: 700px; background: #000; border-radius: 44px; border: 6px solid #333; position: relative; overflow: hidden; box-shadow: 0 20px 80px rgba(0,0,0,0.6), 0 0 40px rgba(34,197,94,0.15); }
+  .phone-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 140px; height: 30px; background: #000; border-radius: 0 0 20px 20px; z-index: 3; }
+  .phone-screen { width: 100%; height: 100%; border-radius: 38px; overflow: hidden; }
+  .phone-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; border-radius: 38px; }
+  .phone-label { text-align: center; margin-top: 16px; color: #94a3b8; font-size: 14px; }
+  .phone-label span { color: #22c55e; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="left">
+    <div class="top-row">
+      <span class="badge">血糖自己管理</span>
+      <span class="free-badge">無料</span>
+    </div>
+    <h1 class="app-title"><span class="accent">Glucose</span> Diary</h1>
+    <p class="tagline">毎日の血糖記録を、かしこく管理する</p>
+    <div class="features">
+      <div class="feature"><div class="feature-icon">📊</div><div><div class="feature-text">7ポイント血糖記録</div><div class="feature-sub">朝食前〜就寝前まで</div></div></div>
+      <div class="feature"><div class="feature-icon">📈</div><div><div class="feature-text">週間トレンドグラフ</div><div class="feature-sub">血糖パターンを可視化</div></div></div>
+      <div class="feature"><div class="feature-icon">🤖</div><div><div class="feature-text">パターン自動検出</div><div class="feature-sub">低・高血糖をAI分析</div></div></div>
+      <div class="feature"><div class="feature-icon">💉</div><div><div class="feature-text">注射管理</div><div class="feature-sub">週1回注射の次回投与日管理</div></div></div>
+      <div class="feature"><div class="feature-icon">📋</div><div><div class="feature-text">受診レポート自動生成</div></div></div>
+      <div class="feature"><div class="feature-icon">🏃</div><div><div class="feature-text">生活データ記録</div><div class="feature-sub">体重・血圧・食事・歩数</div></div></div>
+    </div>
+    <div class="target">
+      <div class="target-chip">🩸 糖尿病患者</div>
+      <div class="target-chip">👨‍⚕️ 主治医との共有</div>
+    </div>
+    <div class="bottom">
+      <div class="market-badge">
+        <div class="market-icon">M</div>
+        <div><div class="market-name">MedApp Market</div><div class="market-url">medapp-market.vercel.app</div></div>
+      </div>
+      <div><div class="author-name">Dr. いわたつ</div><div class="author-role">糖尿病・内分泌専門医</div></div>
+    </div>
+  </div>
+  <div class="right">
+    <div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <img src="public/screenshots/glucose-diary-1.png" alt="Glucose Diary">
+        </div>
+      </div>
+      <div class="phone-label"><span>実際のアプリ画面</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

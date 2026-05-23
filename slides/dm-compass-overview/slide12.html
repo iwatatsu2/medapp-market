@@ -1,0 +1,177 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><link rel="stylesheet" href="slide-template.css">
+<style>
+  /* スマホモック */
+  .phones { display:flex; justify-content:center; gap:40px; margin-top:20px; }
+  .phone { width:280px; }
+  .phone-frame {
+    width:280px; height:480px;
+    background:#000; border-radius:28px;
+    border:4px solid #333;
+    padding:12px 10px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.5);
+    overflow:hidden;
+    position:relative;
+  }
+  .phone-frame::before {
+    content:''; position:absolute; top:6px; left:50%; transform:translateX(-50%);
+    width:60px; height:6px; background:#222; border-radius:3px; z-index:10;
+  }
+  .phone-screen {
+    width:100%; height:100%; border-radius:18px; overflow:hidden;
+    background:#0a0a0a; padding:16px 12px;
+    display:flex; flex-direction:column;
+  }
+  .phone-label { text-align:center; margin-top:12px; font-size:20px; font-weight:700; color:#e2e8f0; }
+  .phone-sublabel { text-align:center; font-size:14px; color:#94a3b8; margin-top:2px; }
+
+  /* ホーム画面のモック */
+  .mock-header { text-align:center; margin-bottom:12px; }
+  .mock-title { font-size:16px; font-weight:900; color:white; }
+  .mock-sub { font-size:9px; color:#64748b; }
+  .mock-card { background:#1a1a1a; border:1px solid #333; border-radius:10px; padding:12px; margin-bottom:8px; display:flex; align-items:center; gap:10px; cursor:pointer; }
+  .mock-card-icon { width:36px; height:36px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .mock-card-icon.calc { background:rgba(20,184,166,0.2); }
+  .mock-card-icon.guide { background:rgba(59,130,246,0.2); }
+  .mock-card-title { font-size:13px; font-weight:700; color:white; }
+  .mock-card-desc { font-size:9px; color:#64748b; margin-top:2px; }
+
+  /* CALC画面モック */
+  .mock-tab-bar { display:flex; gap:4px; margin-bottom:10px; overflow:hidden; }
+  .mock-tab { font-size:9px; padding:4px 8px; border-radius:6px; white-space:nowrap; }
+  .mock-tab.active { background:#14b8a6; color:white; font-weight:700; }
+  .mock-tab.inactive { background:#333; color:#999; }
+  .mock-input-group { margin-bottom:8px; }
+  .mock-label { font-size:9px; color:#999; margin-bottom:2px; }
+  .mock-input { width:100%; background:#1a1a1a; border:1px solid #333; border-radius:6px; padding:6px 8px; font-size:11px; color:white; }
+  .mock-btn { width:100%; background:#14b8a6; color:white; font-size:11px; font-weight:700; padding:8px; border-radius:8px; text-align:center; margin-top:6px; border:none; }
+  .mock-result { background:rgba(20,184,166,0.1); border:1px solid rgba(20,184,166,0.3); border-radius:8px; padding:8px; margin-top:8px; }
+  .mock-result-val { font-size:20px; font-weight:900; color:#14b8a6; text-align:center; }
+  .mock-result-label { font-size:9px; color:#64748b; text-align:center; }
+
+  /* GUIDE画面モック */
+  .mock-guide-tab { display:flex; gap:4px; margin-bottom:10px; }
+  .mock-guide-tab .mock-tab.active { background:#3b82f6; }
+  .mock-expand { background:#1a1a1a; border:1px solid #333; border-radius:8px; padding:8px 10px; margin-bottom:6px; }
+  .mock-expand-title { font-size:11px; font-weight:700; color:white; display:flex; justify-content:space-between; }
+  .mock-expand-arrow { color:#64748b; font-size:10px; }
+  .mock-drug { font-size:9px; color:#e2e8f0; padding:3px 0; border-bottom:1px solid #222; }
+  .mock-drug-sub { font-size:8px; color:#64748b; }
+
+  /* 下部メッセージ */
+  .install-msg { text-align:center; margin-top:20px; }
+  .install-badge { display:inline-flex; align-items:center; gap:10px; background:rgba(20,184,166,0.12); border:2px solid #14b8a6; border-radius:14px; padding:12px 28px; }
+  .install-badge-icon { font-size:28px; }
+  .install-badge-text { font-size:22px; font-weight:900; color:#2dd4bf; }
+  .install-badge-sub { font-size:16px; color:#94a3b8; font-weight:500; }
+</style></head><body>
+<div class="slide slide-dark">
+  <div class="bg-glow bg-glow-1"></div><div class="bg-glow bg-glow-2"></div>
+  <div class="content">
+    <div class="slide-header"><div class="slide-num">11</div><div class="slide-logo">DM Compass</div></div>
+    <h2 class="section-title" style="font-size:34px">アプリ画面イメージ：<span class="accent">スマホで即アクセス</span></h2>
+
+    <div class="phones">
+      <!-- ホーム画面（実際のスクリーンショット） -->
+      <div class="phone">
+        <div class="phone-frame">
+          <div class="phone-screen" style="padding:0">
+            <img src="mock-home.png" style="width:100%;height:100%;object-fit:cover;border-radius:18px;">
+          </div>
+        </div>
+        <div class="phone-label">ホーム</div>
+        <div class="phone-sublabel">実際のアプリ画面</div>
+      </div>
+
+      <!-- CALC画面 -->
+      <div class="phone">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+              <span style="color:#14b8a6;font-size:14px">◀</span>
+              <span style="font-size:13px;font-weight:700;color:white">CALC - 計算ツール</span>
+            </div>
+            <div class="mock-tab-bar">
+              <div class="mock-tab active">必要エネルギー</div>
+              <div class="mock-tab inactive">腎症</div>
+              <div class="mock-tab inactive">末梢</div>
+              <div class="mock-tab inactive">IVH</div>
+              <div class="mock-tab inactive">SS</div>
+            </div>
+            <div class="mock-input-group">
+              <div class="mock-label">身長 (cm)</div>
+              <div class="mock-input">165</div>
+            </div>
+            <div class="mock-input-group">
+              <div class="mock-label">活動量</div>
+              <div class="mock-input">安静（25 kcal/kg）</div>
+            </div>
+            <div class="mock-btn">計算する</div>
+            <div class="mock-result">
+              <div class="mock-result-label">標準体重</div>
+              <div class="mock-result-val">59.9 kg</div>
+              <div style="display:flex;gap:8px;margin-top:6px">
+                <div style="flex:1;text-align:center">
+                  <div class="mock-result-label">1日カロリー</div>
+                  <div style="font-size:16px;font-weight:900;color:#14b8a6">1498 kcal</div>
+                </div>
+                <div style="flex:1;text-align:center">
+                  <div class="mock-result-label">1食あたり</div>
+                  <div style="font-size:16px;font-weight:900;color:#14b8a6">499 kcal</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">CALC</div>
+        <div class="phone-sublabel">必要エネルギー計算例</div>
+      </div>
+
+      <!-- GUIDE画面 -->
+      <div class="phone">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+              <span style="color:#3b82f6;font-size:14px">◀</span>
+              <span style="font-size:13px;font-weight:700;color:white">GUIDE - 医学情報</span>
+            </div>
+            <div class="mock-guide-tab">
+              <div class="mock-tab active">インスリン</div>
+              <div class="mock-tab inactive">経口薬</div>
+              <div class="mock-tab inactive">分類</div>
+              <div class="mock-tab inactive">合併症</div>
+            </div>
+            <div class="mock-expand">
+              <div class="mock-expand-title">超速効型 <span class="mock-expand-arrow">▼</span></div>
+              <div class="mock-drug">インスリンリスプロ<div class="mock-drug-sub">発現15分 / ピーク1h / 持続3-5h</div></div>
+              <div class="mock-drug">インスリンアスパルト<div class="mock-drug-sub">発現15分 / ピーク1-3h / 持続3-5h</div></div>
+            </div>
+            <div class="mock-expand">
+              <div class="mock-expand-title">持効型溶解 <span class="mock-expand-arrow">▶</span></div>
+            </div>
+            <div class="mock-expand">
+              <div class="mock-expand-title">混合型 <span class="mock-expand-arrow">▶</span></div>
+            </div>
+            <div class="mock-expand">
+              <div class="mock-expand-title">週1回基礎 <span class="mock-expand-arrow">▶</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="phone-label">GUIDE</div>
+        <div class="phone-sublabel">インスリン製剤一覧</div>
+      </div>
+    </div>
+
+    <div class="install-msg">
+      <div class="install-badge">
+        <div class="install-badge-icon">📥</div>
+        <div>
+          <div class="install-badge-text">ホーム画面に追加するだけでOK</div>
+          <div class="install-badge-sub">アプリストア不要 ／ 無料 ／ 登録不要 ／ PWA対応</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-footer"><span>© Dr. いわたつ</span><span>DM Compass シリーズ vol.4</span></div>
+  </div>
+</div>
+</body></html>

@@ -19,32 +19,70 @@ export function CoverFlow() {
     SEED_APPS.slice(0, 3).map((a) => ({ ...a, accessCount: a.access_count ?? 0 }))
   );
 
-  // Supabaseからサムネ・アクセス数を取得してマージ
+  // Supabaseからアプリ情報＋アクセス数を取得し、アクセス数順にソート
   useEffect(() => {
     async function fetchApps() {
       try {
         const supabase = createClient();
-        const { data } = await supabase
-          .from("apps")
-          .select("*")
-          .eq("is_published", true);
+        const [appsRes, viewsRes] = await Promise.all([
+          supabase.from("apps").select("*").eq("is_published", true),
+          supabase.from("app_views").select("slug, view_count"),
+        ]);
 
-        if (data && data.length > 0) {
+        // アクセス数マップ
+        const viewMap = new Map<string, number>();
+        if (viewsRes.data) {
+          for (const v of viewsRes.data) {
+            viewMap.set(v.slug, v.view_count);
+          }
+        }
+
+        // DB + SEEDをマージ
+        let allApps: (AppData & { accessCount: number })[];
+        if (appsRes.data && appsRes.data.length > 0) {
           const dbMap = new Map<string, Record<string, unknown>>();
-          for (const a of data) {
+          for (const a of appsRes.data) {
             dbMap.set(a.slug as string, a);
           }
+          const dbSlugs = new Set(appsRes.data.map((a) => a.slug as string));
 
-          const merged = SEED_APPS.slice(0, 3).map((seedApp) => {
-            const db = dbMap.get(seedApp.slug);
-            return {
-              ...seedApp,
-              thumbnail_url: (db?.thumbnail_url as string | null) ?? seedApp.thumbnail_url,
-              accessCount: seedApp.access_count ?? 0,
-            };
-          });
-          setApps(merged);
+          const dbApps = appsRes.data.map((a) => ({
+            id: a.id as string,
+            slug: a.slug as string,
+            name: a.name as string,
+            category: a.category as string | string[],
+            price: a.price as number,
+            tagline: a.tagline as string,
+            description: a.description as string,
+            app_url: a.app_url as string,
+            demo_url: a.demo_url as string | null,
+            thumbnail_url: a.thumbnail_url as string | null,
+            developer_name: "開発者",
+            developer_specialty: "",
+            access_count: viewMap.get(a.slug as string) ?? 0,
+            accessCount: viewMap.get(a.slug as string) ?? 0,
+          }));
+
+          const seedOnly = SEED_APPS
+            .filter((a) => !dbSlugs.has(a.slug))
+            .map((a) => ({
+              ...a,
+              accessCount: viewMap.get(a.slug) ?? 0,
+              access_count: viewMap.get(a.slug) ?? 0,
+            }));
+
+          allApps = [...dbApps, ...seedOnly];
+        } else {
+          allApps = SEED_APPS.map((a) => ({
+            ...a,
+            accessCount: viewMap.get(a.slug) ?? 0,
+            access_count: viewMap.get(a.slug) ?? 0,
+          }));
         }
+
+        // アクセス数降順でソートし、上位3件を表示
+        allApps.sort((a, b) => b.accessCount - a.accessCount);
+        setApps(allApps.slice(0, 3));
       } catch {
         // fallback to seed data
       }
