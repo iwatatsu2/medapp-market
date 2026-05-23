@@ -28,10 +28,10 @@ export function Hero() {
             <Button
               variant="outline"
               size="lg"
-              asChild
-              className="rounded-full border-white/30! bg-transparent! px-8 text-white! hover:bg-white/10! hover:text-white!"
+              disabled
+              className="rounded-full border-white/30! bg-transparent! px-8 text-white/50! cursor-not-allowed"
             >
-              <Link href="/auth/register">開発者として登録</Link>
+              開発者登録（準備中）
             </Button>
           </div>
         </div>

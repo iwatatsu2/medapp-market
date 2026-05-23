@@ -22,9 +22,9 @@ export function Footer() {
               <Link href="/#apps" className="text-xs text-slate-400 hover:text-white">
                 アプリ一覧
               </Link>
-              <Link href="/auth/register" className="text-xs text-slate-400 hover:text-white">
-                アプリを投稿する
-              </Link>
+              <span className="text-xs text-slate-500">
+                アプリ投稿（準備中）
+              </span>
             </nav>
           </div>
 

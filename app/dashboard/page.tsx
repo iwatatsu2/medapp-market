@@ -39,12 +39,9 @@ export default async function DashboardPage() {
           <PurchasedApps userId={user.id} />
 
           <div className="mt-8 flex items-center justify-between">
-            <Link
-              href="/dashboard/developer"
-              className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground"
-            >
-              開発者ダッシュボードへ
-            </Link>
+            <span className="text-sm text-muted-foreground/50">
+              開発者ダッシュボード（準備中）
+            </span>
             <form
               action={async () => {
                 "use server";
