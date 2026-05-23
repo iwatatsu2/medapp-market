@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>肥満症チェッカー サムネイル</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1280px;
+    height: 720px;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', sans-serif;
+  }
+
+  .container {
+    width: 1280px;
+    height: 720px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .left {
+    width: 780px;
+    padding: 28px 50px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    z-index: 2;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: white;
+  }
+
+  .badge-primary {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+  }
+
+  .badge-secondary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+  }
+
+  .badge-free {
+    background: #22c55e;
+  }
+
+  .title {
+    font-size: 72px;
+    font-weight: 900;
+    color: white;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .subtitle {
+    font-size: 32px;
+    color: white;
+    margin-top: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .features {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 32px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .feature-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+
+  .author {
+    margin-top: 28px;
+  }
+
+  .author-name {
+    color: #60a5fa;
+    font-size: 22px;
+    font-weight: 900;
+  }
+
+  .author-role {
+    color: #94a3b8;
+    font-size: 16px;
+    margin-top: 2px;
+  }
+
+  .right {
+    position: absolute;
+    right: -40px;
+    bottom: 0;
+    width: 520px;
+    height: 720px;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .right img {
+    height: 660px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.5));
+  }
+
+  .bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    z-index: 1;
+  }
+
+  .bg-glow-1 {
+    background: #3b82f6;
+    width: 500px; height: 500px;
+    top: -150px; right: 150px;
+    opacity: 0.12;
+  }
+
+  .bg-glow-2 {
+    background: #ef4444;
+    width: 500px; height: 500px;
+    bottom: -200px; left: 100px;
+    opacity: 0.10;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="left">
+    <div class="badges">
+      <span class="badge badge-primary">糖尿病・肥満症</span>
+      <span class="badge badge-secondary">一般の方向け</span>
+      <span class="badge badge-free">無料</span>
+    </div>
+
+    <h1 class="title">肥満症チェッカー</h1>
+    <p class="subtitle">肥満症の治療適応を<br>3ステップでかんたん判定</p>
+
+    <div class="features">
+      <div class="feature-item"><span class="feature-icon">🔢</span>BMI自動計算</div>
+      <div class="feature-item"><span class="feature-icon">💊</span>GLP-1薬適応チェック</div>
+      <div class="feature-item"><span class="feature-icon">🏥</span>健康障害11項目</div>
+      <div class="feature-item"><span class="feature-icon">✅</span>肥満症判定</div>
+      <div class="feature-item"><span class="feature-icon">📊</span>統計ダッシュボード</div>
+      <div class="feature-item"><span class="feature-icon">🔒</span>個人情報不要</div>
+    </div>
+
+    <div class="author">
+      <div class="author-name">Dr. いわたつ</div>
+      <div class="author-role">糖尿病・肥満症専門医</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <img src="dr-iwatatsu.png" alt="Dr. いわたつ">
+  </div>
+</div>
+</body>
+</html>
