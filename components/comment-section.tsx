@@ -45,7 +45,7 @@ export function CommentSection({ slug, currentUserId }: CommentSectionProps) {
   }
 
   function handleNewComment(c: Record<string, unknown>) {
-    setComments((prev) => [...prev, c as Comment]);
+    setComments((prev) => [...prev, c as unknown as Comment]);
   }
 
   function handleDeleted(id: string) {
