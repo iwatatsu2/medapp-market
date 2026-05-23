@@ -45,12 +45,17 @@ export function LikeButton({ slug }: LikeButtonProps) {
     <button
       onClick={toggle}
       disabled={loading}
-      className="flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium transition-colors hover:bg-red-50"
+      className={`flex items-center gap-2.5 rounded-full px-6 py-3 text-base font-bold shadow-sm transition-all hover:scale-105 ${
+        liked
+          ? "bg-red-50 border-2 border-red-300 text-red-500"
+          : "bg-white border-2 border-border text-muted-foreground hover:border-red-200 hover:bg-red-50"
+      }`}
     >
       <Heart
-        className={`size-5 transition-colors ${liked ? "fill-red-500 text-red-500" : "text-muted-foreground"}`}
+        className={`size-6 transition-colors ${liked ? "fill-red-500 text-red-500" : ""}`}
       />
-      <span className={liked ? "text-red-500" : "text-muted-foreground"}>
+      <span>いいね</span>
+      <span className={`rounded-full px-2 py-0.5 text-sm ${liked ? "bg-red-100" : "bg-muted"}`}>
         {count}
       </span>
     </button>

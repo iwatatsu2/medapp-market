@@ -55,16 +55,19 @@ export function CommentSection({ slug, currentUserId }: CommentSectionProps) {
   }
 
   return (
-    <div className="mt-8 border-t border-border pt-6">
-      <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
-        <MessageCircle className="size-5" />
-        コメント
+    <div className="mt-10 rounded-xl border-2 border-primary/20 bg-gradient-to-b from-primary/5 to-transparent p-6 sm:p-8">
+      <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+        <MessageCircle className="size-6 text-primary" />
+        コメント・感想を書く
         {topLevel.length > 0 && (
-          <span className="text-sm font-normal text-muted-foreground">({comments.length})</span>
+          <span className="rounded-full bg-primary/10 px-3 py-0.5 text-sm font-medium text-primary">{comments.length}件</span>
         )}
       </h2>
+      <p className="mt-1 text-sm text-muted-foreground">
+        このアプリを使った感想やフィードバックをお待ちしています
+      </p>
 
-      <div className="mt-4">
+      <div className="mt-5">
         <CommentForm slug={slug} onSubmitted={handleNewComment} />
       </div>
 
@@ -85,7 +88,10 @@ export function CommentSection({ slug, currentUserId }: CommentSectionProps) {
           ))}
         </div>
       ) : (
-        <p className="mt-4 text-sm text-muted-foreground">まだコメントはありません。最初のコメントを投稿しましょう！</p>
+        <div className="mt-6 rounded-lg border border-dashed border-border bg-white/50 p-8 text-center">
+          <MessageCircle className="mx-auto size-10 text-muted-foreground/30" />
+          <p className="mt-2 text-sm text-muted-foreground">まだコメントはありません。最初のコメントを投稿しましょう！</p>
+        </div>
       )}
     </div>
   );
