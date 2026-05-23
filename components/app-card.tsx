@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { AppWindow } from "lucide-react";
+import { AppWindow, Heart, MessageCircle } from "lucide-react";
 import { getCategoryLabel } from "@/lib/category-utils";
 
 export interface AppData {
@@ -19,6 +19,8 @@ export interface AppData {
   developer_name: string;
   developer_specialty: string;
   access_count?: number;
+  like_count?: number;
+  comment_count?: number;
 }
 
 interface AppCardProps {
@@ -78,12 +80,26 @@ export function AppCard({ app }: AppCardProps) {
             <span className="text-xs text-muted-foreground">
               {app.developer_specialty}
             </span>
-            {app.access_count != null && (
-              <span className="ml-auto flex items-center gap-1 text-xs text-muted-foreground">
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500" />
-                {app.access_count.toLocaleString()}
-              </span>
-            )}
+            <span className="ml-auto flex items-center gap-3 text-xs text-muted-foreground">
+              {app.access_count != null && (
+                <span className="flex items-center gap-1">
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500" />
+                  {app.access_count.toLocaleString()}
+                </span>
+              )}
+              {(app.like_count ?? 0) > 0 && (
+                <span className="flex items-center gap-0.5">
+                  <Heart className="size-3 text-red-400" />
+                  {app.like_count}
+                </span>
+              )}
+              {(app.comment_count ?? 0) > 0 && (
+                <span className="flex items-center gap-0.5">
+                  <MessageCircle className="size-3" />
+                  {app.comment_count}
+                </span>
+              )}
+            </span>
           </div>
         </div>
       </article>

@@ -16,14 +16,16 @@ export function AppGrid() {
     async function fetchApps() {
       const supabase = createClient();
 
-      // DBアプリとアクセス数を並行取得
-      const [appsRes, viewsRes] = await Promise.all([
+      // DBアプリとアクセス数・いいね数・コメント数を並行取得
+      const [appsRes, viewsRes, likesRes, commentsRes] = await Promise.all([
         supabase
           .from("apps")
           .select("*")
           .eq("is_published", true)
           .order("created_at", { ascending: false }),
         supabase.from("app_views").select("slug, view_count"),
+        supabase.from("app_likes").select("app_slug"),
+        supabase.from("app_comments").select("app_slug"),
       ]);
 
       if (viewsRes.error) {
@@ -36,6 +38,18 @@ export function AppGrid() {
         for (const v of viewsRes.data) {
           viewMap.set(v.slug, v.view_count);
         }
+      }
+
+      // いいね数マップ
+      const likeMap = new Map<string, number>();
+      for (const l of likesRes.data ?? []) {
+        likeMap.set(l.app_slug, (likeMap.get(l.app_slug) ?? 0) + 1);
+      }
+
+      // コメント数マップ
+      const commentMap = new Map<string, number>();
+      for (const c of commentsRes.data ?? []) {
+        commentMap.set(c.app_slug, (commentMap.get(c.app_slug) ?? 0) + 1);
       }
 
       let merged: AppData[];
@@ -55,17 +69,23 @@ export function AppGrid() {
           developer_name: "開発者",
           developer_specialty: "",
           access_count: viewMap.get(a.slug as string) ?? 0,
+          like_count: likeMap.get(a.slug as string) ?? 0,
+          comment_count: commentMap.get(a.slug as string) ?? 0,
         }));
         const dbSlugs = new Set(dbApps.map((a) => a.slug));
         const seedOnly = SEED_APPS.map((a) => ({
           ...a,
           access_count: viewMap.get(a.slug) ?? 0,
+          like_count: likeMap.get(a.slug) ?? 0,
+          comment_count: commentMap.get(a.slug) ?? 0,
         })).filter((a) => !dbSlugs.has(a.slug));
         merged = [...dbApps, ...seedOnly];
       } else {
         merged = SEED_APPS.map((a) => ({
           ...a,
           access_count: viewMap.get(a.slug) ?? 0,
+          like_count: likeMap.get(a.slug) ?? 0,
+          comment_count: commentMap.get(a.slug) ?? 0,
         }));
       }
 
