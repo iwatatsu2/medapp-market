@@ -6,6 +6,8 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { PurchaseButton } from "@/components/purchase-button";
 import { TrackView } from "@/components/track-view";
+import { LikeButton } from "@/components/like-button";
+import { CommentSection } from "@/components/comment-section";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
 import { getCategoryLabel } from "@/lib/category-utils";
@@ -109,7 +111,7 @@ export default async function AppDetailPage({
                 <span>専門：{app.developer_specialty}</span>
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <PurchaseButton
                   appId={"id" in app ? app.id : ""}
                   slug={slug}
@@ -118,6 +120,7 @@ export default async function AppDetailPage({
                   purchased={purchased}
                   loggedIn={!!user}
                 />
+                <LikeButton slug={slug} />
               </div>
               {app.price > 0 && !purchased && (
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
@@ -154,6 +157,8 @@ export default async function AppDetailPage({
                   {app.description}
                 </p>
               </div>
+
+              <CommentSection slug={slug} currentUserId={user?.id} />
             </div>
           </div>
         </div>
