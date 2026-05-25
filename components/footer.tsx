@@ -22,6 +22,9 @@ export function Footer() {
               <Link href="/#apps" className="text-xs text-slate-400 hover:text-white">
                 アプリ一覧
               </Link>
+              <Link href="/tools" className="text-xs text-slate-400 hover:text-white">
+                くらしのツール
+              </Link>
               <span className="text-xs text-slate-500">
                 アプリ投稿（準備中）
               </span>

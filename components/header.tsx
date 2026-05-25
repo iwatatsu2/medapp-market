@@ -73,6 +73,9 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="ghost" size="sm" asChild>
+            <Link href="/tools">くらしのツール</Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
             <Link href="/dashboard">マイページ</Link>
           </Button>
           {loggedIn ? (
@@ -116,6 +119,12 @@ export function Header() {
                   </Link>
                 ))}
               </div>
+              <Link
+                href="/tools"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                🏠 くらしのツール
+              </Link>
               <Link
                 href="/dashboard"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"
