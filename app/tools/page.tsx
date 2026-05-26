@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { SEED_TOOLS } from "@/lib/seed-tools";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -9,29 +10,6 @@ export const metadata: Metadata = {
   description:
     "医師の暮らしから生まれた便利ツール。子育て・生活に役立つWebアプリを無料で公開しています。",
 };
-
-interface Tool {
-  name: string;
-  tagline: string;
-  description: string;
-  emoji: string;
-  url: string;
-  tags: string[];
-  color: string;
-}
-
-const TOOLS: Tool[] = [
-  {
-    name: "あさのしたく チェッカー",
-    tagline: "こどもの朝・夜の準備をイラストでチェック",
-    description:
-      "4歳〜小学生向け。かわいいイラストをタッチして、朝や夜の準備を楽しく習慣化。名前・タスク・人数をカスタマイズでき、5日間連続達成でご褒美演出も。タブレットの横画面での利用がおすすめです。",
-    emoji: "🌅",
-    url: "https://morning-checker.vercel.app",
-    tags: ["子育て", "無料", "登録不要"],
-    color: "from-orange-400 to-pink-500",
-  },
-];
 
 export default function ToolsPage() {
   return (
@@ -68,12 +46,10 @@ export default function ToolsPage() {
         <section className="bg-background">
           <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {TOOLS.map((tool) => (
-                <a
-                  key={tool.name}
-                  href={tool.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {SEED_TOOLS.map((tool) => (
+                <Link
+                  key={tool.slug}
+                  href={`/tools/${tool.slug}`}
                   className="group relative overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div
@@ -91,9 +67,6 @@ export default function ToolsPage() {
                     <p className="mt-1 text-sm font-medium text-muted-foreground">
                       {tool.tagline}
                     </p>
-                    <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                      {tool.description}
-                    </p>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {tool.tags.map((tag) => (
                         <span
@@ -105,9 +78,15 @@ export default function ToolsPage() {
                       ))}
                     </div>
                   </div>
-                </a>
+                </Link>
               ))}
             </div>
+
+            {SEED_TOOLS.length <= 1 && (
+              <p className="mt-8 text-center text-sm text-muted-foreground">
+                今後もツールを追加予定です。お楽しみに！
+              </p>
+            )}
           </div>
         </section>
       </main>
