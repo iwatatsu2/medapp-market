@@ -80,8 +80,11 @@ export async function POST(req: NextRequest) {
       },
     };
 
-    // If developer has connected Stripe, split revenue (80% developer, 20% platform)
+    // Platform owner's apps: no fee split needed (100% goes to platform owner)
+    // For third-party developers with connected Stripe: split revenue (80% developer, 20% platform)
+    const isPlatformOwner = app.developer_id === process.env.PLATFORM_OWNER_ID;
     if (
+      !isPlatformOwner &&
       developerProfile?.stripe_account_id &&
       developerProfile.stripe_onboarding_complete
     ) {
