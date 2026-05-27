@@ -7,6 +7,7 @@ import { Footer } from "@/components/footer";
 import { PurchaseButton } from "@/components/purchase-button";
 import { TrackView } from "@/components/track-view";
 import { LikeButton } from "@/components/like-button";
+import { ShareButton } from "@/components/share-button";
 import { CommentSection } from "@/components/comment-section";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
@@ -121,6 +122,7 @@ export default async function AppDetailPage({
                   loggedIn={!!user}
                 />
                 <LikeButton slug={slug} />
+                <ShareButton url={`https://medapp-market.vercel.app/apps/${slug}`} title={`${app.name} | MedApp Market`} />
               </div>
               {app.price > 0 && !purchased && (
                 <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
