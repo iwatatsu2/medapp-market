@@ -45,6 +45,7 @@ export function AppForm({ app, userId }: AppFormProps) {
     (app as Record<string, unknown>)?.target_roles as string[] ?? []
   );
   const [isPublished, setIsPublished] = useState(app?.is_published ?? false);
+  const [isTool, setIsTool] = useState((app as Record<string, unknown>)?.is_tool as boolean ?? false);
 
   function slugify(text: string) {
     return text
@@ -93,6 +94,7 @@ export function AppForm({ app, userId }: AppFormProps) {
         screenshots,
         target_roles: targetRoles,
         is_published: isPublished,
+        is_tool: isTool,
       };
 
       if (app) {
@@ -397,6 +399,34 @@ export function AppForm({ app, userId }: AppFormProps) {
             <p className="text-xs text-muted-foreground mt-0.5">マーケットに表示する</p>
           </button>
         </div>
+      </div>
+
+      {/* くらしのツール */}
+      <div className="space-y-2">
+        <Label>くらしのツールに掲載</Label>
+        <label
+          className={`flex cursor-pointer items-center gap-3 rounded-xl border-2 p-4 transition-all ${
+            isTool
+              ? "border-emerald-500 bg-emerald-50 shadow-md"
+              : "border-muted bg-white hover:border-muted-foreground/30"
+          }`}
+        >
+          <input
+            type="checkbox"
+            checked={isTool}
+            onChange={(e) => setIsTool(e.target.checked)}
+            className="hidden"
+          />
+          <span className="text-2xl">🏠</span>
+          <div>
+            <p className={`text-sm font-bold ${isTool ? "text-emerald-700" : "text-muted-foreground"}`}>
+              {isTool ? "掲載する" : "掲載しない"}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              ONにすると「くらしのツール」ページにも表示されます
+            </p>
+          </div>
+        </label>
       </div>
 
       {/* 開発者同意 */}

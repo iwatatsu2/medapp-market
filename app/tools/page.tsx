@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, AppWindow } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { createClient } from "@/lib/supabase/server";
 import { SEED_TOOLS } from "@/lib/seed-tools";
 import type { Metadata } from "next";
 
@@ -11,7 +13,37 @@ export const metadata: Metadata = {
     "医師の暮らしから生まれた便利ツール。子育て・生活に役立つWebアプリを無料で公開しています。",
 };
 
-export default function ToolsPage() {
+export default async function ToolsPage() {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("apps")
+    .select("*")
+    .eq("is_published", true)
+    .eq("is_tool", true)
+    .order("created_at", { ascending: false });
+
+  const dbApps = data ?? [];
+  // Merge with seed tools (fallback if not in DB)
+  const dbSlugs = new Set(dbApps.map((a) => a.slug));
+  const seedOnly = SEED_TOOLS.filter((t) => !dbSlugs.has(t.slug));
+
+  const allTools = [
+    ...dbApps.map((a) => ({
+      slug: a.slug as string,
+      name: a.name as string,
+      tagline: a.tagline as string,
+      thumbnail_url: a.thumbnail_url as string | null,
+      tags: ["無料"],
+    })),
+    ...seedOnly.map((t) => ({
+      slug: t.slug,
+      name: t.name,
+      tagline: t.tagline,
+      thumbnail_url: null,
+      tags: t.tags,
+    })),
+  ];
+
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -42,32 +74,51 @@ export default function ToolsPage() {
           </div>
         </section>
 
+        {/* 開発者紹介バナー */}
+        <section className="bg-emerald-50">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+            <Link
+              href="/about/developer"
+              className="flex items-center gap-3 text-sm text-emerald-700 transition-colors hover:text-emerald-900"
+            >
+              <span className="text-lg">👨‍⚕️</span>
+              <span>開発者 <strong>Dr. いわたつ</strong>（糖尿病専門医）について →</span>
+            </Link>
+          </div>
+        </section>
+
         {/* ツール一覧 */}
         <section className="bg-background">
           <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {SEED_TOOLS.map((tool) => (
+              {allTools.map((tool) => (
                 <Link
                   key={tool.slug}
-                  href={`/tools/${tool.slug}`}
+                  href={`/apps/${tool.slug}`}
                   className="group relative overflow-hidden rounded-xl border border-border bg-white shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg"
                 >
-                  <div
-                    className={`bg-gradient-to-br ${tool.color} flex items-center justify-center py-8`}
-                  >
-                    <span className="text-6xl">{tool.emoji}</span>
+                  <div className="relative aspect-[16/9] bg-gradient-to-br from-emerald-100 to-teal-100">
+                    {tool.thumbnail_url ? (
+                      <Image
+                        src={tool.thumbnail_url}
+                        alt={tool.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-full items-center justify-center">
+                        <AppWindow className="size-16 text-emerald-300" />
+                      </div>
+                    )}
                   </div>
                   <div className="p-5">
-                    <div className="flex items-start justify-between gap-2">
-                      <h3 className="text-base font-bold text-foreground">
-                        {tool.name}
-                      </h3>
-                      <ExternalLink className="mt-0.5 size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-                    </div>
-                    <p className="mt-1 text-sm font-medium text-muted-foreground">
+                    <h3 className="text-base font-bold text-foreground">
+                      {tool.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
                       {tool.tagline}
                     </p>
-                    <div className="mt-4 flex flex-wrap gap-1.5">
+                    <div className="mt-3 flex flex-wrap gap-1.5">
                       {tool.tags.map((tag) => (
                         <span
                           key={tag}
@@ -82,9 +133,9 @@ export default function ToolsPage() {
               ))}
             </div>
 
-            {SEED_TOOLS.length <= 1 && (
-              <p className="mt-8 text-center text-sm text-muted-foreground">
-                今後もツールを追加予定です。お楽しみに！
+            {allTools.length === 0 && (
+              <p className="text-center text-sm text-muted-foreground">
+                準備中です。お楽しみに！
               </p>
             )}
           </div>

@@ -111,6 +111,21 @@ export default async function ToolDetailPage({
                 </p>
               </div>
 
+              {/* 開発者 */}
+              <div className="mt-8 border-t border-border pt-6">
+                <Link
+                  href="/about/developer"
+                  className="flex items-center gap-3 rounded-lg border border-border p-4 transition-colors hover:bg-slate-50"
+                >
+                  <span className="flex size-10 items-center justify-center rounded-full bg-slate-100 text-xl">👨‍⚕️</span>
+                  <div>
+                    <p className="text-sm font-bold text-foreground">Dr. いわたつ</p>
+                    <p className="text-xs text-muted-foreground">糖尿病・内分泌 専門医・指導医</p>
+                  </div>
+                  <span className="ml-auto text-xs text-muted-foreground">プロフィール →</span>
+                </Link>
+              </div>
+
               {/* コメント */}
               <CommentSection slug={`tool-${slug}`} currentUserId={user?.id} />
             </div>
