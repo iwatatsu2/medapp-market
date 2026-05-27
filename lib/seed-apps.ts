@@ -236,4 +236,22 @@ export const SEED_APPS: AppData[] = [
     developer_specialty: "糖尿病内分泌代謝内科",
     access_count: 0,
   },
+  {
+    id: "14",
+    slug: "morning-checker",
+    name: "あさのしたく チェッカー",
+    tagline: "こどもの朝・夜の準備をイラストでチェック",
+    description:
+      "4歳〜小学生向け。かわいいイラストをタッチして、朝や夜の準備を楽しく習慣化。1〜4人対応、朝/夜モード切替、自由タスク追加OK。月〜金の5日間連続達成でごほうび演出つき。タブレット横画面での利用がおすすめです。",
+    price: 0,
+    category: ["other"],
+    app_url: "https://morning-checker.vercel.app/",
+    demo_url: "https://morning-checker.vercel.app/",
+    thumbnail_url: null,
+    screenshots: [],
+    target_roles: ["general"],
+    developer_name: "岩本 達也",
+    developer_specialty: "糖尿病内分泌代謝内科",
+    access_count: 0,
+  },
 ];
