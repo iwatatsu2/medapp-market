@@ -37,7 +37,7 @@ export function Hero() {
         </div>
 
         {/* 職種別リンク */}
-        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-5">
           {Object.entries(ROLES).map(([key, role]) => (
             <Link
               key={key}
@@ -50,6 +50,15 @@ export function Hero() {
               </span>
             </Link>
           ))}
+          <Link
+            href="/tools"
+            className="group flex flex-col items-center gap-2 rounded-lg border border-emerald-400/30 bg-emerald-500/10 p-4 backdrop-blur-sm transition-all hover:border-emerald-400/50 hover:bg-emerald-500/20"
+          >
+            <span className="text-3xl">🏠</span>
+            <span className="text-sm font-medium text-emerald-200 group-hover:text-white">
+              くらしのツール
+            </span>
+          </Link>
         </div>
       </div>
     </section>
