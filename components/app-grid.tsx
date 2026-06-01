@@ -79,7 +79,7 @@ export function AppGrid() {
           like_count: likeMap.get(a.slug) ?? 0,
           comment_count: commentMap.get(a.slug) ?? 0,
         })).filter((a) => !dbSlugs.has(a.slug));
-        merged = [...dbApps, ...seedOnly];
+        merged = [...seedOnly, ...dbApps];
       } else {
         merged = SEED_APPS.map((a) => ({
           ...a,
