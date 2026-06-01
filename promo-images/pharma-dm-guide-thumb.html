@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; }
+  .card {
+    width: 1200px;
+    height: 630px;
+    background: linear-gradient(160deg, #0f1923 0%, #0a1a1a 50%, #0d2222 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Hiragino Sans", sans-serif;
+    text-align: center;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(20,184,166,0.12) 0%, transparent 65%);
+    border-radius: 50%;
+  }
+  .content { position: relative; z-index: 1; }
+  .app-icon {
+    width: 110px;
+    height: 110px;
+    border-radius: 26px;
+    overflow: hidden;
+    margin: 0 auto 22px;
+    box-shadow: 0 16px 50px rgba(0,0,0,0.5), 0 0 50px rgba(20,184,166,0.15);
+  }
+  .app-icon img { width: 100%; height: 100%; object-fit: cover; }
+  .badges {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+  .badge {
+    background: rgba(20,184,166,0.12);
+    border: 1px solid rgba(20,184,166,0.25);
+    border-radius: 6px;
+    padding: 5px 14px;
+    color: #14b8a6;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .badge-free {
+    background: #14b8a6;
+    color: #0a1a1a;
+    border: none;
+    font-weight: 800;
+  }
+  .title {
+    font-size: 50px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .catchcopy {
+    font-size: 20px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px 16px;
+    max-width: 960px;
+    margin: 0 auto 28px;
+  }
+  .feature {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.85);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .feature .icon { font-size: 16px; flex-shrink: 0; }
+  .author {
+    color: rgba(255,255,255,0.35);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="content">
+    <div class="app-icon">
+      <img src="file:///Users/iwamototatsuya/Desktop/Claude-Projects/pharma-dm-guide/public/app-icon.png" alt="">
+    </div>
+    <div class="badges">
+      <span class="badge">糖尿病薬</span>
+      <span class="badge">薬剤師向け</span>
+      <span class="badge badge-free">無料</span>
+    </div>
+    <div class="title">PharmaDM Guide</div>
+    <div class="catchcopy">病棟で迷ったら、ここで確認。糖尿病薬の判断フローチャート</div>
+    <div class="features">
+      <div class="feature"><span class="icon">💊</span> 術前休薬ガイド</div>
+      <div class="feature"><span class="icon">🤒</span> シックデイ対応</div>
+      <div class="feature"><span class="icon">🚫</span> 食止め時の対応</div>
+      <div class="feature"><span class="icon">⚕️</span> 周術期の血糖管理</div>
+      <div class="feature"><span class="icon">🫘</span> 腎機能別 用量調整</div>
+      <div class="feature"><span class="icon">💉</span> 注射製剤の取り扱い</div>
+      <div class="feature"><span class="icon">⚡</span> 薬物相互作用</div>
+      <div class="feature"><span class="icon">👴</span> 高齢者の薬剤選択</div>
+    </div>
+    <div class="author">監修：Dr. いわたつ ｜ 糖尿病内分泌代謝内科</div>
+  </div>
+</div>
+</body>
+</html>
