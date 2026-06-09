@@ -1,4 +1,6 @@
 import { notFound, redirect } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
 import { TrackView } from "@/components/track-view";
@@ -55,6 +57,13 @@ export default async function AppViewerPage({
   return (
     <>
       <TrackView slug={slug} />
+      <Link
+        href={`/apps/${slug}`}
+        className="fixed top-3 left-3 z-50 flex items-center gap-1 rounded-full bg-white/90 px-3 py-1.5 text-xs font-medium text-gray-700 shadow-md backdrop-blur transition-opacity hover:bg-white"
+      >
+        <ArrowLeft className="size-3.5" />
+        戻る
+      </Link>
       <iframe
         src={appUrl}
         className="fixed inset-0 h-full w-full border-0"
