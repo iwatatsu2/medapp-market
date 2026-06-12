@@ -22,7 +22,7 @@ export default async function ShopPage() {
           <div className="text-center">
             <h1 className="font-serif text-3xl font-medium">ショップ</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              医療者のためのオリジナルグッズ
+              インスリンキーホルダー・ケースなどのオリジナルグッズ
             </p>
           </div>
 

@@ -130,6 +130,7 @@ export default async function ProductDetailPage({
               <div className="mt-6 rounded-lg border bg-muted/30 p-4 text-xs text-muted-foreground space-y-1">
                 <p>決済完了後、登録された住所に発送いたします。</p>
                 <p>領収書はStripeから自動でメール送信されます。</p>
+                <p className="mt-2 pt-2 border-t border-border/50">※本商品は医療機器・医薬品ではありません。観賞用・アクセサリー用途の雑貨です。</p>
               </div>
             </div>
           </div>
