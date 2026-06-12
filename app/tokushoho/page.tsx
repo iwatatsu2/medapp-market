@@ -57,7 +57,7 @@ export default function TokushohoPage() {
                     販売価格
                   </th>
                   <td className="px-4 py-3 text-muted-foreground">
-                    各アプリの詳細ページに表示された価格（税込）
+                    各アプリ・商品の詳細ページに表示された価格（税込）
                   </td>
                 </tr>
                 <tr>
@@ -65,7 +65,7 @@ export default function TokushohoPage() {
                     販売価格以外の必要料金
                   </th>
                   <td className="px-4 py-3 text-muted-foreground">
-                    インターネット接続に必要な通信料（お客様のご負担）
+                    インターネット接続に必要な通信料（お客様のご負担）。物販商品の場合は別途送料がかかります（商品ページに表示）。
                   </td>
                 </tr>
                 <tr>
@@ -89,7 +89,7 @@ export default function TokushohoPage() {
                     商品の引渡し時期
                   </th>
                   <td className="px-4 py-3 text-muted-foreground">
-                    決済完了後、即時ご利用いただけます
+                    デジタルコンテンツ：決済完了後、即時ご利用いただけます。物販商品：決済完了後、通常3〜7営業日以内に発送いたします。
                   </td>
                 </tr>
                 <tr>
@@ -97,7 +97,7 @@ export default function TokushohoPage() {
                     返品・キャンセル
                   </th>
                   <td className="px-4 py-3 text-muted-foreground">
-                    デジタルコンテンツという商品の性質上、購入後の返品・返金は原則としてお受けできません。ただし、商品に重大な不具合がある場合はお問い合わせください。
+                    デジタルコンテンツ：商品の性質上、購入後の返品・返金は原則としてお受けできません。物販商品：商品到着後7日以内に限り、初期不良・破損の場合は交換対応いたします。お客様都合による返品はお受けできません。いずれもお問い合わせください。
                   </td>
                 </tr>
                 <tr>

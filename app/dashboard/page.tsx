@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { ProfileForm } from "@/components/profile-form";
 import { PurchasedApps } from "@/components/purchased-apps";
+import { OrderHistory } from "@/components/order-history";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -37,6 +38,8 @@ export default async function DashboardPage() {
           </div>
 
           <PurchasedApps userId={user.id} />
+
+          <OrderHistory userId={user.id} />
 
           <div className="mt-8 flex items-center justify-between">
             {profile?.is_developer ? (

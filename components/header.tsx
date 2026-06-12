@@ -73,6 +73,9 @@ export function Header() {
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="ghost" size="sm" asChild>
+            <Link href="/shop">ショップ</Link>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
             <Link href="/tools">くらしのツール</Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
@@ -119,6 +122,12 @@ export function Header() {
                   </Link>
                 ))}
               </div>
+              <Link
+                href="/shop"
+                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+              >
+                ショップ
+              </Link>
               <Link
                 href="/tools"
                 className="text-sm text-muted-foreground transition-colors hover:text-foreground"

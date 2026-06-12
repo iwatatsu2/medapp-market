@@ -37,6 +37,54 @@ export type Purchase = {
   purchased_at: string;
 };
 
+export type Product = {
+  id: string;
+  seller_id: string;
+  slug: string;
+  name: string;
+  description: string | null;
+  price: number;
+  tax_rate: number;
+  shipping_fee: number;
+  stock: number;
+  thumbnail_url: string | null;
+  images: string[];
+  is_published: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type Order = {
+  id: string;
+  order_number: string;
+  user_id: string;
+  product_id: string;
+  quantity: number;
+  subtotal: number;
+  tax_amount: number;
+  shipping_fee: number;
+  total: number;
+  stripe_session_id: string | null;
+  status: "pending" | "paid" | "shipped" | "delivered" | "cancelled";
+  tracking_number: string | null;
+  shipping_name: string | null;
+  shipping_postal_code: string | null;
+  shipping_address: string | null;
+  shipping_phone: string | null;
+  shipped_at: string | null;
+  created_at: string;
+  updated_at: string;
+  product?: Product;
+};
+
+export const ORDER_STATUS_LABELS: Record<Order["status"], string> = {
+  pending: "決済待ち",
+  paid: "入金済み",
+  shipped: "発送済み",
+  delivered: "配達完了",
+  cancelled: "キャンセル",
+};
+
 // 職種別ページ定義
 export const ROLES = {
   doctors: {

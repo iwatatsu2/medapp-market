@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, AppWindow, Settings } from "lucide-react";
+import { Plus, Pencil, AppWindow, Settings, Package, ClipboardList } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -48,6 +48,30 @@ export default async function DeveloperDashboardPage() {
                 </Link>
               </Button>
             </div>
+          </div>
+
+          {/* 物販管理リンク */}
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/dashboard/developer/products"
+              className="flex items-center gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-muted/50"
+            >
+              <Package className="size-5 text-primary" />
+              <div>
+                <p className="font-medium text-sm">物販管理</p>
+                <p className="text-xs text-muted-foreground">商品の登録・在庫管理</p>
+              </div>
+            </Link>
+            <Link
+              href="/dashboard/developer/orders"
+              className="flex items-center gap-3 rounded-xl border bg-card p-4 transition-colors hover:bg-muted/50"
+            >
+              <ClipboardList className="size-5 text-primary" />
+              <div>
+                <p className="font-medium text-sm">注文管理</p>
+                <p className="text-xs text-muted-foreground">注文確認・発送処理</p>
+              </div>
+            </Link>
           </div>
 
           <div className="mt-8 rounded-2xl bg-card p-8">
