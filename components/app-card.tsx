@@ -16,6 +16,7 @@ export interface AppData {
   thumbnail_url?: string | null;
   screenshots?: string[];
   target_roles?: string[];
+  is_tool?: boolean;
   developer_name: string;
   developer_specialty: string;
   access_count?: number;

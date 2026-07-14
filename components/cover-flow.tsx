@@ -16,7 +16,9 @@ const RANK_STYLES = [
 
 export function CoverFlow() {
   const [apps, setApps] = useState<(AppData & { accessCount: number })[]>(
-    SEED_APPS.slice(0, 3).map((a) => ({ ...a, accessCount: a.access_count ?? 0 }))
+    SEED_APPS.filter((a) => !a.is_tool)
+      .slice(0, 3)
+      .map((a) => ({ ...a, accessCount: a.access_count ?? 0 }))
   );
 
   // Supabaseからアプリ情報＋アクセス数を取得し、アクセス数順にソート
@@ -57,6 +59,7 @@ export function CoverFlow() {
             app_url: a.app_url as string,
             demo_url: a.demo_url as string | null,
             thumbnail_url: a.thumbnail_url as string | null,
+            is_tool: a.is_tool as boolean | undefined,
             developer_name: "開発者",
             developer_specialty: "",
             access_count: viewMap.get(a.slug as string) ?? 0,
@@ -80,6 +83,8 @@ export function CoverFlow() {
           }));
         }
 
+        // くらしのツール行きのアプリはランキングから除外
+        allApps = allApps.filter((a) => !a.is_tool);
         // アクセス数降順でソートし、上位3件を表示
         allApps.sort((a, b) => b.accessCount - a.accessCount);
         setApps(allApps.slice(0, 3));

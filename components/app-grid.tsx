@@ -10,7 +10,9 @@ import type { AppData } from "@/components/app-card";
 
 export function AppGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [apps, setApps] = useState<AppData[]>(SEED_APPS);
+  const [apps, setApps] = useState<AppData[]>(
+    SEED_APPS.filter((a) => !a.is_tool)
+  );
 
   useEffect(() => {
     async function fetchApps() {
@@ -66,6 +68,7 @@ export function AppGrid() {
           app_url: a.app_url as string,
           demo_url: a.demo_url as string | null,
           thumbnail_url: a.thumbnail_url as string | null,
+          is_tool: a.is_tool as boolean | undefined,
           developer_name: "開発者",
           developer_specialty: "",
           access_count: viewMap.get(a.slug as string) ?? 0,
@@ -89,7 +92,8 @@ export function AppGrid() {
         }));
       }
 
-      setApps(merged);
+      // くらしのツール行きのアプリ（子供向け等）はトップページに表示しない
+      setApps(merged.filter((a) => !a.is_tool));
     }
     fetchApps();
   }, []);

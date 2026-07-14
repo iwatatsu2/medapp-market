@@ -4,7 +4,7 @@ import { ArrowLeft, AppWindow } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { createClient } from "@/lib/supabase/server";
-import { SEED_TOOLS } from "@/lib/seed-tools";
+import { SEED_APPS } from "@/lib/seed-apps";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -23,9 +23,9 @@ export default async function ToolsPage() {
     .order("created_at", { ascending: false });
 
   const dbApps = data ?? [];
-  // Merge with seed tools (fallback if not in DB)
+  // is_tool フラグの付いたシードアプリ（子供向け等）をマージ（DBに未登録のもの）
   const dbSlugs = new Set(dbApps.map((a) => a.slug));
-  const seedOnly = SEED_TOOLS.filter((t) => !dbSlugs.has(t.slug));
+  const seedOnly = SEED_APPS.filter((a) => a.is_tool && !dbSlugs.has(a.slug));
 
   const allTools = [
     ...dbApps.map((a) => ({
@@ -35,12 +35,12 @@ export default async function ToolsPage() {
       thumbnail_url: a.thumbnail_url as string | null,
       tags: ["無料"],
     })),
-    ...seedOnly.map((t) => ({
-      slug: t.slug,
-      name: t.name,
-      tagline: t.tagline,
-      thumbnail_url: null,
-      tags: t.tags,
+    ...seedOnly.map((a) => ({
+      slug: a.slug,
+      name: a.name,
+      tagline: a.tagline,
+      thumbnail_url: a.thumbnail_url ?? null,
+      tags: ["無料"],
     })),
   ];
 
