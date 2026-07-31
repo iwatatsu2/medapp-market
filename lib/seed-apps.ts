@@ -2,6 +2,24 @@ import type { AppData } from "@/components/app-card";
 
 export const SEED_APPS: AppData[] = [
   {
+    id: "18",
+    slug: "ketto-quest",
+    name: "血糖値クエスト",
+    tagline: "遊んで学べる血糖ゲーム｜コンビニ・外食の選び方をRPGで",
+    description:
+      "糖尿病専門医が作った、遊びながら食事の選び方が身につくRPG風の学習ゲーム。コンビニ・牛丼・ラーメン・居酒屋・回転寿司など日常の場面で「どれを選ぶ？」に答え、章を進めてボスと戦い、主人公ドクターいわたつを育てていきます。1日の食事を選んで血糖の波形（Time in Range）を管理する『血糖カーブ・サバイバル』、自分が食べたものを入れて血糖の動きの目安を見る『マイ食事チェッカー』も搭載。楽しみながら“なんとなくこっちかな”という感覚を養うことを目的にしています。スマホのブラウザで完全無料、インストール不要。※本アプリは学習・啓発用で医療機器ではありません。表示される内容は一般的な情報であり、効果には個人差があります。実際の食事や治療の判断は主治医にご相談ください。",
+    price: 0,
+    category: ["diabetes-endocrine"],
+    app_url: "https://ketto-quest.vercel.app/",
+    demo_url: "https://ketto-quest.vercel.app/",
+    thumbnail_url: "/thumbnails/thumbnail-ketto-quest.png",
+    screenshots: [],
+    target_roles: ["general"],
+    developer_name: "岩本 達也",
+    developer_specialty: "糖尿病内分泌代謝内科",
+    access_count: 0,
+  },
+  {
     id: "17",
     slug: "gluview",
     name: "GluView",
@@ -46,8 +64,8 @@ export const SEED_APPS: AppData[] = [
       "研修医・病棟担当医のための糖尿病マネジメント支援アプリ。必要エネルギー量計算、糖尿病性腎症病期分類、末梢輸液インスリン混注量、IVHインスリン混注量、スライディングスケール自動生成などの計算ツールと、インスリン製剤一覧、経口血糖降下薬、糖尿病分類、合併症リファレンスなどのガイド機能を搭載。スマートフォンに最適化されたUIで、病棟での即時参照が可能です。",
     price: 0,
     category: ["diabetes-endocrine", "resident"],
-    app_url: "https://iwatatsu2.github.io/dm-compass/",
-    demo_url: "https://iwatatsu2.github.io/dm-compass/",
+    app_url: "https://dm-compass.vercel.app/",
+    demo_url: "https://dm-compass.vercel.app/",
     thumbnail_url: "/thumbnails/thumbnail-dm-compass.png",
     screenshots: ["/screenshots/dm-compass-1.png"],
     target_roles: ["doctors", "nurses"],
