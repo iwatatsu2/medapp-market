@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """施設向け教材2本（てあて連絡帳・災害パック）をMedApp Marketに登録する
-使い方: cd medapp-market && python3 scripts/add_endo_training_app.py
+使い方: cd medapp-market && python3 scripts/add_facility_kits.py
+※価格欄は price=0（無料表示）のため、施設ライセンスの年額は tagline に明記する
 やること: 既存行からdeveloper_id/サムネ配置規約を自動検出 → サムネをStorageへアップ → appsへINSERT（既存slugならUPDATE）
 """
 import json, pathlib, subprocess, re
@@ -50,7 +51,7 @@ def upsert(app, thumb_file):
 upsert({
     "slug": "hypo-school-kit",
     "name": "てあて連絡帳｜低血糖対応 研修キット",
-    "tagline": "低血糖のとき、まわりの大人がすぐ動ける。学校・園の先生向け",
+    "tagline": "低血糖のとき、まわりの大人がすぐ動ける。学校・園の先生向け｜無料で使える資料あり（施設研修は年額¥9,800）",
     "description": "1型糖尿病の子どもが低血糖になったとき、学校・保育園・学童・スポーツクラブの先生がすぐ動けるようにするための教材です。低血糖のサインと基本対応の掲示カード（A4・印刷可）と、体育の授業のシナリオは無料・登録不要で使えます。職員研修としてまとめて使いたい施設向けに、全シナリオ演習・確認テスト・修了証つきの施設ライセンス（年額9,800円）もあります。糖尿病専門医 Dr.いわたつ 作成。",
     "category": ["糖尿病", "学校・保育", "低血糖"],
     "app_url": "https://hypo-school-kit.vercel.app/?utm_source=medapp&utm_medium=market",
@@ -59,7 +60,7 @@ upsert({
 upsert({
     "slug": "disaster-dm-care",
     "name": "災害時の糖尿病ケア 研修パック",
-    "tagline": "発災直後から避難所・仮設まで。災害時の糖尿病ケアを症例で",
+    "tagline": "発災直後から避難所・仮設まで。災害時の糖尿病ケアを症例で｜無料で使える資料あり（施設研修は年額¥19,800）",
     "description": "災害時に糖尿病のある人を支えるための、医療機関・薬局・訪問看護・介護施設向けの教材です。患者さんとご家族向けの「災害への備えチェックリスト」は無料・登録不要で印刷できます。発災直後・避難所・慢性期のシナリオ演習、確認テスト、施設の備えチェックシート、患者指導用の配布資料は施設ライセンス（年額19,800円）で利用できます。糖尿病専門医 Dr.いわたつ 作成。",
     "category": ["糖尿病", "災害医療", "医療者教育"],
     "app_url": "https://disaster-dm-care.vercel.app/?utm_source=medapp&utm_medium=market",
