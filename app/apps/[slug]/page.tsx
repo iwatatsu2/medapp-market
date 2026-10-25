@@ -12,6 +12,7 @@ import { CommentSection } from "@/components/comment-section";
 import { createClient } from "@/lib/supabase/server";
 import { SEED_APPS } from "@/lib/seed-apps";
 import { getCategoryLabel } from "@/lib/category-utils";
+import { TRAINING_CASES } from "@/lib/training-cases";
 
 async function getApp(slug: string) {
   const supabase = await createClient();
@@ -159,6 +160,27 @@ export default async function AppDetailPage({
                   {app.description}
                 </p>
               </div>
+
+              {TRAINING_CASES[slug] && (
+                <div className="mt-8 border-t border-border pt-6">
+                  <h2 className="text-lg font-bold text-foreground">症例で練習する</h2>
+                  <a
+                    href={TRAINING_CASES[slug].url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 block rounded-lg border border-border p-4 transition-colors hover:border-primary/40 hover:bg-primary/5"
+                  >
+                    <p className="text-sm font-semibold leading-relaxed text-foreground">
+                      {TRAINING_CASES[slug].title}
+                    </p>
+                    <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                      このアプリで調べる内容が出てくる症例です。
+                      {TRAINING_CASES[slug].app === "endo" ? "Endo" : "DM"} Compass Training ・
+                      {TRAINING_CASES[slug].free ? "最後まで無料で体験できます" : "最初の設問まで無料で体験できます"} →
+                    </p>
+                  </a>
+                </div>
+              )}
 
               <CommentSection slug={slug} currentUserId={user?.id} />
             </div>
