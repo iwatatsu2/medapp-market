@@ -1,5 +1,5 @@
+import Script from "next/script";
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
@@ -26,9 +26,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <Script src="https://wellness-note.net/a/t.js" data-app="medapp-market" strategy="afterInteractive" />
         {children}
         <CookieConsent />
-        {process.env.NODE_ENV === "production" && <Analytics />}
+        
       </body>
     </html>
   );
