@@ -3,12 +3,12 @@ import { Globe, Award, GraduationCap, Stethoscope } from "lucide-react";
 
 export function AboutSection() {
   return (
-    <section className="border-t border-border bg-slate-50 py-16">
+    <section className="surface-wash border-t border-border/70 py-20">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-8 text-center text-2xl font-bold text-foreground">
+        <h2 className="mb-10 text-center text-2xl font-bold tracking-tight text-foreground">
           運営者について
         </h2>
-        <div className="overflow-hidden rounded-lg border border-border bg-white p-6 sm:p-8">
+        <div className="overflow-hidden rounded-2xl border border-border/70 bg-card p-6 shadow-card sm:p-8">
           <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
             <div className="shrink-0">
               <Image
@@ -16,7 +16,7 @@ export function AboutSection() {
                 alt="Dr. いわたつ"
                 width={120}
                 height={120}
-                className="rounded-full"
+                className="rounded-full ring-4 ring-primary/10"
               />
             </div>
             <div className="flex-1 text-center sm:text-left">
@@ -88,7 +88,7 @@ export function AboutSection() {
                   @dr.iwatatsu
                 </a>
                 <a
-                  href="https://driwatatsu.readdy.co"
+                  href="https://driwatatsu-hp.vercel.app"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"

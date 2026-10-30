@@ -54,7 +54,10 @@ export default async function RolePage({
     description: a.description as string,
     app_url: a.app_url as string,
     demo_url: a.demo_url as string | null,
-    thumbnail_url: a.thumbnail_url as string | null,
+    thumbnail_url:
+      (a.thumbnail_url as string | null) ??
+      SEED_APPS.find((s) => s.slug === (a.slug as string))?.thumbnail_url ??
+      null,
     target_roles: a.target_roles as string[] | undefined,
     developer_name: "開発者",
     developer_specialty: "",

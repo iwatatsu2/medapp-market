@@ -2,11 +2,14 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="bg-slate-900">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <footer className="surface-ink border-t border-white/5">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="text-base font-bold text-white">
+            <Link href="/" className="flex items-center gap-2 text-base font-bold text-white">
+              <span aria-hidden className="grid size-7 place-items-center rounded-md bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)] text-xs font-black text-primary-foreground">
+                M
+              </span>
               MedApp Market
             </Link>
             <p className="mt-2 text-xs leading-relaxed text-slate-400">

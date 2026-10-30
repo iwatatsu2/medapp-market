@@ -8,6 +8,9 @@ import { createClient } from "@/lib/supabase/client";
 import { getCategoryLabel } from "@/lib/category-utils";
 import type { AppData } from "@/components/app-card";
 
+// DBのthumbnail_urlがnullでも、seed側にサムネがあればそれを使う（DB制限中でも表示を守る）
+const SEED_THUMB = new Map(SEED_APPS.map((a) => [a.slug, a.thumbnail_url]));
+
 export function AppGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [apps, setApps] = useState<AppData[]>(
@@ -67,7 +70,10 @@ export function AppGrid() {
           description: a.description as string,
           app_url: a.app_url as string,
           demo_url: a.demo_url as string | null,
-          thumbnail_url: a.thumbnail_url as string | null,
+          thumbnail_url:
+            (a.thumbnail_url as string | null) ??
+            SEED_THUMB.get(a.slug as string) ??
+            null,
           is_tool: a.is_tool as boolean | undefined,
           developer_name: "開発者",
           developer_specialty: "",
@@ -114,8 +120,9 @@ export function AppGrid() {
 
       <section id="apps" className="scroll-mt-20">
         <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-          <div className="mb-6 flex items-baseline gap-3">
-            <h2 className="text-lg font-bold text-foreground">
+          <div className="mb-6 flex items-center gap-3">
+            <span aria-hidden className="brand-bar h-6 w-1.5 rounded-full" />
+            <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
               {selectedCategory ? getCategoryLabel(selectedCategory) : "新着のアプリ"}
             </h2>
             {selectedCategory && (

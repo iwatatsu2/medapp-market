@@ -96,13 +96,14 @@ export function CoverFlow() {
   }, []);
 
   return (
-    <section className="py-12 bg-gradient-to-b from-slate-900 to-slate-800">
-      <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-bold text-center text-white mb-2 flex items-center justify-center gap-2">
+    <section className="surface-ink relative py-16 border-t border-white/5">
+      <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:52px_52px]" />
+      <div className="container relative mx-auto px-4">
+        <h2 className="text-2xl font-bold tracking-tight text-center text-white mb-2 flex items-center justify-center gap-2">
           <Trophy className="w-6 h-6 text-yellow-400" />
           人気アプリランキング
         </h2>
-        <p className="text-center text-white/40 text-sm mb-8">アクセス数順</p>
+        <p className="text-center text-ink-muted text-sm mb-10">アクセス数順</p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {apps.map((app, index) => {
@@ -111,12 +112,12 @@ export function CoverFlow() {
               <Link
                 key={app.id}
                 href={app.app_url !== "#" ? `/apps/${app.slug}` : "#"}
-                className="group block"
+                className="group block lift"
               >
                 <div className="relative">
                   {/* Rank badge */}
                   <div
-                    className={`absolute -top-3 -left-3 z-10 w-12 h-12 rounded-full bg-gradient-to-br ${rank.bg} flex items-center justify-center shadow-lg`}
+                    className={`absolute -top-3 -left-3 z-10 w-12 h-12 rounded-full bg-gradient-to-br ${rank.bg} flex items-center justify-center shadow-lg ring-2 ring-white/15`}
                   >
                     <span className={`font-black text-2xl ${rank.text}`}>
                       {rank.label}
@@ -124,17 +125,17 @@ export function CoverFlow() {
                   </div>
 
                   {/* Thumbnail */}
-                  <div className="relative aspect-[16/10] rounded-xl overflow-hidden shadow-lg ring-1 ring-white/10 group-hover:shadow-2xl transition-shadow">
+                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10 transition-shadow group-hover:shadow-2xl group-hover:ring-white/20">
                     {app.thumbnail_url ? (
                       <Image
                         src={app.thumbnail_url}
                         alt={app.name}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                         sizes="(max-width: 768px) 100vw, 33vw"
                       />
                     ) : (
-                      <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-indigo-600 to-purple-700">
+                      <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)]">
                         <span className="text-3xl font-bold text-white/80">
                           {app.name}
                         </span>
@@ -150,7 +151,7 @@ export function CoverFlow() {
                 <div className="mt-3 text-center">
                   <p className="text-white font-bold text-2xl">{app.name}</p>
                   <p className="text-white text-base mt-1">{app.tagline}</p>
-                  <p className="text-white text-lg mt-2 flex items-center justify-center gap-1.5">
+                  <p className="text-white text-lg mt-2 flex items-center justify-center gap-1.5 tabular-nums">
                     <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
                     {app.accessCount.toLocaleString()} アクセス
                   </p>

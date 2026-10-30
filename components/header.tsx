@@ -41,11 +41,19 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-white/95 backdrop-blur-sm">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-6">
-          <Link href="/" className="text-lg font-bold tracking-tight text-foreground">
-            MedApp Market
+          <Link href="/" className="group flex items-center gap-2.5">
+            <span
+              aria-hidden
+              className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)] text-sm font-black text-primary-foreground shadow-sm transition-transform duration-200 group-hover:scale-105"
+            >
+              M
+            </span>
+            <span className="text-lg font-bold tracking-tight text-foreground">
+              MedApp Market
+            </span>
           </Link>
           <span className="hidden text-xs text-muted-foreground sm:block">
             医療の現場から生まれたWebアプリマーケット
@@ -86,7 +94,7 @@ export function Header() {
               ログアウト
             </Button>
           ) : (
-            <Button size="sm" className="ml-2 rounded-full bg-primary px-5 text-primary-foreground hover:bg-primary/90" asChild>
+            <Button size="sm" className="lift ml-2 rounded-full bg-primary px-5 text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[0.98]" asChild>
               <Link href="/auth/login">ログイン</Link>
             </Button>
           )}

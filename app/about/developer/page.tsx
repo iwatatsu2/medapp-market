@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const LINKS = [
-  { icon: "🌐", label: "公式サイト", url: "https://driwatatsu.readdy.co" },
+  { icon: "🌐", label: "公式サイト", url: "https://driwatatsu-hp.vercel.app" },
   { icon: "📷", label: "Instagram", url: "https://www.instagram.com/dr.iwatatsu/" },
   { icon: "𝕏", label: "X (Twitter)", url: "https://x.com/KenKyu1019799" },
   { icon: "📝", label: "note", url: "https://note.com/dr_iwatatsu" },

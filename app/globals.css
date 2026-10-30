@@ -4,39 +4,54 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.985 0.002 90);
-  --foreground: oklch(0.15 0 0);
+  /* --- Neutrals: one cohesive cool-neutral family with a faint violet tint (brand-aligned) --- */
+  --background: oklch(0.985 0.004 285);
+  --foreground: oklch(0.23 0.03 285);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
+  --card-foreground: oklch(0.23 0.03 285);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.45 0.18 270);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.02 250);
-  --secondary-foreground: oklch(0.2 0.02 250);
-  --muted: oklch(0.95 0.01 250);
-  --muted-foreground: oklch(0.4 0.02 250);
-  --accent: oklch(0.93 0.03 260);
-  --accent-foreground: oklch(0.2 0.02 260);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.91 0.005 90);
-  --input: oklch(0.95 0.005 90);
-  --ring: oklch(0.45 0.18 270);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.97 0.005 90);
-  --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.45 0.18 270);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.95 0.01 90);
-  --sidebar-accent-foreground: oklch(0.2 0 0);
-  --sidebar-border: oklch(0.91 0.005 90);
-  --sidebar-ring: oklch(0.45 0.18 270);
+  --popover-foreground: oklch(0.23 0.03 285);
+  /* --- Brand accent: vivid violet (LILA override: brand IS violet, executed with intent) --- */
+  --primary: oklch(0.54 0.218 288);
+  --primary-foreground: oklch(0.99 0.004 285);
+  --primary-bright: oklch(0.62 0.21 300);
+  --secondary: oklch(0.955 0.016 285);
+  --secondary-foreground: oklch(0.32 0.045 285);
+  --muted: oklch(0.965 0.009 285);
+  --muted-foreground: oklch(0.525 0.03 285);
+  --accent: oklch(0.94 0.028 285);
+  --accent-foreground: oklch(0.32 0.05 285);
+  --destructive: oklch(0.585 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.915 0.012 285);
+  --input: oklch(0.93 0.012 285);
+  --ring: oklch(0.515 0.195 283);
+  --chart-1: oklch(0.515 0.195 283);
+  --chart-2: oklch(0.62 0.15 250);
+  --chart-3: oklch(0.7 0.14 200);
+  --chart-4: oklch(0.75 0.15 85);
+  --chart-5: oklch(0.65 0.2 30);
+  /* --- Shape: one radius scale for the whole page (soft-premium) --- */
+  --radius: 0.875rem;
+  --sidebar: oklch(0.975 0.006 285);
+  --sidebar-foreground: oklch(0.23 0.03 285);
+  --sidebar-primary: oklch(0.515 0.195 283);
+  --sidebar-primary-foreground: oklch(0.99 0.004 285);
+  --sidebar-accent: oklch(0.95 0.012 285);
+  --sidebar-accent-foreground: oklch(0.3 0.04 285);
+  --sidebar-border: oklch(0.915 0.012 285);
+  --sidebar-ring: oklch(0.515 0.195 283);
+
+  /* --- Brand "ink": ONE unified deep violet-navy for all dark bands (hero/ranking/CTA/footer) --- */
+  --ink-1: oklch(0.235 0.052 283);
+  --ink-2: oklch(0.285 0.07 286);
+  --ink-foreground: oklch(0.97 0.01 285);
+  --ink-muted: oklch(0.72 0.03 285);
+
+  /* --- Tinted shadows (never pure black on light bg) --- */
+  --shadow-card: 0 1px 2px oklch(0.4 0.05 285 / 0.06), 0 6px 20px oklch(0.4 0.08 285 / 0.07);
+  --shadow-card-hover: 0 2px 6px oklch(0.4 0.05 285 / 0.08), 0 18px 40px oklch(0.4 0.1 285 / 0.14);
+  --shadow-pop: 0 10px 30px oklch(0.4 0.1 285 / 0.18);
 }
 
 @theme inline {
@@ -79,6 +94,10 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
 }
 
 @layer base {
@@ -86,6 +105,67 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  /* Display headings: tighter tracking + balanced wrapping for a premium type rhythm */
+  h1, h2, h3 {
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  ::selection {
+    background: oklch(0.515 0.195 283 / 0.18);
+  }
+  /* a11y: collapse motion (hover transforms, image zoom, transitions) when the user prefers reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .lift:hover,
+    .group:hover .group-hover\:scale-110,
+    .group:hover .group-hover\:scale-\[1\.03\],
+    .group:hover .group-hover\:scale-\[1\.04\] {
+      transform: none !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* ONE unified brand-ink surface for every dark band (hero / ranking / CTA / footer) */
+  .surface-ink {
+    background:
+      radial-gradient(130% 120% at 15% -10%, var(--ink-2) 0%, transparent 55%),
+      radial-gradient(120% 130% at 100% 0%, oklch(0.42 0.17 285 / 0.35) 0%, transparent 50%),
+      linear-gradient(160deg, var(--ink-1) 0%, oklch(0.2 0.045 283) 100%);
+  }
+  /* subtle brand-tinted top wash for light sections that need separation */
+  .surface-wash {
+    background: linear-gradient(180deg, oklch(0.975 0.012 285) 0%, var(--background) 100%);
+  }
+  .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-card-hover { box-shadow: var(--shadow-card-hover); }
+  /* vivid brand gradient for key headline words (light-on-dark) */
+  .text-brand-gradient {
+    background-image: linear-gradient(100deg, #ffffff 0%, oklch(0.85 0.1 295) 45%, var(--primary-bright) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* animated gradient accent bar / top-edge */
+  .brand-bar {
+    background-image: linear-gradient(90deg, var(--primary), var(--primary-bright));
+  }
+  /* tactile hover lift for cards & CTAs (MOTION 4, transform/opacity only) */
+  .lift {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lift:hover { transform: translateY(-3px); }
+  @media (prefers-reduced-motion: reduce) {
+    .lift { transition: none; }
+    .lift:hover { transform: none; }
   }
 }
