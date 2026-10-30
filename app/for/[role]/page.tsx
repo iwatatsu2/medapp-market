@@ -77,23 +77,23 @@ export default async function RolePage({
       <main className="flex-1">
         {/* ヒーロー */}
         <section
-          className={`bg-gradient-to-br ${roleData.color} text-white`}
+          className="paper-grain border-b-2 border-foreground bg-paper-2 text-foreground"
         >
           <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
             <Link
               href="/"
-              className="mb-6 inline-flex items-center gap-1.5 text-sm text-white/70 transition-colors hover:text-white"
+              className="mb-6 inline-flex items-center gap-1.5 text-sm font-bold text-foreground/60 transition-colors hover:text-foreground"
             >
               <ArrowLeft className="size-4" />
               トップに戻る
             </Link>
-            <div className="flex items-center gap-4">
-              <span className="text-5xl">{roleData.icon}</span>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+              <span className="font-display text-6xl italic leading-none text-tomato sm:text-7xl">For</span>
               <div>
-                <h1 className="whitespace-pre-line text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl">
+                <h1 className="whitespace-pre-line font-serif text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
                   {roleData.title}
                 </h1>
-                <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
+                <p className="mt-3 max-w-xl text-[15px] leading-relaxed text-foreground/70 sm:text-base">
                   {roleData.description}
                 </p>
               </div>
@@ -104,18 +104,18 @@ export default async function RolePage({
         {/* アプリ一覧 */}
         <section className="bg-background">
           <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-            <h2 className="mb-6 text-lg font-bold text-foreground">
+            <h2 className="mb-10 border-b-2 border-foreground pb-4 font-serif text-2xl font-extrabold text-foreground">
               {roleData.label}向けアプリ（{filteredApps.length}件）
             </h2>
 
             {filteredApps.length > 0 ? (
-              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 {filteredApps.map((app) => (
                   <AppCard key={app.id} app={app} />
                 ))}
               </div>
             ) : (
-              <div className="rounded-lg border border-border bg-white p-12 text-center">
+              <div className="border border-dashed border-foreground/40 p-12 text-center">
                 <p className="text-sm text-muted-foreground">
                   現在{roleData.label}向けのアプリを準備中です。
                 </p>

@@ -77,8 +77,8 @@ export default async function AppDetailPage({
             アプリ一覧に戻る
           </Link>
 
-          <div className="overflow-hidden rounded-lg border border-border bg-white">
-            <div className="relative aspect-[16/9] bg-gradient-to-br from-primary/5 to-primary/10">
+          <div className="overflow-hidden rounded-md border border-foreground bg-card">
+            <div className="relative aspect-[16/9] border-b border-foreground bg-paper-2">
               {thumbnailUrl ? (
                 <Image
                   src={thumbnailUrl}
@@ -95,10 +95,10 @@ export default async function AppDetailPage({
 
             <div className="p-6 sm:p-8">
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-2xl font-bold text-foreground sm:text-3xl">
+                <h1 className="font-serif text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
                   {app.name}
                 </h1>
-                <span className="rounded-full bg-primary/10 px-3 py-1 text-sm text-primary">
+                <span className="rounded-full bg-marker px-3 py-1 text-sm font-bold text-foreground">
                   {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
                 </span>
               </div>
@@ -109,8 +109,16 @@ export default async function AppDetailPage({
 
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span>カテゴリ：{(Array.isArray(app.category) ? app.category : [app.category]).map((c: string) => getCategoryLabel(c)).join(" / ")}</span>
-                <span>開発者：{app.developer_name}</span>
-                <span>専門：{app.developer_specialty}</span>
+                <span>
+                  つくった人：
+                  {app.developer_name && !["開発者", "岩本 達也"].includes(app.developer_name) ? (
+                    `${app.developer_name}${app.developer_specialty ? `（${app.developer_specialty}）` : ""}`
+                  ) : (
+                    <Link href="/#editor" className="font-bold text-foreground underline underline-offset-2">
+                      Dr.いわたつ（糖尿病・内分泌専門医）
+                    </Link>
+                  )}
+                </span>
               </div>
 
               <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -136,7 +144,7 @@ export default async function AppDetailPage({
 
               {screenshots.length > 0 && (
                 <div className="mt-8 border-t border-border pt-6">
-                  <h2 className="text-lg font-bold text-foreground">
+                  <h2 className="font-serif text-xl font-extrabold text-foreground">
                     スクリーンショット
                   </h2>
                   <div className="mt-3 grid grid-cols-2 gap-3">
@@ -147,7 +155,7 @@ export default async function AppDetailPage({
                         alt={`${app.name} スクリーンショット ${i + 1}`}
                         width={400}
                         height={225}
-                        className="rounded-lg border object-cover"
+                        className="rounded-md border border-foreground object-cover"
                       />
                     ))}
                   </div>
@@ -155,7 +163,7 @@ export default async function AppDetailPage({
               )}
 
               <div className="mt-8 border-t border-border pt-6">
-                <h2 className="text-lg font-bold text-foreground">説明</h2>
+                <h2 className="font-serif text-xl font-extrabold text-foreground">説明</h2>
                 <p className="mt-3 whitespace-pre-wrap text-sm leading-loose text-muted-foreground">
                   {app.description}
                 </p>
@@ -163,12 +171,12 @@ export default async function AppDetailPage({
 
               {TRAINING_CASES[slug] && (
                 <div className="mt-8 border-t border-border pt-6">
-                  <h2 className="text-lg font-bold text-foreground">症例で練習する</h2>
+                  <h2 className="font-serif text-xl font-extrabold text-foreground">症例で練習する</h2>
                   <a
                     href={TRAINING_CASES[slug].url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3 block rounded-lg border border-border p-4 transition-colors hover:border-primary/40 hover:bg-primary/5"
+                    className="mt-3 block rounded-lg border border-border p-4 transition-colors hover:border-foreground hover:bg-marker/40"
                   >
                     <p className="text-sm font-semibold leading-relaxed text-foreground">
                       {TRAINING_CASES[slug].title}

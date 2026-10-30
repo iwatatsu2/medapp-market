@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { CoverFlow } from "@/components/cover-flow";
+import { MarqueeBand } from "@/components/marquee-band";
 import { AppGrid } from "@/components/app-grid";
 import { DeveloperCTA } from "@/components/developer-cta";
 import { AboutSection } from "@/components/about-section";
@@ -15,6 +16,7 @@ export default function HomePage() {
       <main className="flex-1">
         <ReferrerWelcome />
         <Hero />
+        <MarqueeBand />
         <CoverFlow />
         <AppGrid />
         <AboutSection />

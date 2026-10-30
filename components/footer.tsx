@@ -1,83 +1,85 @@
 import Link from "next/link";
 
+const COLUMNS: { title: string; links: { label: string; href?: string }[] }[] = [
+  {
+    title: "Apps",
+    links: [
+      { label: "アプリ一覧", href: "/#apps" },
+      { label: "くらしのツール", href: "/tools" },
+      { label: "ショップ", href: "/shop" },
+      { label: "アプリ投稿（準備中）" },
+    ],
+  },
+  {
+    title: "Account",
+    links: [
+      { label: "ログイン", href: "/auth/login" },
+      { label: "新規登録", href: "/auth/register" },
+      { label: "マイページ", href: "/dashboard" },
+    ],
+  },
+  {
+    title: "About",
+    links: [
+      { label: "つくった人", href: "/#editor" },
+      { label: "公式サイト", href: "https://driwatatsu-hp.vercel.app" },
+      { label: "利用規約", href: "/terms" },
+      { label: "プライバシーポリシー", href: "/privacy" },
+      { label: "特定商取引法に基づく表記", href: "/tokushoho" },
+      { label: "お問い合わせ", href: "/contact" },
+      { label: "ホーム画面に追加", href: "/#install" },
+    ],
+  },
+];
+
 export function Footer() {
   return (
-    <footer className="surface-ink border-t border-white/5">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="bg-foreground text-background">
+      <div className="mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_2fr]">
           <div>
-            <Link href="/" className="flex items-center gap-2 text-base font-bold text-white">
-              <span aria-hidden className="grid size-7 place-items-center rounded-md bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)] text-xs font-black text-primary-foreground">
-                M
-              </span>
-              MedApp Market
-            </Link>
-            <p className="mt-2 text-xs leading-relaxed text-slate-400">
-              医療の現場から生まれた
+            <p className="kicker text-marker">The Doctor-Made App Magazine</p>
+            <Link href="/" className="mt-3 block font-serif text-4xl font-extrabold leading-tight sm:text-5xl">
+              MedApp
               <br />
-              Webアプリマーケット
+              Market<span className="text-tomato">.</span>
+            </Link>
+            <p className="mt-4 text-[14px] leading-relaxed text-background/60">
+              病院で生まれた、ちょっと気の利くアプリたち。
             </p>
           </div>
 
-          <div>
-            <h3 className="text-xs font-medium text-slate-300">アプリ</h3>
-            <nav className="mt-3 flex flex-col gap-2">
-              <Link href="/#apps" className="text-xs text-slate-400 hover:text-white">
-                アプリ一覧
-              </Link>
-              <Link href="/tools" className="text-xs text-slate-400 hover:text-white">
-                くらしのツール
-              </Link>
-              <span className="text-xs text-slate-500">
-                アプリ投稿（準備中）
-              </span>
-            </nav>
-          </div>
-
-          <div>
-            <h3 className="text-xs font-medium text-slate-300">アカウント</h3>
-            <nav className="mt-3 flex flex-col gap-2">
-              <Link href="/auth/login" className="text-xs text-slate-400 hover:text-white">
-                ログイン
-              </Link>
-              <Link href="/auth/register" className="text-xs text-slate-400 hover:text-white">
-                新規登録
-              </Link>
-              <Link href="/dashboard" className="text-xs text-slate-400 hover:text-white">
-                マイページ
-              </Link>
-            </nav>
-          </div>
-
-          <div>
-            <h3 className="text-xs font-medium text-slate-300">その他</h3>
-            <nav className="mt-3 flex flex-col gap-2">
-              <Link href="/terms" className="text-xs text-slate-400 hover:text-white">
-                利用規約
-              </Link>
-              <Link href="/privacy" className="text-xs text-slate-400 hover:text-white">
-                プライバシーポリシー
-              </Link>
-              <Link href="/tokushoho" className="text-xs text-slate-400 hover:text-white">
-                特定商取引法に基づく表記
-              </Link>
-              <Link href="/contact" className="text-xs text-slate-400 hover:text-white">
-                お問い合わせ
-              </Link>
-              <Link href="/#install" className="text-xs text-slate-400 hover:text-white">
-                アプリをインストール
-              </Link>
-            </nav>
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
+            {COLUMNS.map((col) => (
+              <div key={col.title}>
+                <h3 className="font-display text-lg italic text-marker">{col.title}</h3>
+                <ul className="mt-3 space-y-2.5">
+                  {col.links.map((l) => (
+                    <li key={l.label} className="text-[13px]">
+                      {l.href ? (
+                        l.href.startsWith("http") ? (
+                          <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-background/75 hover:text-background hover:underline">
+                            {l.label}
+                          </a>
+                        ) : (
+                          <Link href={l.href} className="text-background/75 hover:text-background hover:underline">
+                            {l.label}
+                          </Link>
+                        )
+                      ) : (
+                        <span className="text-background/40">{l.label}</span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
-        <div className="mt-8 border-t border-slate-700 pt-6">
-          <p className="text-center text-xs leading-relaxed text-slate-500">
-            当サイトに掲載されたアプリは医療行為の代替ではありません。医療上の判断は必ず医療専門家にご相談ください。
-          </p>
-          <p className="mt-2 text-center text-xs text-slate-500">
-            &copy; 2026 MedApp Market. All rights reserved.
-          </p>
+        <div className="mt-14 border-t border-background/20 pt-6 text-[12px] leading-relaxed text-background/50">
+          <p>当サイトに掲載されたアプリは医療行為の代替ではありません。医療上の判断は必ず医療専門家にご相談ください。</p>
+          <p className="mt-2">&copy; 2026 MedApp Market. All rights reserved.</p>
         </div>
       </div>
     </footer>

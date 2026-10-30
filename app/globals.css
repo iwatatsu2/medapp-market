@@ -4,59 +4,66 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* --- Neutrals: one cohesive cool-neutral family with a faint violet tint (brand-aligned) --- */
-  --background: oklch(0.985 0.004 285);
-  --foreground: oklch(0.23 0.03 285);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.23 0.03 285);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.23 0.03 285);
-  /* --- Brand accent: vivid violet (LILA override: brand IS violet, executed with intent) --- */
-  --primary: oklch(0.54 0.218 288);
-  --primary-foreground: oklch(0.99 0.004 285);
-  --primary-bright: oklch(0.62 0.21 300);
-  --secondary: oklch(0.955 0.016 285);
-  --secondary-foreground: oklch(0.32 0.045 285);
-  --muted: oklch(0.965 0.009 285);
-  --muted-foreground: oklch(0.525 0.03 285);
-  --accent: oklch(0.94 0.028 285);
-  --accent-foreground: oklch(0.32 0.05 285);
-  --destructive: oklch(0.585 0.22 25);
-  --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.915 0.012 285);
-  --input: oklch(0.93 0.012 285);
-  --ring: oklch(0.515 0.195 283);
-  --chart-1: oklch(0.515 0.195 283);
-  --chart-2: oklch(0.62 0.15 250);
-  --chart-3: oklch(0.7 0.14 200);
-  --chart-4: oklch(0.75 0.15 85);
-  --chart-5: oklch(0.65 0.2 30);
-  /* --- Shape: one radius scale for the whole page (soft-premium) --- */
-  --radius: 0.875rem;
-  --sidebar: oklch(0.975 0.006 285);
-  --sidebar-foreground: oklch(0.23 0.03 285);
-  --sidebar-primary: oklch(0.515 0.195 283);
-  --sidebar-primary-foreground: oklch(0.99 0.004 285);
-  --sidebar-accent: oklch(0.95 0.012 285);
-  --sidebar-accent-foreground: oklch(0.3 0.04 285);
-  --sidebar-border: oklch(0.915 0.012 285);
-  --sidebar-ring: oklch(0.515 0.195 283);
+  /* --- MAGAZINE: 温かい紙 × 墨 × 蛍光マーカー（ライフスタイル誌の世界観） --- */
+  --background: #f6f1e7;
+  --foreground: #161412;
+  --card: #fbf8f2;
+  --card-foreground: #161412;
+  --popover: #fbf8f2;
+  --popover-foreground: #161412;
+  /* 主役は墨。色は「マーカー黄」と「朱」の2点だけを差し色に使う */
+  --primary: #161412;
+  --primary-foreground: #f6f1e7;
+  --primary-bright: #ff5a36;
+  --secondary: #ece4d4;
+  --secondary-foreground: #161412;
+  --muted: #ece4d4;
+  --muted-foreground: #6a625a;
+  --accent: #ffd23f;
+  --accent-foreground: #161412;
+  --destructive: #d8342a;
+  --destructive-foreground: #ffffff;
+  --border: #d9cfbd;
+  --input: #d9cfbd;
+  --ring: #161412;
+  --chart-1: #161412;
+  --chart-2: #ff5a36;
+  --chart-3: #ffd23f;
+  --chart-4: #3f6b5c;
+  --chart-5: #8a7f72;
+  /* 雑誌は角を立てる */
+  --radius: 0.375rem;
+  --sidebar: #f1ebdf;
+  --sidebar-foreground: #161412;
+  --sidebar-primary: #161412;
+  --sidebar-primary-foreground: #f6f1e7;
+  --sidebar-accent: #ece4d4;
+  --sidebar-accent-foreground: #161412;
+  --sidebar-border: #d9cfbd;
+  --sidebar-ring: #161412;
 
-  /* --- Brand "ink": ONE unified deep violet-navy for all dark bands (hero/ranking/CTA/footer) --- */
-  --ink-1: oklch(0.235 0.052 283);
-  --ink-2: oklch(0.285 0.07 286);
-  --ink-foreground: oklch(0.97 0.01 285);
-  --ink-muted: oklch(0.72 0.03 285);
+  --marker: #ffd23f;
+  --tomato: #ff5a36;
+  --paper-2: #ede5d6;
 
-  /* --- Tinted shadows (never pure black on light bg) --- */
-  --shadow-card: 0 1px 2px oklch(0.4 0.05 285 / 0.06), 0 6px 20px oklch(0.4 0.08 285 / 0.07);
-  --shadow-card-hover: 0 2px 6px oklch(0.4 0.05 285 / 0.08), 0 18px 40px oklch(0.4 0.1 285 / 0.14);
-  --shadow-pop: 0 10px 30px oklch(0.4 0.1 285 / 0.18);
+  /* 暗い帯は「墨」1色 */
+  --ink-1: #161412;
+  --ink-2: #221f1b;
+  --ink-foreground: #f6f1e7;
+  --ink-muted: #a89f93;
+
+  --shadow-card: 0 1px 0 rgba(22, 20, 18, 0.06);
+  --shadow-card-hover: 0 14px 30px -12px rgba(22, 20, 18, 0.28);
+  --shadow-pop: 0 18px 40px -14px rgba(22, 20, 18, 0.35);
 }
 
 @theme inline {
   --font-sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
-  --font-serif: "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-serif: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-display: "Fraunces", "Shippori Mincho", serif;
+  --color-marker: var(--marker);
+  --color-tomato: var(--tomato);
+  --color-paper-2: var(--paper-2);
   --font-mono: "SF Mono", "Consolas", monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -115,7 +122,8 @@
     text-wrap: balance;
   }
   ::selection {
-    background: oklch(0.515 0.195 283 / 0.18);
+    background: var(--marker);
+    color: var(--foreground);
   }
   /* a11y: collapse motion (hover transforms, image zoom, transitions) when the user prefers reduced motion */
   @media (prefers-reduced-motion: reduce) {
@@ -135,37 +143,55 @@
 }
 
 @layer utilities {
-  /* ONE unified brand-ink surface for every dark band (hero / ranking / CTA / footer) */
+  /* 暗い帯（ランキング以外の旧ページでも使う）＝墨ベタ */
   .surface-ink {
-    background:
-      radial-gradient(130% 120% at 15% -10%, var(--ink-2) 0%, transparent 55%),
-      radial-gradient(120% 130% at 100% 0%, oklch(0.42 0.17 285 / 0.35) 0%, transparent 50%),
-      linear-gradient(160deg, var(--ink-1) 0%, oklch(0.2 0.045 283) 100%);
+    background: var(--ink-1);
   }
-  /* subtle brand-tinted top wash for light sections that need separation */
   .surface-wash {
-    background: linear-gradient(180deg, oklch(0.975 0.012 285) 0%, var(--background) 100%);
+    background: var(--paper-2);
   }
   .shadow-card { box-shadow: var(--shadow-card); }
   .shadow-card-hover { box-shadow: var(--shadow-card-hover); }
-  /* vivid brand gradient for key headline words (light-on-dark) */
-  .text-brand-gradient {
-    background-image: linear-gradient(100deg, #ffffff 0%, oklch(0.85 0.1 295) 45%, var(--primary-bright) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .text-brand-gradient { color: var(--marker); }
+  .brand-bar { background: var(--tomato); }
+
+  /* 蛍光マーカーを引いた見出し語 */
+  .marker {
+    background: linear-gradient(transparent 60%, var(--marker) 60%, var(--marker) 92%, transparent 92%);
+    padding: 0 0.08em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
   }
-  /* animated gradient accent bar / top-edge */
-  .brand-bar {
-    background-image: linear-gradient(90deg, var(--primary), var(--primary-bright));
+  .font-display { font-family: var(--font-display); font-optical-sizing: auto; }
+  .kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
-  /* tactile hover lift for cards & CTAs (MOTION 4, transform/opacity only) */
+  /* 紙のザラつき（ごく薄く） */
+  .paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.09 0 0 0 0 0.08 0 0 0 0 0.07 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
   .lift {
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .lift:hover { transform: translateY(-3px); }
+
+  /* ティッカー帯 */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .animate-marquee { animation: marquee 38s linear infinite; }
+  /* 回転スタンプ */
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .animate-spin-slow { animation: spin-slow 22s linear infinite; }
+  /* ふわっと出る */
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .animate-rise { animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
   @media (prefers-reduced-motion: reduce) {
     .lift { transition: none; }
     .lift:hover { transform: none; }
+    .animate-marquee, .animate-spin-slow, .animate-rise { animation: none; }
   }
 }

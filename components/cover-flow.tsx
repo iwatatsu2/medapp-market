@@ -3,16 +3,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Trophy } from "lucide-react";
 import { SEED_APPS } from "@/lib/seed-apps";
 import { createClient } from "@/lib/supabase/client";
 import type { AppData } from "@/components/app-card";
-
-const RANK_STYLES = [
-  { bg: "from-yellow-400 to-amber-500", text: "text-yellow-900", label: "1" },
-  { bg: "from-slate-300 to-slate-400", text: "text-slate-700", label: "2" },
-  { bg: "from-amber-600 to-amber-700", text: "text-amber-100", label: "3" },
-];
 
 export function CoverFlow() {
   const [apps, setApps] = useState<(AppData & { accessCount: number })[]>(
@@ -96,70 +89,59 @@ export function CoverFlow() {
   }, []);
 
   return (
-    <section className="surface-ink relative py-16 border-t border-white/5">
-      <div className="pointer-events-none absolute inset-0 opacity-[0.04] [background-image:linear-gradient(to_right,white_1px,transparent_1px),linear-gradient(to_bottom,white_1px,transparent_1px)] [background-size:52px_52px]" />
-      <div className="container relative mx-auto px-4">
-        <h2 className="text-2xl font-bold tracking-tight text-center text-white mb-2 flex items-center justify-center gap-2">
-          <Trophy className="w-6 h-6 text-yellow-400" />
-          人気アプリランキング
-        </h2>
-        <p className="text-center text-ink-muted text-sm mb-10">アクセス数順</p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {apps.map((app, index) => {
-            const rank = RANK_STYLES[index];
-            return (
-              <Link
-                key={app.id}
-                href={app.app_url !== "#" ? `/apps/${app.slug}` : "#"}
-                className="group block lift"
-              >
-                <div className="relative">
-                  {/* Rank badge */}
-                  <div
-                    className={`absolute -top-3 -left-3 z-10 w-12 h-12 rounded-full bg-gradient-to-br ${rank.bg} flex items-center justify-center shadow-lg ring-2 ring-white/15`}
-                  >
-                    <span className={`font-black text-2xl ${rank.text}`}>
-                      {rank.label}
-                    </span>
-                  </div>
-
-                  {/* Thumbnail */}
-                  <div className="relative aspect-[16/10] rounded-2xl overflow-hidden shadow-xl ring-1 ring-white/10 transition-shadow group-hover:shadow-2xl group-hover:ring-white/20">
-                    {app.thumbnail_url ? (
-                      <Image
-                        src={app.thumbnail_url}
-                        alt={app.name}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                      />
-                    ) : (
-                      <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)]">
-                        <span className="text-3xl font-bold text-white/80">
-                          {app.name}
-                        </span>
-                        <span className="text-white/50 text-sm mt-1">
-                          {app.tagline}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* App info */}
-                <div className="mt-3 text-center">
-                  <p className="text-white font-bold text-2xl">{app.name}</p>
-                  <p className="text-white text-base mt-1">{app.tagline}</p>
-                  <p className="text-white text-lg mt-2 flex items-center justify-center gap-1.5 tabular-nums">
-                    <span className="inline-block w-2 h-2 rounded-full bg-green-400" />
-                    {app.accessCount.toLocaleString()} アクセス
-                  </p>
-                </div>
-              </Link>
-            );
-          })}
+    <section className="bg-paper-2 py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b-2 border-foreground pb-4">
+          <div>
+            <p className="kicker text-tomato">Ranking</p>
+            <h2 className="mt-1 font-serif text-3xl font-extrabold tracking-tight sm:text-4xl">
+              いま<span className="marker">人気</span>のアプリ
+            </h2>
+          </div>
+          <p className="text-[13px] font-bold text-foreground/60">アクセス数の多い順</p>
         </div>
+
+        <ol className="grid gap-10 md:grid-cols-3 md:gap-8">
+          {apps.map((app, index) => (
+            <li key={app.id}>
+              <Link
+                href={app.app_url !== "#" ? `/apps/${app.slug}` : "#"}
+                className="group block"
+              >
+                <div className="flex items-end gap-3">
+                  <span className="font-display text-[72px] font-semibold italic leading-[0.8] text-foreground sm:text-[88px]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {app.accessCount > 0 && (
+                    <span className="mb-1 flex items-center gap-1.5 text-[13px] font-bold tabular-nums text-foreground/70">
+                      <span className="inline-block size-1.5 rounded-full bg-tomato" />
+                      {app.accessCount.toLocaleString()} 回ひらかれた
+                    </span>
+                  )}
+                </div>
+                <div className="relative mt-4 aspect-[16/10] overflow-hidden rounded-md border border-foreground bg-card transition-shadow duration-500 group-hover:shadow-pop">
+                  {app.thumbnail_url ? (
+                    <Image
+                      src={app.thumbnail_url}
+                      alt={app.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  ) : (
+                    <div className="grid h-full place-items-center bg-marker">
+                      <span className="font-serif text-3xl font-extrabold">{app.name}</span>
+                    </div>
+                  )}
+                </div>
+                <h3 className="mt-4 font-serif text-2xl font-extrabold group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">
+                  {app.name}
+                </h3>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-foreground/70">{app.tagline}</p>
+              </Link>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

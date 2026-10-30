@@ -86,17 +86,17 @@ export function CategoryFilter({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="sticky top-16 z-40 border-b border-border/70 bg-background/85 backdrop-blur-md">
+    <section className="sticky top-16 z-40 border-b border-foreground/80 bg-background/90 backdrop-blur-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ハッシュタグ横スクロール */}
         <div className="flex items-center gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <button
             onClick={() => onCategoryChange(null)}
             className={cn(
-              "shrink-0 rounded-full border px-4 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+              "shrink-0 rounded-full border px-4 py-1.5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50",
               selectedCategory === null
-                ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                ? "border-foreground bg-foreground text-background"
+                : "border-foreground/25 bg-transparent text-foreground/75 hover:border-foreground hover:bg-marker hover:text-foreground"
             )}
           >
             すべて
@@ -106,10 +106,10 @@ export function CategoryFilter({
               key={tag}
               onClick={() => onCategoryChange(tag)}
               className={cn(
-                "shrink-0 rounded-full border px-4 py-1.5 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+                "shrink-0 rounded-full border px-4 py-1.5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50",
                 selectedCategory === tag
-                  ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                  : "border-border bg-card text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-foreground/25 bg-transparent text-foreground/75 hover:border-foreground hover:bg-marker hover:text-foreground"
               )}
             >
               #{tag}

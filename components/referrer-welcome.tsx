@@ -42,7 +42,7 @@ export function ReferrerWelcome() {
     (window as unknown as { iwt?: Iwt }).iwt?.track?.("referrer_welcome_click", { src: src.key, to });
 
   return (
-    <section className="border-b border-white/10 bg-[oklch(0.2_0.03_285)] text-white">
+    <section className="border-b border-foreground bg-foreground text-background">
       <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <p className="text-[15px] leading-relaxed">
           {src.label}からお越しの先生へ。
@@ -53,7 +53,7 @@ export function ReferrerWelcome() {
           <a
             href={CASE_URL + src.key}
             onClick={() => click("case")}
-            className="rounded-full bg-white px-5 py-2 text-[15px] font-bold text-[oklch(0.23_0.03_285)]"
+            className="rounded-full bg-marker px-5 py-2 text-[15px] font-bold text-foreground"
           >
             HbA1c 8.7%の症例を解く
           </a>

@@ -118,33 +118,43 @@ export function AppGrid() {
         onCategoryChange={setSelectedCategory}
       />
 
-      <section id="apps" className="scroll-mt-20">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-          <div className="mb-6 flex items-center gap-3">
-            <span aria-hidden className="brand-bar h-6 w-1.5 rounded-full" />
-            <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-              {selectedCategory ? getCategoryLabel(selectedCategory) : "新着のアプリ"}
-            </h2>
-            {selectedCategory && (
-              <button
-                onClick={() => setSelectedCategory(null)}
-                className="text-sm text-primary hover:underline"
-              >
-                すべて見る
-              </button>
-            )}
+      <section id="apps" className="scroll-mt-32">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b-2 border-foreground pb-4">
+            <div>
+              <p className="kicker text-tomato">{selectedCategory ? "Tag" : "All Apps"}</p>
+              <h2 className="mt-1 font-serif text-3xl font-extrabold tracking-tight sm:text-4xl">
+                {selectedCategory ? `#${getCategoryLabel(selectedCategory)}` : "ぜんぶのアプリ"}
+              </h2>
+            </div>
+            <div className="flex items-center gap-4 text-[13px] font-bold text-foreground/60">
+              <span className="tabular-nums">{filteredApps.length} 本</span>
+              {selectedCategory && (
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="text-foreground underline decoration-2 underline-offset-4 hover:decoration-tomato"
+                >
+                  すべて見る
+                </button>
+              )}
+            </div>
           </div>
 
           {filteredApps.length > 0 ? (
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {filteredApps.map((app) => (
-                <AppCard key={app.id} app={app} />
-              ))}
+            <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredApps.map((app, i) => {
+                const featured = i === 0 && !selectedCategory;
+                return (
+                  <div key={app.id} className={featured ? "sm:col-span-2" : undefined}>
+                    <AppCard app={app} featured={featured} />
+                  </div>
+                );
+              })}
             </div>
           ) : (
-            <div className="rounded-lg border border-border bg-white p-12 text-center">
-              <p className="text-sm text-muted-foreground">
-                該当するアプリが見つかりませんでした
+            <div className="border border-dashed border-foreground/40 p-12 text-center">
+              <p className="text-sm text-foreground/60">
+                このタグのアプリはまだありません
               </p>
             </div>
           )}

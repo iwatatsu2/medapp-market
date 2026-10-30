@@ -41,22 +41,17 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-foreground/80 bg-background/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-6">
-          <Link href="/" className="group flex items-center gap-2.5">
-            <span
-              aria-hidden
-              className="grid size-8 place-items-center rounded-lg bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)] text-sm font-black text-primary-foreground shadow-sm transition-transform duration-200 group-hover:scale-105"
-            >
-              M
-            </span>
-            <span className="text-lg font-bold tracking-tight text-foreground">
+        <div className="flex items-baseline gap-4">
+          <Link href="/" aria-label="MedApp Market ホームへ" className="group flex items-baseline gap-2">
+            <span className="font-serif text-[22px] font-extrabold tracking-tight text-foreground sm:text-2xl">
               MedApp Market
             </span>
+            <span aria-hidden className="size-2 translate-y-[-2px] rounded-full bg-tomato transition-transform duration-300 group-hover:scale-150" />
           </Link>
-          <span className="hidden text-xs text-muted-foreground sm:block">
-            医療の現場から生まれたWebアプリマーケット
+          <span className="kicker hidden text-muted-foreground lg:block">
+            The Doctor-Made App Magazine
           </span>
         </div>
 
@@ -94,7 +89,7 @@ export function Header() {
               ログアウト
             </Button>
           ) : (
-            <Button size="sm" className="lift ml-2 rounded-full bg-primary px-5 text-primary-foreground shadow-sm hover:bg-primary/90 active:scale-[0.98]" asChild>
+            <Button size="sm" className="ml-2 rounded-full bg-foreground px-5 text-background hover:bg-tomato active:scale-[0.98]" asChild>
               <Link href="/auth/login">ログイン</Link>
             </Button>
           )}

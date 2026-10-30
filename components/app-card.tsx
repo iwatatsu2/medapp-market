@@ -1,6 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AppWindow, Heart, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Heart, MessageCircle } from "lucide-react";
 import { getCategoryLabel } from "@/lib/category-utils";
 
 export interface AppData {
@@ -26,84 +29,83 @@ export interface AppData {
 
 interface AppCardProps {
   app: AppData;
+  /** 一覧の先頭など、大きく見せる号の扱い */
+  featured?: boolean;
 }
 
-export function AppCard({ app }: AppCardProps) {
+// サムネが無い・読めないときの「文字だけの表紙」。空白カードを出さない
+const COVER_TONES = ["bg-marker", "bg-[#f3c8b6]", "bg-[#cfe0d4]", "bg-[#d9d2f0]", "bg-[#f1e3b8]"];
+function TypeCover({ app }: { app: AppData }) {
+  const tone = COVER_TONES[[...app.slug].reduce((n, c) => n + c.charCodeAt(0), 0) % COVER_TONES.length];
+  return (
+    <div className={`flex h-full flex-col justify-between p-5 ${tone}`}>
+      <span className="kicker text-foreground/70">MedApp Market</span>
+      <span className="font-serif text-[clamp(26px,4vw,40px)] font-extrabold leading-tight text-foreground">
+        {app.name}
+      </span>
+      <span className="text-[13px] font-bold text-foreground/70 line-clamp-1">{app.tagline}</span>
+    </div>
+  );
+}
+
+export function AppCard({ app, featured = false }: AppCardProps) {
   const isFree = app.price === 0;
+  const [broken, setBroken] = useState(false);
+  const cats = (Array.isArray(app.category) ? app.category : [app.category]).slice(0, 2);
 
   return (
-    <Link href={`/apps/${app.slug}`} className="group block">
-      <article className="lift relative overflow-hidden rounded-2xl border border-border/70 bg-card shadow-card hover:shadow-card-hover hover:border-primary/30">
-        {/* ホバーで伸びるブランドアクセント */}
-        <div className="brand-bar absolute inset-x-0 top-0 z-10 h-1 origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100" />
-        {/* サムネイル */}
-        <div className="relative aspect-[16/9] overflow-hidden bg-gradient-to-br from-secondary to-accent">
-          {app.thumbnail_url ? (
+    <Link href={`/apps/${app.slug}`} className="group block h-full">
+      <article className="flex h-full flex-col">
+        <div
+          className={`relative overflow-hidden rounded-md border border-foreground bg-card transition-shadow duration-500 group-hover:shadow-pop ${featured ? "aspect-[16/10] lg:aspect-[16/9]" : "aspect-[16/10]"}`}
+        >
+          {app.thumbnail_url && !broken ? (
             <Image
               src={app.thumbnail_url}
               alt={app.name}
               fill
-              className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+              sizes={featured ? "(max-width: 1024px) 100vw, 66vw" : "(max-width: 640px) 100vw, 33vw"}
+              onError={() => setBroken(true)}
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
             />
           ) : (
-            <div className="flex h-full items-center justify-center">
-              <AppWindow className="size-12 text-primary/30" />
-            </div>
+            <TypeCover app={app} />
           )}
-          <div className="pointer-events-none absolute inset-0 rounded-t-2xl ring-1 ring-inset ring-black/[0.04]" />
         </div>
 
-        {/* コンテンツ */}
-        <div className="p-4">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className={`rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap ${isFree ? "bg-primary/10 text-primary" : "bg-foreground/[0.06] text-foreground"}`}>
+        <div className="flex flex-1 flex-col pt-4">
+          <div className="flex items-center gap-2">
+            <span
+              className={`shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold ${isFree ? "bg-marker text-foreground" : "bg-foreground text-background"}`}
+            >
               {isFree ? "無料" : `¥${app.price.toLocaleString()}`}
             </span>
-            {(Array.isArray(app.category) ? app.category : [app.category]).map((cat) => (
-              <span key={cat} className="text-xs text-muted-foreground whitespace-nowrap">
-                {getCategoryLabel(cat)}
-              </span>
-            ))}
+            <p className="kicker truncate text-tomato">{cats.map((c) => getCategoryLabel(c)).join(" / ")}</p>
           </div>
-
-          <h3 className="mt-2.5 text-base font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
-            {app.name}
+          <h3
+            className={`mt-1.5 flex items-start gap-2 font-serif font-extrabold leading-snug text-foreground ${featured ? "text-3xl sm:text-4xl" : "text-xl"}`}
+          >
+            <span className="group-hover:underline group-hover:decoration-2 group-hover:underline-offset-4">{app.name}</span>
+            <ArrowUpRight className="mt-1 size-4 shrink-0 opacity-0 transition-opacity group-hover:opacity-100" />
           </h3>
-
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+          <p className={`mt-1.5 leading-relaxed text-foreground/70 ${featured ? "text-base" : "text-[14px]"}`}>
             {app.tagline}
           </p>
 
-          <div className="mt-3.5 flex items-center gap-2 border-t border-border/70 pt-3">
-            <div className="flex size-6 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[oklch(0.42_0.17_285)] text-xs font-semibold text-primary-foreground">
-              {app.developer_name.charAt(0)}
-            </div>
-            <span className="text-xs text-muted-foreground">
-              {app.developer_name}
-            </span>
-            <span className="text-xs text-muted-foreground">
-              {app.developer_specialty}
-            </span>
-            <span className="ml-auto flex items-center gap-3 text-xs text-muted-foreground tabular-nums">
-              {app.access_count != null && (
-                <span className="flex items-center gap-1">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-green-500" />
-                  {app.access_count.toLocaleString()}
-                </span>
-              )}
-              {(app.like_count ?? 0) > 0 && (
-                <span className="flex items-center gap-0.5">
-                  <Heart className="size-3 text-red-400" aria-hidden />
-                  {app.like_count}
-                </span>
-              )}
-              {(app.comment_count ?? 0) > 0 && (
-                <span className="flex items-center gap-0.5">
-                  <MessageCircle className="size-3" aria-hidden />
-                  {app.comment_count}
-                </span>
-              )}
-            </span>
+          <div className="mt-auto flex items-center gap-3 pt-3 text-[12px] font-bold tabular-nums text-foreground/55">
+            {(app.access_count ?? 0) > 0 && <span>{(app.access_count ?? 0).toLocaleString()} 回ひらかれた</span>}
+            {(app.like_count ?? 0) > 0 && (
+              <span className="flex items-center gap-0.5">
+                <Heart className="size-3 text-tomato" aria-hidden />
+                {app.like_count}
+              </span>
+            )}
+            {(app.comment_count ?? 0) > 0 && (
+              <span className="flex items-center gap-0.5">
+                <MessageCircle className="size-3" aria-hidden />
+                {app.comment_count}
+              </span>
+            )}
           </div>
         </div>
       </article>
