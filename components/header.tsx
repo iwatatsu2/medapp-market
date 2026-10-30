@@ -68,9 +68,9 @@ export function Header() {
             <DropdownMenuContent align="center">
               {Object.entries(ROLES).map(([key, role]) => (
                 <DropdownMenuItem key={key} asChild>
-                  <Link href={`/for/${key}`}>
+                  <a href={`/#for-${key}`}>
                     {role.icon} {role.label}
-                  </Link>
+                  </a>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
@@ -116,13 +116,13 @@ export function Header() {
               <div className="space-y-1">
                 <span className="text-xs font-medium text-foreground">職種で探す</span>
                 {Object.entries(ROLES).map(([key, role]) => (
-                  <Link
+                  <a
                     key={key}
-                    href={`/for/${key}`}
+                    href={`/#for-${key}`}
                     className="block pl-3 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {role.icon} {role.label}
-                  </Link>
+                  </a>
                 ))}
               </div>
               <Link

@@ -7,6 +7,7 @@ import { AppCard } from "@/components/app-card";
 import { createClient } from "@/lib/supabase/server";
 import { ROLES } from "@/lib/types";
 import { SEED_APPS } from "@/lib/seed-apps";
+import { rolesFor } from "@/lib/role-assign";
 import type { RoleKey } from "@/lib/types";
 import type { AppData } from "@/components/app-card";
 
@@ -68,7 +69,7 @@ export default async function RolePage({
   const allApps = [...dbApps, ...seedOnly];
 
   const filteredApps = allApps.filter(
-    (app) => app.target_roles && app.target_roles.includes(role)
+    (app) => rolesFor(app).includes(role)
   );
 
   return (

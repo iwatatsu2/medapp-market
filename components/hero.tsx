@@ -151,18 +151,18 @@ export function Hero() {
           <p className="kicker mb-3 text-foreground/60">Contents ─ だれのためのアプリ？</p>
           <ul className="grid sm:grid-cols-2 lg:grid-cols-3 sm:gap-x-10">
             {[
-              ...Object.entries(ROLES).map(([key, role]) => ({ href: `/for/${key}`, label: `${role.label.replace(/の方$/, "")}のかたへ` })),
+              ...Object.entries(ROLES).map(([key, role]) => ({ href: `#for-${key}`, label: `${role.label.replace(/の方$/, "")}のかたへ` })),
               { href: "/tools", label: "くらしのツール" },
             ].map((item, i) => (
               <li key={item.href}>
-                <Link
+                <a
                   href={item.href}
                   className="group flex items-baseline gap-4 border-b border-foreground/20 py-3.5 transition-colors hover:border-foreground"
                 >
                   <span className="font-display w-7 text-lg italic text-tomato">{String(i + 1).padStart(2, "0")}</span>
                   <span className="font-serif text-lg font-extrabold">{item.label}</span>
                   <ArrowUpRight className="ml-auto size-4 self-center transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

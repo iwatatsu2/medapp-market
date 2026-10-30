@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/collapsible";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { ROLES } from "@/lib/types";
+import type { RoleKey } from "@/lib/types";
 
 const popularTags = [
   "研修医",
@@ -77,11 +79,15 @@ const allCategories = {
 interface CategoryFilterProps {
   selectedCategory: string | null;
   onCategoryChange: (category: string | null) => void;
+  selectedRole?: RoleKey | null;
+  onRoleChange?: (role: RoleKey | null) => void;
 }
 
 export function CategoryFilter({
   selectedCategory,
   onCategoryChange,
+  selectedRole = null,
+  onRoleChange,
 }: CategoryFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -94,13 +100,30 @@ export function CategoryFilter({
             onClick={() => onCategoryChange(null)}
             className={cn(
               "shrink-0 rounded-full border px-4 py-1.5 text-sm font-bold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50",
-              selectedCategory === null
+              selectedCategory === null && selectedRole === null
                 ? "border-foreground bg-foreground text-background"
                 : "border-foreground/25 bg-transparent text-foreground/75 hover:border-foreground hover:bg-marker hover:text-foreground"
             )}
           >
             すべて
           </button>
+          {onRoleChange &&
+            (Object.keys(ROLES) as RoleKey[]).map((key) => (
+              <button
+                key={key}
+                onClick={() => onRoleChange(selectedRole === key ? null : key)}
+                aria-pressed={selectedRole === key}
+                className={cn(
+                  "shrink-0 rounded-full border px-4 py-1.5 font-serif text-sm font-extrabold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/50",
+                  selectedRole === key
+                    ? "border-foreground bg-marker text-foreground"
+                    : "border-foreground bg-transparent text-foreground hover:bg-marker"
+                )}
+              >
+                {ROLES[key].label.replace(/の方$/, "")}
+              </button>
+            ))}
+          {onRoleChange && <span aria-hidden className="mx-1 h-5 w-px shrink-0 bg-foreground/30" />}
           {popularTags.map((tag) => (
             <button
               key={tag}

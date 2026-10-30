@@ -7,12 +7,53 @@ import { SEED_APPS } from "@/lib/seed-apps";
 import { createClient } from "@/lib/supabase/client";
 import { getCategoryLabel } from "@/lib/category-utils";
 import type { AppData } from "@/components/app-card";
+import { ROLES } from "@/lib/types";
+import type { RoleKey } from "@/lib/types";
+import { rolesFor, ROLE_HASH_PREFIX } from "@/lib/role-assign";
 
 // DBのthumbnail_urlがnullでも、seed側にサムネがあればそれを使う（DB制限中でも表示を守る）
 const SEED_THUMB = new Map(SEED_APPS.map((a) => [a.slug, a.thumbnail_url]));
 
 export function AppGrid() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedRole, setSelectedRole] = useState<RoleKey | null>(null);
+
+  // /#for-doctors のようなリンクで来たら、その職種で絞り込んで一覧へスクロール
+  useEffect(() => {
+    function applyHash() {
+      const h = window.location.hash;
+      if (!h.startsWith(ROLE_HASH_PREFIX)) return;
+      const key = h.slice(ROLE_HASH_PREFIX.length) as RoleKey;
+      if (!(key in ROLES)) return;
+      setSelectedRole(key);
+      setSelectedCategory(null);
+      requestAnimationFrame(() =>
+        document.getElementById("apps")?.scrollIntoView({ behavior: "smooth", block: "start" })
+      );
+    }
+    // 同じ職種をもう一度押した時（ハッシュが変わらない）も一覧へ戻す
+    function onClick(e: MouseEvent) {
+      const a = (e.target as HTMLElement).closest?.("a[href]") as HTMLAnchorElement | null;
+      if (a && a.pathname === window.location.pathname && a.hash === window.location.hash) {
+        setTimeout(applyHash, 0);
+      }
+    }
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", applyHash);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+
+  function clearFilters() {
+    setSelectedCategory(null);
+    setSelectedRole(null);
+    if (window.location.hash.startsWith(ROLE_HASH_PREFIX)) {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  }
   const [apps, setApps] = useState<AppData[]>(
     SEED_APPS.filter((a) => !a.is_tool)
   );
@@ -75,6 +116,7 @@ export function AppGrid() {
             SEED_THUMB.get(a.slug as string) ??
             null,
           is_tool: a.is_tool as boolean | undefined,
+          target_roles: a.target_roles as string[] | undefined,
           developer_name: "開発者",
           developer_specialty: "",
           access_count: viewMap.get(a.slug as string) ?? 0,
@@ -104,34 +146,48 @@ export function AppGrid() {
     fetchApps();
   }, []);
 
-  const filteredApps = selectedCategory
-    ? apps.filter((app) => {
-        const cats = Array.isArray(app.category) ? app.category : [app.category];
-        return cats.includes(selectedCategory);
-      })
-    : apps;
+  const filteredApps = apps.filter((app) => {
+    if (selectedRole && !rolesFor(app).includes(selectedRole)) return false;
+    if (selectedCategory) {
+      const cats = Array.isArray(app.category) ? app.category : [app.category];
+      if (!cats.includes(selectedCategory)) return false;
+    }
+    return true;
+  });
+  const filtering = !!(selectedCategory || selectedRole);
+  const roleLabel = selectedRole ? `${ROLES[selectedRole].label.replace(/の方$/, "")}のかたへ` : null;
 
   return (
     <>
       <CategoryFilter
         selectedCategory={selectedCategory}
-        onCategoryChange={setSelectedCategory}
+        onCategoryChange={(c) => {
+          setSelectedCategory(c);
+          if (c === null) clearFilters();
+        }}
+        selectedRole={selectedRole}
+        onRoleChange={(r) => {
+          setSelectedRole(r);
+          if (r === null && window.location.hash.startsWith(ROLE_HASH_PREFIX)) {
+            history.replaceState(null, "", window.location.pathname + window.location.search);
+          }
+        }}
       />
 
       <section id="apps" className="scroll-mt-32">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4 border-b-2 border-foreground pb-4">
             <div>
-              <p className="kicker text-tomato">{selectedCategory ? "Tag" : "All Apps"}</p>
+              <p className="kicker text-tomato">{selectedRole ? "For You" : selectedCategory ? "Tag" : "All Apps"}</p>
               <h2 className="mt-1 font-serif text-3xl font-extrabold tracking-tight sm:text-4xl">
-                {selectedCategory ? `#${getCategoryLabel(selectedCategory)}` : "ぜんぶのアプリ"}
+                {[roleLabel, selectedCategory && `#${getCategoryLabel(selectedCategory)}`].filter(Boolean).join(" × ") || "ぜんぶのアプリ"}
               </h2>
             </div>
             <div className="flex items-center gap-4 text-[13px] font-bold text-foreground/60">
               <span className="tabular-nums">{filteredApps.length} 本</span>
-              {selectedCategory && (
+              {filtering && (
                 <button
-                  onClick={() => setSelectedCategory(null)}
+                  onClick={clearFilters}
                   className="text-foreground underline decoration-2 underline-offset-4 hover:decoration-tomato"
                 >
                   すべて見る
@@ -143,7 +199,7 @@ export function AppGrid() {
           {filteredApps.length > 0 ? (
             <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {filteredApps.map((app, i) => {
-                const featured = i === 0 && !selectedCategory;
+                const featured = i === 0 && !filtering;
                 return (
                   <div key={app.id} className={featured ? "sm:col-span-2" : undefined}>
                     <AppCard app={app} featured={featured} />
