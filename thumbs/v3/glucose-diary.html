@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:720px}
+.wrap{position:relative;width:1280px;height:720px;overflow:hidden;background:#F6EFE4 url(bg-diary.png) right center/cover;font-family:'Zen Kaku Gothic New',sans-serif;color:#3A2E25}
+.fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(248,242,233,.95) 0%,rgba(248,242,233,.82) 40%,rgba(248,242,233,0) 62%)}
+.copy{position:absolute;left:66px;top:80px}
+.brand{font-family:'Kaisei Decol';font-size:30px;color:#B5674D}
+h1{margin-top:20px;font-family:'Kaisei Decol';font-weight:700;font-size:64px;line-height:1.3;white-space:nowrap}
+.sub{margin-top:24px;font-size:23px;font-weight:700;line-height:1.65;color:#6B5A4C}
+.foot{position:absolute;left:66px;bottom:40px;font-size:17px;font-weight:700;color:#8A7766}
+/* 画面（作り物） */
+.phone{position:absolute;left:760px;top:44px;width:300px;height:632px;border-radius:46px;background:#2E2620;padding:12px;transform:rotate(-5deg);box-shadow:24px 34px 50px rgba(90,60,30,.4)}
+.scr{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#FFFCF7;padding:26px 20px}
+.scr h4{font-size:15px;color:#9A8573;font-weight:700}
+.scr .big{font-size:58px;font-weight:900;line-height:1.05;margin-top:4px}
+.scr .big small{font-size:18px;color:#9A8573;margin-left:4px}
+.scr .tag{display:inline-block;margin-top:6px;background:#E8F5E9;color:#2E7D32;font-size:13px;font-weight:900;padding:4px 10px;border-radius:999px}
+.chart{margin-top:18px;background:#fff;border:1.5px solid #EFE4D6;border-radius:18px;padding:12px 10px 6px}
+.chart h5{font-size:13px;color:#9A8573;margin:0 0 4px 4px}
+.rows{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.r{display:flex;justify-content:space-between;align-items:center;background:#fff;border:1.5px solid #EFE4D6;border-radius:14px;padding:10px 14px;font-size:14px;font-weight:700}
+.r b{font-size:18px}
+</style></head><body>
+<div class="wrap">
+  <div class="fade"></div>
+  <div class="copy">
+    <div class="brand">Glucose Diary</div>
+    <h1>毎日の血糖を、<br>1週間の波で見る。</h1>
+    <div class="sub">血糖・体重・血圧・食事をひとつに。<br>パターンがグラフで見えてくる。</div>
+  </div>
+  <div class="foot">血糖の自己管理ノート ・ 無料</div>
+  <div class="phone"><div class="scr">
+    <h4>けさの血糖</h4>
+    <div class="big">112<small>mg/dL</small></div>
+    <span class="tag">目標の範囲内</span>
+    <div class="chart"><h5>この1週間</h5>
+      <svg viewBox="0 0 240 120" width="100%"><rect x="0" y="34" width="240" height="44" fill="#E8F5E9"/>
+        <polyline points="5,70 30,40 55,62 80,30 105,58 130,48 155,22 180,55 205,44 235,60" fill="none" stroke="#B5674D" stroke-width="3.5" stroke-linejoin="round"/>
+        <g fill="#B5674D"><circle cx="5" cy="70" r="3.5"/><circle cx="80" cy="30" r="3.5"/><circle cx="155" cy="22" r="3.5"/><circle cx="235" cy="60" r="3.5"/></g>
+        <g fill="#B3A08F" font-size="10" font-family="sans-serif"><text x="2" y="114">月</text><text x="38" y="114">火</text><text x="74" y="114">水</text><text x="110" y="114">木</text><text x="146" y="114">金</text><text x="182" y="114">土</text><text x="218" y="114">日</text></g></svg>
+    </div>
+    <div class="rows"><div class="r">体重<b>68.4 kg</b></div><div class="r">血圧<b>124/78</b></div><div class="r">昼ごはん<b>そば・天ぷら</b></div></div>
+  </div></div>
+</div>
+</body></html>

@@ -263,7 +263,7 @@ export const SEED_APPS: AppData[] = [
       "電解質異常の鑑別診断、補正計算、緊急対応をサポートするリファレンスアプリ。",
     price: 0,
     category: ["resident", "emergency"],
-    app_url: "#",
+    app_url: "https://iwatatsu2.github.io/electrolyte-compass/",
     demo_url: null,
     thumbnail_url: "/thumbnails/thumbnail-electrolyte-compass.png",
     screenshots: [],

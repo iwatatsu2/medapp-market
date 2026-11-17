@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Anton&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:720px}
+.wrap{position:relative;width:1280px;height:720px;overflow:hidden;background:#F4EFE6;font-family:'Zen Kaku Gothic New',sans-serif;color:#141414}
+.steps{position:absolute;left:0;top:0;width:820px;height:720px;display:grid;grid-template-columns:1fr 1fr 1fr}
+.st{position:relative;padding:250px 26px 0}
+.st:nth-child(1){background:#FFB703}.st:nth-child(2){background:#FB8500}.st:nth-child(3){background:#023047;color:#fff}
+.st .n{position:absolute;left:18px;top:14px;font-family:'Anton';font-size:210px;line-height:1;opacity:.95}
+.st:nth-child(3) .n{color:#8ECAE6}
+.st h3{font-weight:900;font-size:34px;line-height:1.3}
+.st p{margin-top:10px;font-weight:700;font-size:19px;line-height:1.5;opacity:.85}
+.arrow{position:absolute;top:330px;width:0;height:0;border-left:26px solid #141414;border-top:20px solid transparent;border-bottom:20px solid transparent;z-index:2}
+.title{position:absolute;left:0;bottom:0;width:820px;background:#141414;color:#fff;padding:28px 34px}
+.title b{display:block;font-size:22px;color:#FFB703;letter-spacing:.06em}
+.title h1{font-weight:900;font-size:46px;line-height:1.25;margin-top:4px}
+.phone{position:absolute;left:880px;top:46px;width:300px;height:630px;border-radius:46px;background:#141414;padding:12px;box-shadow:0 26px 50px rgba(0,0,0,.25)}
+.phone .scr{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#fff}
+.phone img{width:100%;display:block}
+.foot{position:absolute;right:40px;bottom:14px;font-size:15px;font-weight:700;color:#555}
+</style></head><body>
+<div class="wrap">
+  <div class="steps">
+    <div class="st"><div class="n">1</div><h3>BMIを出す</h3><p>身長と体重を<br>入れるだけ</p></div>
+    <div class="st"><div class="n">2</div><h3>健康障害を<br>チェック</h3><p>高血圧・脂質・<br>睡眠時無呼吸など</p></div>
+    <div class="st"><div class="n">3</div><h3>治療の<br>対象か判定</h3><p>ガイドライン<br>どおりに</p></div>
+  </div>
+  <div class="title"><b>肥満症チェッカー</b><h1>「肥満症」の治療対象か、<br>3ステップでわかる。</h1></div>
+  <div class="phone"><div class="scr"><img src="shot-obesity-checker.png" alt=""></div></div>
+  <div class="foot">個人情報不要 ・ 無料</div>
+</div>
+</body></html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800;900&family=Outfit:wght@800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:720px}
+.wrap{position:relative;width:1280px;height:720px;overflow:hidden;background:#06C755;font-family:'M PLUS Rounded 1c',sans-serif;color:#fff}
+.dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.13) 2px,transparent 2.5px);background-size:28px 28px}
+.copy{position:absolute;left:64px;top:78px;width:520px}
+.brand{font-family:'Outfit';font-weight:800;font-size:34px;display:flex;align-items:center;gap:10px}
+h1{margin-top:26px;font-weight:900;font-size:62px;line-height:1.2;white-space:nowrap}
+.sub{margin-top:24px;font-weight:800;font-size:26px;line-height:1.55;opacity:.95}
+/* 1週間の帯 */
+.week{position:absolute;left:64px;bottom:44px;display:flex;gap:10px}
+.d{width:62px;height:76px;border-radius:14px;background:rgba(255,255,255,.18);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:800;font-size:18px}
+.d.on{background:#fff;color:#06C755}
+.d.on b{font-size:26px;line-height:1}
+.d small{font-size:13px;opacity:.85}
+/* トーク画面 */
+.chat{position:absolute;right:70px;top:54px;width:520px;height:612px;border-radius:34px;background:#8CABD9;box-shadow:0 30px 60px rgba(0,60,20,.35);overflow:hidden}
+.bar{height:70px;background:#283B5C;display:flex;align-items:center;padding:0 26px;font-weight:800;font-size:22px;gap:12px}
+.bar .av{width:40px;height:40px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:22px}
+.msgs{padding:26px 24px;display:flex;flex-direction:column;gap:22px}
+.row{display:flex;align-items:flex-end;gap:10px}
+.row.me{justify-content:flex-end}
+.b{max-width:360px;padding:18px 22px;border-radius:24px;font-weight:800;font-size:25px;line-height:1.45;color:#1F2A37;background:#fff}
+.me .b{background:#06C755;color:#fff;font-size:34px;padding:14px 30px}
+.t{font-size:14px;color:#33415A;font-weight:500}
+.date{align-self:center;background:rgba(40,59,92,.45);padding:6px 16px;border-radius:999px;font-size:16px;font-weight:800}
+</style></head><body>
+<div class="wrap">
+  <div class="dots"></div>
+  <div class="copy">
+    <div class="brand">💉 WeeklyShot</div>
+    <h1>週1の注射日を、<br>LINEが<br>教えてくれる。</h1>
+    <div class="sub">打ったら「済」と返すだけ。<br>アプリのインストールは不要。</div>
+  </div>
+  <div class="week">
+    <div class="d"><small>月</small>9</div><div class="d"><small>火</small>10</div><div class="d on"><small>水</small><b>✓</b></div><div class="d"><small>木</small>12</div><div class="d"><small>金</small>13</div><div class="d"><small>土</small>14</div><div class="d"><small>日</small>15</div>
+  </div>
+  <div class="chat">
+    <div class="bar"><div class="av">💉</div>WeeklyShot</div>
+    <div class="msgs">
+      <div class="date">11月11日(水)</div>
+      <div class="row"><div class="b">おはようございます☀️<br>今日は<b style="color:#06A548">週1回の注射の日</b>です。</div><span class="t">8:00</span></div>
+      <div class="row me"><span class="t">既読 8:12</span><div class="b">済</div></div>
+      <div class="row"><div class="b">記録しました ✓<br>次は <b>11月18日(水)</b> です。</div><span class="t">8:12</span></div>
+    </div>
+  </div>
+</div>
+</body></html>

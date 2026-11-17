@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:720px}
+.wrap{position:relative;width:1280px;height:720px;overflow:hidden;background:#071224 url(bg-dmcompass.png) center/cover;font-family:'Zen Kaku Gothic New',sans-serif;color:#E6F0FF}
+.fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,12,28,.95) 0%,rgba(5,12,28,.7) 45%,rgba(5,12,28,.1) 75%)}
+.time{position:absolute;left:70px;top:64px;font-family:'JetBrains Mono';font-size:22px;color:#FF6B6B;display:flex;align-items:center;gap:10px}
+.time i{width:12px;height:12px;border-radius:50%;background:#FF6B6B;box-shadow:0 0 12px #FF6B6B}
+h1{position:absolute;left:70px;top:110px;font-weight:900;font-size:62px;line-height:1.25;white-space:nowrap}
+h1 span{color:#7FD3FF}
+.cards{position:absolute;left:70px;top:330px;display:grid;grid-template-columns:240px 240px;gap:14px}
+.c{border:1.5px solid rgba(127,211,255,.4);background:rgba(10,30,60,.6);border-radius:14px;padding:14px 16px}
+.c small{font-size:15px;color:#7FD3FF;font-weight:700}
+.c div{font-family:'JetBrains Mono';font-size:22px;margin-top:4px}
+.brand{position:absolute;left:70px;bottom:40px;font-size:18px;font-weight:700;opacity:.85}
+.brand b{font-size:26px;color:#fff;margin-right:12px}
+.phone{position:absolute;left:840px;top:40px;width:300px;height:640px;border-radius:46px;background:#000;padding:12px;transform:rotate(-3deg);box-shadow:0 0 50px rgba(80,170,255,.35)}
+.phone .scr{width:100%;height:100%;border-radius:36px;overflow:hidden}
+.phone img{width:100%;display:block}
+</style></head><body>
+<div class="wrap">
+  <div class="fade"></div>
+  <div class="time"><i></i>AM 3:12 ・ 当直コール</div>
+  <h1>「血糖 600です」<br>まず<span>何をする？</span></h1>
+  <div class="cards">
+    <div class="c"><small>補液</small><div>500–1000mL/h</div></div>
+    <div class="c"><small>インスリン持続</small><div>0.1単位/kg/h</div></div>
+    <div class="c"><small>K補正</small><div>K&lt;5.0で開始</div></div>
+    <div class="c"><small>スライディング</small><div>自動で作成</div></div>
+  </div>
+  <div class="brand"><b>DM Compass</b>研修医・病棟の糖尿病管理 ・ 無料</div>
+  <div class="phone"><div class="scr"><img src="shot-dm-compass.png" alt=""></div></div>
+</div>
+</body></html>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@700;900&family=Space+Grotesk:wght@700&family=Noto+Serif:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:720px}
+.wrap{position:relative;width:1280px;height:720px;overflow:hidden;background:#05070A url(bg-infecti.png) right center/cover;font-family:'Zen Kaku Gothic New',sans-serif;color:#EEF3F6}
+.fade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,9,.96) 0%,rgba(4,6,9,.75) 44%,rgba(4,6,9,0) 66%)}
+.copy{position:absolute;left:68px;top:74px}
+.brand{font-family:'Space Grotesk';font-size:28px;color:#B6F36B;letter-spacing:.04em}
+h1{margin-top:22px;font-weight:900;font-size:60px;line-height:1.28;white-space:nowrap}
+h1 span{color:#B6F36B}
+.bugs{margin-top:30px;display:flex;flex-direction:column;gap:10px}
+.bugs div{font-size:20px;font-weight:700;display:flex;gap:14px;align-items:baseline}
+.bugs i{font-family:'Noto Serif';font-style:italic;font-weight:600;color:#9FB3C2;font-size:19px}
+.foot{position:absolute;left:68px;bottom:40px;font-size:17px;font-weight:700;opacity:.75}
+.phone{position:absolute;left:560px;top:110px;width:270px;height:580px;border-radius:42px;background:#000;padding:11px;transform:rotate(4deg);box-shadow:0 0 0 1.5px rgba(182,243,107,.35),0 30px 60px rgba(0,0,0,.7)}
+.phone .scr{width:100%;height:100%;border-radius:32px;overflow:hidden}
+.phone img{width:100%;display:block}
+</style></head><body>
+<div class="wrap">
+  <div class="fade"></div>
+  <div class="copy">
+    <div class="brand">InfectiRef</div>
+    <h1>この感染症、<br><span>最初の抗菌薬</span>は？</h1>
+    <div class="bugs"><div>市中肺炎<i>S. pneumoniae</i></div><div>尿路感染症<i>E. coli</i></div><div>蜂窩織炎<i>S. pyogenes</i></div></div>
+  </div>
+  <div class="foot">ガイドライン準拠の推奨治療 ・ 研修医向け ・ 無料</div>
+  <div class="phone"><div class="scr"><img src="shot-infecti-ref.png" alt=""></div></div>
+</div>
+</body></html>
